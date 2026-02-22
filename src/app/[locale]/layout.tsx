@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import { IBM_Plex_Mono, Saira, Saira_Condensed } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages, setRequestLocale } from 'next-intl/server'
+import { getMessages, setRequestLocale, getTranslations } from 'next-intl/server'
 import SmoothScroll from '@/components/atoms/SmoothScroll'
 import LocaleSuggester from '@/components/molecules/LocaleSuggester'
+import SiteHeader from '@/components/organisms/SiteHeader'
 import SiteFooter from '@/components/organisms/SiteFooter'
 import { routing } from '@/i18n/routing'
 import './globals.css'
@@ -31,9 +32,17 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ['400', '500']
 })
 
-export const metadata: Metadata = {
-  title: 'WinuxDB',
-  description: 'Windows Apps compatibility database for Linux'
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'Metadata' })
+
+  return {
+    title: {
+      template: '%s | WinuxDB',
+      default: 'WinuxDB'
+    },
+    description: t('description')
+  }
 }
 
 export default async function LocaleLayout({
@@ -63,6 +72,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <SmoothScroll />
           <LocaleSuggester />
+          <SiteHeader />
           {children}
           <SiteFooter />
         </NextIntlClientProvider>

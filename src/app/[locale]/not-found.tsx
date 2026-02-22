@@ -2,7 +2,6 @@ import { Ban } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Link } from '@/i18n/routing'
-import SiteHeader from '@/components/organisms/SiteHeader'
 
 export default function NotFound() {
   const t = useTranslations('NotFound')
@@ -12,7 +11,6 @@ export default function NotFound() {
       <div className="hero-glow relative overflow-hidden">
         <div className="surface-grid absolute inset-0 opacity-60" />
         <div className="surface-noise absolute inset-0 opacity-70" />
-        <SiteHeader />
 
         <main className="relative z-10 flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
           <div className="glass-panel relative flex flex-col items-center gap-8 rounded-3xl p-12 sm:p-20">

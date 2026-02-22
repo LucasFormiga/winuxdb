@@ -127,6 +127,9 @@
     "contribute": "Contribuir",
     "games": "Jogos (ProtonDB)"
   },
+  "Metadata": {
+    "description": "O índice definitivo de compatibilidade para apps Windows no Linux. Explore notas, relatos e encontre a distro perfeita."
+  },
   "LocaleSuggester": {
     "message": "Parece que seu navegador está em {language}.",
     "action": "Mudar para {language}?",

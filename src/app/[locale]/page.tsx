@@ -4,7 +4,6 @@ import DistroQuiz from '@/components/organisms/DistroQuiz'
 import HighlightsGrid from '@/components/organisms/HighlightsGrid'
 import HomeHero from '@/components/organisms/HomeHero'
 import HowItWorks from '@/components/organisms/HowItWorks'
-import SiteHeader from '@/components/organisms/SiteHeader'
 import TrustStrip from '@/components/organisms/TrustStrip'
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
@@ -17,7 +16,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <div className="hero-glow relative overflow-hidden">
         <div className="surface-grid absolute inset-0 opacity-60" />
         <div className="surface-noise absolute inset-0 opacity-70" />
-        <SiteHeader />
 
         <main className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 pb-20 pt-12 lg:px-8">
           <HomeHero />

@@ -6,7 +6,6 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import AppCard from '@/components/molecules/AppCard'
 import FilterSort, { type SortOption } from '@/components/molecules/FilterSort'
 import SearchInput from '@/components/molecules/SearchInput'
-import SiteHeader from '@/components/organisms/SiteHeader'
 import type { App, Rating } from '@/lib/types'
 
 const RATING_ORDER: Record<Rating, number> = {
@@ -101,7 +100,6 @@ export default function AppsContent({ apps }: AppsContentProps) {
       <div className="hero-glow relative overflow-hidden">
         <div className="surface-grid absolute inset-0 opacity-60" />
         <div className="surface-noise absolute inset-0 opacity-70" />
-        <SiteHeader />
 
         <main className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 pb-20 pt-12 lg:px-8">
           <section className="glass-panel space-y-8 rounded-3xl px-6 py-10 sm:px-10">

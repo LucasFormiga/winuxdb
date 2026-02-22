@@ -127,6 +127,9 @@
     "contribute": "Contribute",
     "games": "Games (ProtonDB)"
   },
+  "Metadata": {
+    "description": "The definitive compatibility index for Windows apps on Linux. Explore ratings, reports, and find the perfect distro."
+  },
   "DistroTaglines": {
     "ubuntu": "Stable, polished, and backed by a massive community.",
     "linux-mint": "Comfortable, classic, and welcoming for Windows converts.",

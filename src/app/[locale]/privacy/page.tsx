@@ -1,5 +1,10 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import SiteHeader from '@/components/organisms/SiteHeader'
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'Privacy' })
+  return { title: t('title') }
+}
 
 export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
@@ -11,7 +16,6 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
       <div className="hero-glow relative overflow-hidden">
         <div className="surface-grid absolute inset-0 opacity-60" />
         <div className="surface-noise absolute inset-0 opacity-70" />
-        <SiteHeader />
 
         <main className="relative z-10 mx-auto max-w-4xl px-6 pb-20 pt-12 lg:px-8">
           <section className="glass-panel rounded-3xl p-8 sm:p-12">
