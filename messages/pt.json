@@ -9,15 +9,23 @@
     "es": "Espanhol"
   },
   "Ratings": {
+    "filterLabel": "Filtrar por avaliação",
     "BORKED": "Borked",
     "BRONZE": "Bronze",
     "SILVER": "Prata",
     "GOLD": "Ouro",
     "PLATINUM": "Platina",
-    "NATIVE": "Nativo"
+    "NATIVE": "Nativo",
+    "ALL": "Todas as avaliações"
   },
   "Search": {
     "placeholder": "Buscar aplicativos...",
     "label": "Buscar"
+  },
+  "Sort": {
+    "label": "Ordenar por",
+    "popularity": "Popularidade",
+    "releaseDate": "Data de lançamento",
+    "rating": "Avaliação"
   }
 }
