@@ -4,9 +4,9 @@
 - [x] Task: Setup internationalization (i18n) framework (English, Portuguese, Spanish) [aad29e0]
     - [x] Write tests for language switching
     - [x] Implement language selector component
-- [ ] Task: Create mock data for apps listing
-    - [ ] Define App interface/type
-    - [ ] Generate mock JSON data with names, medals, and dates
+- [x] Task: Create mock data for apps listing [2c5b0ee]
+    - [x] Define App interface/type
+    - [x] Generate mock JSON data with names, medals, and dates
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundations' (Protocol in workflow.md)
 
 ## Phase 2: Core UI Components
