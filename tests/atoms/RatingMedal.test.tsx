@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import { describe, it, expect } from "vitest";
-import RatingMedal from "./RatingMedal";
-import messages from "../../../messages/en.json";
+import RatingMedal from "@/components/atoms/RatingMedal";
+import messages from "../../messages/en.json";
 
 describe("RatingMedal", () => {
   const ratings: any[] = ["BORKED", "BRONZE", "SILVER", "GOLD", "PLATINUM", "NATIVE"];

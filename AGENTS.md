@@ -30,6 +30,7 @@ This file defines how agents should work in this codebase. Keep changes consiste
 - Use Vitest for unit and component tests
 - Use React Testing Library for rendering and assertions
 - Test setup lives in tests/setup.ts
+- Tests live in top-level tests/ and are organized by atomic layer; use @tests/* for test imports
 
 ## Linting and formatting
 - Use Biome scripts from package.json
@@ -39,3 +40,4 @@ This file defines how agents should work in this codebase. Keep changes consiste
 - Keep imports using @/* alias
 - Do not introduce ESLint, Prettier, or Jest
 - Keep files under src/ unless there is a clear reason
+- Quiz weighting guide: docs/quiz-weighting.md

@@ -1,12 +1,130 @@
 {
-  "Index": {
-    "title": "Para começar, edite o arquivo page.tsx."
+  "Home": {
+    "subtitle": "Compatibilidade Wine",
+    "quizKicker": "Mude com inteligência",
+    "quizTitle": "Encontre a distro Linux certa",
+    "quizSubtitle": "Responda algumas perguntas e vamos indicar uma distro e um sabor que combinam com seu estilo.",
+    "hero": {
+      "kickerPrimary": "Base de compatibilidade",
+      "kickerSecondary": "Apps Windows no Linux",
+      "title": "Saiba o que roda antes de migrar",
+      "subtitle": "A WinuxDB mapeia a compatibilidade de apps Windows no Linux. Pesquise, filtre e compare notas para migrar com segurança.",
+      "ctaPrimary": "Buscar apps",
+      "ctaSecondary": "Explorar notas"
+    },
+    "how": {
+      "stepLabel": "Etapa {number}",
+      "step1": {
+        "title": "Busque seus apps",
+        "description": "Pesquise aplicativos Windows e veja notas reais de compatibilidade."
+      },
+      "step2": {
+        "title": "Compare distros",
+        "description": "Veja quais configurações Linux rodam melhor seus apps."
+      },
+      "step3": {
+        "title": "Migre com confiança",
+        "description": "Planeje sua mudança com dados claros e relatos da comunidade."
+      }
+    },
+    "trust": {
+      "appsLabel": "Apps mapeados",
+      "appsValue": "6.200+",
+      "reportsLabel": "Relatórios",
+      "reportsValue": "110k+",
+      "updatesLabel": "Atualizações",
+      "updatesValue": "Diárias",
+      "coverageLabel": "Distros",
+      "coverageValue": "30+"
+    },
+    "highlights": {
+      "kicker": "Compatibilidade em destaque",
+      "title": "Apps populares no Linux",
+      "subtitle": "Uma amostra rápida de apps com bons relatos de compatibilidade."
+    },
+    "conversion": {
+      "kicker": "Hora de migrar",
+      "title": "Pronto para checar seu setup?",
+      "subtitle": "Descubra o que roda hoje e qual distro facilita a mudança.",
+      "ctaPrimary": "Começar a busca",
+      "ctaSecondary": "Ver notas"
+    },
+    "quiz": {
+      "kicker": "Distro Finder",
+      "title": "Encontre sua distro",
+      "reset": "Resetar",
+      "recommendationLabel": "Recomendação {rank}",
+      "bestFit": "Melhor opção",
+      "alternate": "Alternativa",
+      "suggestedFlavor": "Sabor sugerido",
+      "visitSite": "Site oficial",
+      "tryInBrowser": "Testar no navegador",
+      "downloadFlavor": "Baixar {flavor}",
+      "questions": {
+        "priority": {
+          "label": "O que importa mais agora?",
+          "options": {
+            "stability": "Estabilidade e suporte longo",
+            "gaming": "Desempenho em jogos",
+            "latest": "Novidades e recursos",
+            "performance": "Velocidade em qualquer hardware"
+          }
+        },
+        "experience": {
+          "label": "Qual seu nível no Linux?",
+          "options": {
+            "beginner": "Iniciante",
+            "intermediate": "Confortável",
+            "advanced": "Avançado"
+          }
+        },
+        "desktop": {
+          "label": "Estilo de desktop",
+          "options": {
+            "gnome": "Limpo e focado (GNOME)",
+            "kde": "Flexível e familiar (KDE)",
+            "tiling": "Tiling / teclado",
+            "classic": "Layout tradicional",
+            "any": "Sem preferência"
+          }
+        },
+        "hardware": {
+          "label": "Seu hardware",
+          "options": {
+            "new": "Novo ou potente",
+            "mid": "Intermediário",
+            "old": "Antigo ou simples"
+          }
+        },
+        "rolling": {
+          "label": "Estilo de atualização",
+          "options": {
+            "fixed": "Lançamentos previsíveis",
+            "rolling": "Rolling / sempre novo",
+            "atomic": "Imutável / atomic"
+          }
+        }
+      }
+    }
+  },
+  "Apps": {
+    "title": "Explore a compatibilidade",
+    "subtitle": "Compatibilidade Wine",
+    "subtitleLong": "Pesquise no índice da WinuxDB e veja como apps Windows se comportam no Linux, com notas, licenças e lançamentos.",
+    "kicker": "Base de apps",
+    "kickerSecondary": "Notas de compatibilidade",
+    "emptyState": "Nenhum app encontrado com esses filtros."
   },
   "LanguageSelector": {
     "label": "Idioma",
-    "en": "Inglês",
-    "pt": "Português",
-    "es": "Espanhol"
+    "en": "EN",
+    "pt": "PT",
+    "es": "ES"
+  },
+  "Nav": {
+    "home": "Início",
+    "apps": "Apps",
+    "games": "Jogos (ProtonDB)"
   },
   "Ratings": {
     "filterLabel": "Filtrar por avaliação",
@@ -19,7 +137,7 @@
     "ALL": "Todas as avaliações"
   },
   "Search": {
-    "placeholder": "Buscar aplicativos...",
+    "placeholder": "Buscar apps...",
     "label": "Buscar"
   },
   "Sort": {
@@ -27,5 +145,19 @@
     "popularity": "Popularidade",
     "releaseDate": "Data de lançamento",
     "rating": "Avaliação"
+  },
+  "DistroTaglines": {
+    "ubuntu": "Estável, polida e com uma comunidade enorme.",
+    "linux-mint": "Confortável, clássica e perfeita para quem vem do Windows.",
+    "fedora": "Rápida, moderna e sempre alinhada ao upstream.",
+    "popos": "Base Ubuntu com foco em produtividade e ótimo suporte de hardware.",
+    "arch": "Base mínima, controle total e release contínuo.",
+    "endeavouros": "O poder do Arch com instalação fácil e forte comunidade.",
+    "cachyos": "Arch focado em desempenho, com pacotes otimizados para CPU.",
+    "bazzite": "Gaming estilo SteamOS em Fedora Atomic, pronta para jogar.",
+    "nobara": "Fedora ajustada para jogos, streaming e criação.",
+    "zorin": "Experiência polida, parecida com Windows e fácil de usar.",
+    "debian": "Base sólida com estabilidade de longo prazo.",
+    "pikaos": "Ubuntu gamer com baixa latência e ajustes prontos."
   }
 }

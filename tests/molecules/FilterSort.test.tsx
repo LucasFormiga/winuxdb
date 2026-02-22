@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import { describe, it, expect, vi } from "vitest";
-import FilterSort from "./FilterSort";
-import messages from "../../../messages/en.json";
+import FilterSort from "@/components/molecules/FilterSort";
+import messages from "../../messages/en.json";
 
 describe("FilterSort", () => {
   it("renders filter and sort options", () => {

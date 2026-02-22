@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#151218" />
+      <stop offset="100%" stop-color="#22141a" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff3c3c" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#ff3c3c" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)" />
+  <rect x="0" y="0" width="1200" height="720" fill="url(#glow)" />
+  <g opacity="0.3" stroke="#ffffff" stroke-width="1">
+    <path d="M0 120H1200" />
+    <path d="M0 240H1200" />
+    <path d="M0 360H1200" />
+    <path d="M0 480H1200" />
+    <path d="M0 600H1200" />
+    <path d="M120 0V720" />
+    <path d="M240 0V720" />
+    <path d="M360 0V720" />
+    <path d="M480 0V720" />
+    <path d="M600 0V720" />
+    <path d="M720 0V720" />
+    <path d="M840 0V720" />
+    <path d="M960 0V720" />
+    <path d="M1080 0V720" />
+  </g>
+  <rect x="120" y="180" width="960" height="360" rx="24" fill="#1b171d" stroke="#3a2a2f" />
+  <text x="600" y="350" fill="#f7f3f1" font-family="Arial, sans-serif" font-size="42" text-anchor="middle">Screenshot coming soon</text>
+  <text x="600" y="405" fill="#c8b9b9" font-family="Arial, sans-serif" font-size="18" text-anchor="middle">Official image not available yet</text>
+</svg>

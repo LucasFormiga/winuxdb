@@ -1,8 +1,8 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import { describe, it, expect, vi } from "vitest";
-import SearchInput from "./SearchInput";
-import messages from "../../../messages/en.json";
+import SearchInput from "@/components/molecules/SearchInput";
+import messages from "../../messages/en.json";
 
 describe("SearchInput", () => {
   it("renders with placeholder", () => {
