@@ -18,7 +18,7 @@
     - [x] Implement responsive App Card
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Core UI Components' (Protocol in workflow.md)
 
-## Phase 3: Search and Discovery
+## Phase 3: Search and Discovery [checkpoint: 60261f2]
 - [x] Task: Implement Search input with debounce [e538990]
     - [x] Write tests for search filtering
     - [x] Implement Search component
@@ -28,4 +28,4 @@
 - [x] Task: Integrate Search/Filter/Sort with the main Apps List [ff4426f]
     - [x] Write integration tests for discovery flow
     - [x] Implement main Page listing logic
-- [~] Task: Conductor - User Manual Verification 'Phase 3: Search and Discovery' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Search and Discovery' (Protocol in workflow.md)
