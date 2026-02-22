@@ -62,6 +62,7 @@ Looking to get started? Try one of these:
 - **[Data] Add Native Alternatives**: Many apps in `apps.jsonl` have empty `recommendedAlternatives`. Help users find Linux-native replacements!
 - **[i18n] Localization Polish**: Audit `messages/*.json` for more natural phrasing in Portuguese or Spanish.
 - **[UI] Responsive Refinements**: Improve the mobile experience of the Distro Quiz or the Apps Filter bar.
+- **[UI] Add Missing App Icons**: Source and add missing app icons so listings feel complete and scannable.
 - **[Testing] Increase Coverage**: Add unit tests for molecules or organisms in the `tests/` directory.
 - **[SEO] Meta Tag Audit**: Ensure all high-value applications are accurately represented in our visually hidden SEO list in `AppsContent.tsx`.
 

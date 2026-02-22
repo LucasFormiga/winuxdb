@@ -1,4 +1,5 @@
 import { ArrowRight, Calendar, Hash, Image as ImageIcon, Sparkles, Users } from 'lucide-react'
+import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import RatingMedal from '@/components/atoms/RatingMedal'
 import { Badge } from '@/components/ui/badge'
@@ -17,10 +18,18 @@ export default function AppCard({ app }: AppCardProps) {
   return (
     <Card className="group flex h-full flex-col overflow-hidden border-border/60 bg-card/80 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_24px_60px_rgba(0,0,0,0.5)]">
       <CardHeader className="p-0">
-        <div className="relative flex aspect-video w-full items-center justify-center bg-gradient-to-br from-black/60 via-black/30 to-primary/10">
+        <div className="relative flex aspect-video w-full items-center justify-center bg-linear-to-br from-black/60 via-black/30 to-primary/10">
           <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-white/95 p-3 shadow-sm ring-1 ring-black/5 sm:h-24 sm:w-24">
             {app.logo ? (
-              <img src={app.logo} alt={app.name} className="max-h-full max-w-full object-contain" loading="lazy" />
+              <Image
+                src={app.logo}
+                alt={app.name}
+                className="size-20 max-h-full max-w-full object-contain"
+                loading="lazy"
+                width={0}
+                height={0}
+                placeholder="blur"
+              />
             ) : (
               <ImageIcon className="size-10 text-muted-foreground/60" />
             )}
