@@ -12,7 +12,7 @@ const mockApp: App = {
   recommendedVersion: 'Native',
   rating: 'GOLD',
   score: 4,
-  category: 'Gaming',
+  category: 'Audio',
   license: 'Proprietary',
   author: 'Test Author',
   releaseDate: '2023-01-01',
