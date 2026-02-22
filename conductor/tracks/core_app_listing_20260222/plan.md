@@ -9,14 +9,14 @@
     - [x] Generate mock JSON data with names, medals, and dates
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Foundations' (Protocol in workflow.md)
 
-## Phase 2: Core UI Components
+## Phase 2: Core UI Components [checkpoint: 890c40a]
 - [x] Task: Create compatibility medal components with unique styling [36c5128]
     - [x] Write tests for medal color/icon rendering
     - [x] Implement Medal components (BORKED to NATIVE)
 - [x] Task: Build the App Card component (Name, Placeholder, Medal) [98cd144]
     - [x] Write tests for App Card rendering
     - [x] Implement responsive App Card
-- [~] Task: Conductor - User Manual Verification 'Phase 2: Core UI Components' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Core UI Components' (Protocol in workflow.md)
 
 ## Phase 3: Search and Discovery
 - [ ] Task: Implement Search input with debounce
