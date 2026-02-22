@@ -11,7 +11,7 @@ function Button({
   ...props
 }: React.ComponentProps<'button'> & {
   variant?: 'default' | 'secondary' | 'ghost'
-  size?: 'default' | 'sm' | 'lg'
+  size?: 'default' | 'sm' | 'lg' | 'icon'
   asChild?: boolean
 }) {
   const Comp = asChild ? Slot.Root : 'button'
@@ -24,6 +24,7 @@ function Button({
         'data-[size=default]:h-11 data-[size=default]:px-5 data-[size=default]:text-[0.65rem]',
         'data-[size=sm]:h-9 data-[size=sm]:px-4 data-[size=sm]:text-[0.6rem]',
         'data-[size=lg]:h-12 data-[size=lg]:px-6 data-[size=lg]:text-[0.7rem]',
+        'data-[size=icon]:size-9',
         variant === 'default' &&
           'bg-primary text-primary-foreground shadow-[0_0_18px_rgba(255,60,60,0.28)] hover:shadow-[0_0_22px_rgba(255,60,60,0.35)]',
         variant === 'secondary' &&

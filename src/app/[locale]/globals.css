@@ -51,36 +51,36 @@
 :root {
   scroll-behavior: smooth;
   --radius: 0.625rem;
-  --background: oklch(0.148 0.012 285);
-  --foreground: oklch(0.97 0.01 80);
-  --card: oklch(0.185 0.014 285);
-  --card-foreground: oklch(0.965 0.01 80);
-  --popover: oklch(0.205 0.016 285);
-  --popover-foreground: oklch(0.965 0.01 80);
+  --background: oklch(0.985 0.005 285);
+  --foreground: oklch(0.148 0.012 285);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.148 0.012 285);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.148 0.012 285);
   --primary: oklch(0.64 0.235 27.5);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.245 0.018 285);
-  --secondary-foreground: oklch(0.965 0.01 80);
-  --muted: oklch(0.23 0.014 285);
-  --muted-foreground: oklch(0.73 0.02 80);
-  --accent: oklch(0.28 0.02 285);
-  --accent-foreground: oklch(0.98 0.01 80);
-  --destructive: oklch(0.64 0.24 27.5);
-  --border: oklch(0.28 0.02 285);
-  --input: oklch(0.23 0.02 285);
+  --secondary: oklch(0.95 0.01 285);
+  --secondary-foreground: oklch(0.148 0.012 285);
+  --muted: oklch(0.95 0.01 285);
+  --muted-foreground: oklch(0.4 0.02 285);
+  --accent: oklch(0.92 0.02 285);
+  --accent-foreground: oklch(0.148 0.012 285);
+  --destructive: oklch(0.6 0.2 27.5);
+  --border: oklch(0.9 0.02 285);
+  --input: oklch(0.9 0.02 285);
   --ring: oklch(0.64 0.235 27.5);
   --chart-1: oklch(0.64 0.235 27.5);
   --chart-2: oklch(0.7 0.14 160);
   --chart-3: oklch(0.7 0.12 250);
   --chart-4: oklch(0.75 0.16 80);
   --chart-5: oklch(0.62 0.12 12);
-  --sidebar: oklch(0.16 0.012 285);
-  --sidebar-foreground: oklch(0.965 0.01 80);
+  --sidebar: oklch(0.985 0.005 285);
+  --sidebar-foreground: oklch(0.148 0.012 285);
   --sidebar-primary: oklch(0.64 0.235 27.5);
-  --sidebar-primary-foreground: oklch(0.99 0.01 80);
-  --sidebar-accent: oklch(0.24 0.02 285);
-  --sidebar-accent-foreground: oklch(0.98 0.01 80);
-  --sidebar-border: oklch(0.28 0.02 285);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.92 0.02 285);
+  --sidebar-accent-foreground: oklch(0.148 0.012 285);
+  --sidebar-border: oklch(0.9 0.02 285);
   --sidebar-ring: oklch(0.64 0.235 27.5);
 }
 
@@ -151,15 +151,27 @@
 @layer utilities {
   .hero-glow {
     background:
+      radial-gradient(900px 480px at 12% 0%, oklch(0.64 0.22 27.5 / 0.15), transparent 60%),
+      radial-gradient(600px 420px at 88% 10%, oklch(0.75 0.18 12 / 0.1), transparent 65%);
+  }
+
+  .dark .hero-glow {
+    background:
       radial-gradient(900px 480px at 12% 0%, oklch(0.64 0.22 27.5 / 0.25), transparent 60%),
       radial-gradient(600px 420px at 88% 10%, oklch(0.75 0.18 12 / 0.16), transparent 65%);
   }
 
   .surface-grid {
     background-image:
+      linear-gradient(to right, oklch(0.148 0.012 285 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.148 0.012 285 / 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .dark .surface-grid {
+    background-image:
       linear-gradient(to right, oklch(0.88 0.01 80 / 0.05) 1px, transparent 1px),
       linear-gradient(to bottom, oklch(0.88 0.01 80 / 0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
   }
 
   .surface-noise {
@@ -169,8 +181,16 @@
   }
 
   .glass-panel {
-    background: linear-gradient(180deg, oklch(0.22 0.02 285 / 0.65) 0%, oklch(0.19 0.02 285 / 0.85) 100%);
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.7) 0%, oklch(0.97 0.01 285 / 0.8) 100%);
     backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid oklch(0.148 0.012 285 / 0.1);
+    box-shadow:
+      0 0 0 1px oklch(0.64 0.235 27.5 / 0.03),
+      0 20px 60px oklch(0.148 0.012 285 / 0.05);
+  }
+
+  .dark .glass-panel {
+    background: linear-gradient(180deg, oklch(0.22 0.02 285 / 0.65) 0%, oklch(0.19 0.02 285 / 0.85) 100%);
     border: 1px solid oklch(0.35 0.03 285 / 0.4);
     box-shadow:
       0 0 0 1px oklch(0.64 0.235 27.5 / 0.05),
@@ -178,12 +198,23 @@
   }
 
   .glass-header {
-    background: oklch(0.148 0.012 285 / 0.7);
+    background: oklch(0.985 0.005 285 / 0.8);
     backdrop-filter: blur(20px) saturate(160%);
+    border-bottom: 1px solid oklch(0.148 0.012 285 / 0.1);
+  }
+
+  .dark .glass-header {
+    background: oklch(0.148 0.012 285 / 0.7);
     border-bottom: 1px solid oklch(0.28 0.02 285 / 0.5);
   }
 
   .neon-ring {
+    box-shadow:
+      0 0 0 1px oklch(0.64 0.235 27.5 / 0.35),
+      0 0 22px oklch(0.64 0.235 27.5 / 0.15);
+  }
+
+  .dark .neon-ring {
     box-shadow:
       0 0 0 1px oklch(0.64 0.235 27.5 / 0.55),
       0 0 22px oklch(0.64 0.235 27.5 / 0.35);

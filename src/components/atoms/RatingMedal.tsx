@@ -10,11 +10,11 @@ const medalVariants = cva(
     variants: {
       rating: {
         BORKED: 'border-border/70 bg-muted/50 text-muted-foreground',
-        BRONZE: 'border-border/70 bg-muted/50 text-amber-300/80',
-        SILVER: 'border-border/70 bg-muted/50 text-slate-200/80',
-        GOLD: 'border-border/70 bg-muted/50 text-yellow-300/90',
-        PLATINUM: 'border-border/70 bg-muted/50 text-cyan-200/90',
-        NATIVE: 'border-primary/60 bg-primary/10 text-primary shadow-[0_0_16px_rgba(255,60,60,0.25)]'
+        BRONZE: 'border-border/70 bg-muted/50 text-amber-600 dark:text-amber-300/80',
+        SILVER: 'border-border/70 bg-muted/50 text-slate-600 dark:text-slate-200/80',
+        GOLD: 'border-border/70 bg-muted/50 text-yellow-600 dark:text-yellow-300/90',
+        PLATINUM: 'border-border/70 bg-muted/50 text-cyan-600 dark:text-cyan-200/90',
+        NATIVE: 'border-primary/60 bg-primary/10 text-primary shadow-[0_0_16px_rgba(255,60,60,0.1)] dark:shadow-[0_0_16px_rgba(255,60,60,0.25)]'
       }
     },
     defaultVariants: {

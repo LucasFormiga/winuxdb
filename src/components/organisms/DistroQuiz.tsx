@@ -101,7 +101,7 @@ export default function DistroQuiz() {
                       }
                       className={`rounded-full border px-3 py-2 text-xs uppercase tracking-[0.2em] transition-all ${
                         active
-                          ? 'border-primary/60 bg-primary/15 text-primary shadow-[0_0_18px_rgba(255,60,60,0.2)]'
+                          ? 'border-primary/60 bg-primary/10 dark:bg-primary/15 text-primary shadow-[0_0_18px_rgba(255,60,60,0.15)] dark:shadow-[0_0_18px_rgba(255,60,60,0.2)]'
                           : 'border-border/70 text-muted-foreground hover:border-primary/40 hover:text-foreground'
                       }`}
                     >

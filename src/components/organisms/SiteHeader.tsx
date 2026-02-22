@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import LanguageSelector from '@/components/molecules/LanguageSelector'
+import { ThemeSwitcher } from '@/components/molecules/ThemeSwitcher'
 import { Link, usePathname } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
@@ -83,6 +84,7 @@ export default function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-4">
+          <ThemeSwitcher />
           <LanguageSelector />
         </div>
       </div>

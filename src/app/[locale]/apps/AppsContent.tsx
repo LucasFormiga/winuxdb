@@ -167,6 +167,18 @@ export default function AppsContent({ apps }: AppsContentProps) {
                 ))}
               </div>
             )}
+
+            {/* Visually hidden list for SEO crawlers to index all filtered apps */}
+            <div className="sr-only" aria-hidden="true">
+              {filteredApps.map((app) => (
+                <article key={app.id}>
+                  <h2>{app.name}</h2>
+                  <p>{app.category} - {app.license}</p>
+                  <p>Compatibility: {app.rating}</p>
+                  <p>Author: {app.author}</p>
+                </article>
+              ))}
+            </div>
           </section>
         </main>
       </div>

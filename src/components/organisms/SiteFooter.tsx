@@ -8,7 +8,7 @@ export default async function SiteFooter() {
 
   return (
     <footer className="relative mt-20 border-t border-border/40 bg-card/30">
-      <div className="surface-grid absolute inset-0 opacity-20" />
+      <div className="surface-grid absolute inset-0 opacity-10 dark:opacity-20" />
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-4 lg:gap-8">
           {/* Brand Column */}

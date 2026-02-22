@@ -128,7 +128,7 @@
     "games": "Jogos (ProtonDB)"
   },
   "Metadata": {
-    "description": "O índice definitivo de compatibilidade para apps Windows no Linux. Explore notas, relatos e encontre a distro perfeita."
+    "description": "A WinuxDB é a base de dados definitiva de compatibilidade Linux para aplicativos Windows. Pesquise milhares de apps, confira notas de Wine e Proton, e encontre a melhor distro Linux para o seu fluxo de trabalho."
   },
   "LocaleSuggester": {
     "message": "Parece que seu navegador está em {language}.",
