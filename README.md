@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍷 WinuxDB
 
-## Getting Started
+WinuxDB is the definitive community-driven compatibility index for Windows applications on Linux. Inspired by projects like ProtonDB, we aim to eliminate "compatibility anxiety" by providing clear, community-verified data on how productivity, creative, and utility apps behave under Wine and Proton.
 
-First, run the development server:
+**Live at:** [winuxdb.com](https://winuxdb.com)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Mission
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The biggest hurdle for most users switching to Linux isn't the interface—it's the fear of losing essential tools. WinuxDB maps the landscape of non-gaming software compatibility, helping users migrate with confidence or find viable native alternatives.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Crowdsourced Intelligence**: Data directly from users, for users.
+- **Distro Guidance**: A smart quiz to match your workflow with the right Linux distribution.
+- **Multilingual**: Native support for English, Português, and Español.
+- **Modern Stack**: Built for speed and accessibility with Next.js 15, TypeScript, and Tailwind CSS.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Internationalization**: [next-intl](https://next-intl-docs.vercel.app/)
+- **Virtualization**: [TanStack Virtual v3](https://tanstack.com/virtual)
+- **Linting/Formatting**: [Biome](https://biomejs.dev/)
+- **Testing**: [Vitest](https://vitest.dev/) & [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
-The project is hosted on [GitHub](https://github.com/LucasFormiga/winuxdb).
+---
 
-## Deploy on Vercel
+## 🤝 Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+We love contributions! WinuxDB is built by the community. Here’s how you can help:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 1. Update App Data
+The core of WinuxDB is the `src/lib/data/apps.jsonl` file.
+- **To report an app**: Add or update an entry in this JSONL file via a Pull Request.
+- **Format**: Ensure you follow the existing JSON structure (name, compatibility, author, etc.).
+- **Criteria**: We prioritize functional accuracy. If an app has multiple reports, we keep the one reflecting the highest stable compatibility.
+
+### 2. Code & Design
+- **Setup**:
+  ```bash
+  npm install
+  npm run dev
+  ```
+- **Guidelines**: We use **Biome** for linting and formatting. Run `npm run check` before submitting a PR.
+- **Translations**: All strings must be added to `messages/*.json`. Never hardcode text in components.
+
+### 3. Governance
+WinuxDB follows a benevolent community model.
+- **Discussions**: Use GitHub Discussions for feature requests or architectural changes.
+- **Reviews**: All PRs require a peer review to maintain data integrity and code quality.
+
+---
+
+## 🌟 Good First Issues
+
+Looking to get started? Try one of these:
+
+- **[Data] Add Native Alternatives**: Many apps in `apps.jsonl` have empty `recommendedAlternatives`. Help users find Linux-native replacements!
+- **[i18n] Localization Polish**: Audit `messages/*.json` for more natural phrasing in Portuguese or Spanish.
+- **[UI] Responsive Refinements**: Improve the mobile experience of the Distro Quiz or the Apps Filter bar.
+- **[Testing] Increase Coverage**: Add unit tests for molecules or organisms in the `tests/` directory.
+- **[SEO] Meta Tag Audit**: Ensure all high-value applications are accurately represented in our visually hidden SEO list in `AppsContent.tsx`.
+
+---
+
+## ⚖️ Legal Disclaimer
+
+WinuxDB is an independent community project. We are not affiliated with, endorsed by, or sponsored by Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (Proton), ProtonDB, or any software author listed in our database. Use the information provided at your own risk.
+
+---
+
+**Built with ❤️ for the Linux Community.**
