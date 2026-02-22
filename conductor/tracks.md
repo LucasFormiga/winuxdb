@@ -4,5 +4,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: Implement Core App Listing and Search Functionality**
+- [x] **Track: Implement Core App Listing and Search Functionality**
   *Link: [./tracks/core_app_listing_20260222/](./tracks/core_app_listing_20260222/)*
