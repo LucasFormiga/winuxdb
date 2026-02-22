@@ -7,5 +7,13 @@
     "en": "English",
     "pt": "Portuguese",
     "es": "Spanish"
+  },
+  "Ratings": {
+    "BORKED": "Borked",
+    "BRONZE": "Bronze",
+    "SILVER": "Silver",
+    "GOLD": "Gold",
+    "PLATINUM": "Platinum",
+    "NATIVE": "Native"
   }
 }
