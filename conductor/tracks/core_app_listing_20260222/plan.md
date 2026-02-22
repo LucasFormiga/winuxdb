@@ -10,10 +10,10 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Foundations' (Protocol in workflow.md)
 
 ## Phase 2: Core UI Components
-- [ ] Task: Create compatibility medal components with unique styling
-    - [ ] Write tests for medal color/icon rendering
-    - [ ] Implement Medal components (BORKED to NATIVE)
-- [ ] Task: Build the App Card component (Name, Placeholder, Medal)
+- [x] Task: Create compatibility medal components with unique styling [36c5128]
+    - [x] Write tests for medal color/icon rendering
+    - [x] Implement Medal components (BORKED to NATIVE)
+- [~] Task: Build the App Card component (Name, Placeholder, Medal)
     - [ ] Write tests for App Card rendering
     - [ ] Implement responsive App Card
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Core UI Components' (Protocol in workflow.md)
