@@ -15,5 +15,9 @@
     "GOLD": "Oro",
     "PLATINUM": "Platino",
     "NATIVE": "Nativo"
+  },
+  "Search": {
+    "placeholder": "Buscar aplicaciones...",
+    "label": "Buscar"
   }
 }

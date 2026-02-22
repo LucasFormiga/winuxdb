@@ -15,5 +15,9 @@
     "GOLD": "Gold",
     "PLATINUM": "Platinum",
     "NATIVE": "Native"
+  },
+  "Search": {
+    "placeholder": "Search apps...",
+    "label": "Search"
   }
 }
