@@ -16,7 +16,7 @@
 - [x] Task: Build the App Card component (Name, Placeholder, Medal) [98cd144]
     - [x] Write tests for App Card rendering
     - [x] Implement responsive App Card
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Core UI Components' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 2: Core UI Components' (Protocol in workflow.md)
 
 ## Phase 3: Search and Discovery
 - [ ] Task: Implement Search input with debounce
