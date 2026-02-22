@@ -7,7 +7,7 @@
 - [x] Task: Create mock data for apps listing [2c5b0ee]
     - [x] Define App interface/type
     - [x] Generate mock JSON data with names, medals, and dates
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundations' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 1: Foundations' (Protocol in workflow.md)
 
 ## Phase 2: Core UI Components
 - [ ] Task: Create compatibility medal components with unique styling
