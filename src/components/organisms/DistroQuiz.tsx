@@ -175,7 +175,7 @@ export default function DistroQuiz() {
                 </a>
               </Button>
               {(flavor.distroseaUrl ?? distro.distroseaUrl) && (
-                <Button asChild variant="ghost" size="sm">
+                <Button asChild variant="secondary" size="sm">
                   <a href={flavor.distroseaUrl ?? distro.distroseaUrl} target="_blank" rel="noreferrer">
                     {t('tryInBrowser')}
                   </a>

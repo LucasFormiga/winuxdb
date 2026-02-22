@@ -10,7 +10,7 @@
       "title": "Saiba o que roda antes de migrar",
       "subtitle": "A WinuxDB mapeia a compatibilidade de apps Windows no Linux. Pesquise, filtre e compare notas para migrar com segurança.",
       "ctaPrimary": "Buscar apps",
-      "ctaSecondary": "Explorar notas"
+      "ctaSecondary": "Ver distros"
     },
     "how": {
       "stepLabel": "Etapa {number}",
@@ -29,9 +29,9 @@
     },
     "trust": {
       "appsLabel": "Apps mapeados",
-      "appsValue": "6.200+",
+      "appsValue": "500+",
       "reportsLabel": "Relatórios",
-      "reportsValue": "110k+",
+      "reportsValue": "500+",
       "updatesLabel": "Atualizações",
       "updatesValue": "Diárias",
       "coverageLabel": "Distros",
@@ -47,7 +47,7 @@
       "title": "Pronto para checar seu setup?",
       "subtitle": "Descubra o que roda hoje e qual distro facilita a mudança.",
       "ctaPrimary": "Começar a busca",
-      "ctaSecondary": "Ver notas"
+      "ctaSecondary": "Ver distros"
     },
     "quiz": {
       "kicker": "Distro Finder",
@@ -124,7 +124,13 @@
   "Nav": {
     "home": "Início",
     "apps": "Apps",
+    "contribute": "Contribuir",
     "games": "Jogos (ProtonDB)"
+  },
+  "LocaleSuggester": {
+    "message": "Parece que seu navegador está em {language}.",
+    "action": "Mudar para {language}?",
+    "close": "Fechar"
   },
   "Ratings": {
     "filterLabel": "Filtrar por avaliação",
@@ -144,7 +150,47 @@
     "label": "Ordenar por",
     "popularity": "Popularidade",
     "releaseDate": "Data de lançamento",
-    "rating": "Avaliação"
+    "rating": "Compatibilidade"
+  },
+  "Categories": {
+    "Audio": "Áudio",
+    "Business": "Negócios",
+    "Communication": "Comunicação",
+    "Development": "Desenvolvimento",
+    "Distribution": "Distribuição",
+    "Education": "Educação",
+    "Engineering": "Engenharia",
+    "Finance": "Finanças",
+    "Game Development": "Desenvolvimento de Jogos",
+    "Graphics": "Gráficos",
+    "Multimedia": "Multimídia",
+    "Productivity": "Produtividade",
+    "Scientific": "Científico",
+    "Text Editor": "Editor de Texto",
+    "Utility": "Utilitário",
+    "Utility/App": "Utilitário/App",
+    "Video": "Vídeo",
+    "Video Editing": "Edição de Vídeo",
+    "Web Browser": "Navegador Web"
+  },
+  "Licenses": {
+    "Freeware": "Gratuito",
+    "Open Source": "Open Source",
+    "Proprietary": "Proprietário",
+    "Shareware": "Shareware"
+  },
+  "Filters": {
+    "category": "Categoria",
+    "license": "Licença",
+    "alternatives": "Possui Alternativas Nativas",
+    "all": "Todas",
+    "yes": "Sim",
+    "no": "Não"
+  },
+  "AppCard": {
+    "version": "Versão",
+    "release": "Lançamento",
+    "alternatives": "Alternativas Nativas"
   },
   "DistroTaglines": {
     "ubuntu": "Estável, polida e com uma comunidade enorme.",
@@ -159,5 +205,96 @@
     "zorin": "Experiência polida, parecida com Windows e fácil de usar.",
     "debian": "Base sólida com estabilidade de longo prazo.",
     "pikaos": "Ubuntu gamer com baixa latência e ajustes prontos."
+  },
+  "Footer": {
+    "description": "O índice definitivo de compatibilidade para apps Windows no Linux. Curado pela comunidade, para a comunidade.",
+    "links": {
+      "product": "Produto",
+      "apps": "Base de Apps",
+      "distros": "Distro Quiz",
+      "games": "ProtonDB (Jogos)",
+      "resources": "Recursos",
+      "github": "GitHub",
+      "contribute": "Contribuir",
+      "about": "Sobre WinuxDB",
+      "legal": "Legal",
+      "privacy": "Privacidade",
+      "terms": "Termos de Uso"
+    },
+    "copyright": "© {year} WinuxDB. Não afiliado com a Microsoft, WineHQ ou ProtonDB."
+  },
+  "Privacy": {
+    "title": "Política de Privacidade",
+    "lastUpdated": "Última atualização: 22 de fevereiro de 2026",
+    "intro": "A WinuxDB é um projeto movido pela comunidade dedicado a mapear a compatibilidade de aplicativos Windows no Linux. Valorizamos a transparência e a sua privacidade.",
+    "sections": {
+      "data": {
+        "title": "1. Coleta de Dados",
+        "content": "A WinuxDB não exige cadastro e não coleta identificadores pessoais como nomes, endereços de e-mail ou endereços IP. Somos uma ferramenta de busca e referência, não uma plataforma de coleta de dados."
+      },
+      "cookies": {
+        "title": "2. Armazenamento Local e Preferências",
+        "content": "Usamos o armazenamento local do seu navegador ou cookies mínimos apenas para lembrar sua preferência de idioma e configurações de interface. Esses dados nunca saem do seu dispositivo."
+      },
+      "links": {
+        "title": "3. Links Externos",
+        "content": "Nossa base de dados contém links para sites externos (ex: WineHQ, GitHub, sites oficiais de software). Não somos responsáveis pelas práticas de privacidade ou conteúdo desses serviços de terceiros."
+      }
+    }
+  },
+  "Terms": {
+    "title": "Termos de Uso",
+    "lastUpdated": "Última atualização: 22 de fevereiro de 2026",
+    "intro": "Ao usar a WinuxDB, você concorda com os seguintes termos. Este projeto é criado pela comunidade, para a comunidade, e destina-se apenas a fins informativos.",
+    "sections": {
+      "noWarranty": {
+        "title": "1. Isenção de Garantia",
+        "content": "As informações na WinuxDB são fornecidas 'como estão'. As notas de compatibilidade baseiam-se em relatos da comunidade e podem não refletir sua configuração específica de hardware ou software. Não garantimos que qualquer aplicativo funcionará perfeitamente ou sequer funcionará."
+      },
+      "liability": {
+        "title": "2. Limitação de Responsabilidade",
+        "content": "A WinuxDB, seus colaboradores e mantenedores não são responsáveis por qualquer instabilidade do sistema, perda de dados, danos ao hardware ou prejuízo financeiro resultante do uso das informações encontradas neste site. Você usa o Wine, Proton e outras camadas de compatibilidade por sua conta e risco."
+      },
+      "affiliation": {
+        "title": "3. Sem Afiliação",
+        "content": "A WinuxDB é um projeto comunitário independente. Não somos afiliados, endossados ou patrocinados pela Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (ProtonDB) ou qualquer autor de software listado em nossa base."
+      }
+    }
+  },
+  "About": {
+    "title": "Sobre a WinuxDB",
+    "subtitle": "Unindo o mundo Windows ao Linux",
+    "mission": {
+      "title": "Nossa Missão",
+      "content": "A WinuxDB nasceu de uma observação simples: o maior obstáculo para a maioria dos usuários que mudam para o Linux não é a interface ou o terminal — é o medo de perder seus aplicativos essenciais. Nosso objetivo é eliminar a 'ansiedade da compatibilidade' fornecendo dados claros, verificados pela comunidade, sobre o que funciona, o que não funciona e como tirar o melhor proveito das camadas de compatibilidade do Wine."
+    },
+    "history": {
+      "title": "Comunidade Primeiro",
+      "content": "Inspirada pelo sucesso do ProtonDB para jogos, a WinuxDB foca em aplicativos de produtividade, criativos e utilitários que movem nossas vidas diárias. Não somos uma entidade corporativa; somos um grupo de entusiastas construindo o recurso que gostaríamos de ter quando mudamos pela primeira vez."
+    }
+  },
+  "Contribute": {
+    "title": "Contribua com a WinuxDB",
+    "subtitle": "Ajude-nos a construir o índice definitivo de compatibilidade",
+    "intro": "A WinuxDB é um projeto de código aberto. Cada avaliação, relato de bug e linha de código é um presente para a comunidade Linux.",
+    "sections": {
+      "reporting": {
+        "title": "1. Relate a Compatibilidade",
+        "content": "A forma mais valiosa de contribuir é relatando como os apps rodam no seu sistema. Você pode enviar relatos diretamente pelo nosso repositório no GitHub editando o arquivo src/lib/data/apps.jsonl."
+      },
+      "code": {
+        "title": "2. Código e Design",
+        "content": "Nossa base de código é construída com Next.js e TypeScript. Recebemos PRs para melhorias na interface, otimizações de desempenho e novos recursos. Confira os 'good first issues' no GitHub."
+      },
+      "governance": {
+        "title": "3. Governança",
+        "content": "A WinuxDB segue um modelo comunitário benevolente. Mudanças arquiteturais importantes são debatidas nas GitHub Discussions, e todas as atualizações de dados passam por revisão via Pull Requests para garantir a precisão."
+      }
+    }
+  },
+  "NotFound": {
+    "title": "404 - App Não Encontrado",
+    "message": "Parece que esta página recebeu uma nota 'Borked'. Não conseguimos encontrar o recurso que você está procurando.",
+    "cta": "Voltar ao Início"
   }
 }

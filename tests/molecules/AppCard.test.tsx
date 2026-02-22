@@ -8,11 +8,16 @@ import { App } from '@/lib/types'
 const mockApp: App = {
   id: '1',
   name: 'Test App',
+  version: 'Latest',
+  recommendedVersion: 'Native',
   rating: 'GOLD',
+  score: 4,
   category: 'Gaming',
   license: 'Proprietary',
+  author: 'Test Author',
   releaseDate: '2023-01-01',
-  popularity: 100
+  popularity: 100,
+  recommendedAlternatives: []
 }
 
 describe('AppCard', () => {

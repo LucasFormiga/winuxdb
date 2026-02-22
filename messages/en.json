@@ -10,7 +10,7 @@
       "title": "Know what runs before you switch",
       "subtitle": "WinuxDB maps Windows app compatibility across Linux. Search, filter, and compare ratings so you can migrate with confidence.",
       "ctaPrimary": "Search apps",
-      "ctaSecondary": "Explore ratings"
+      "ctaSecondary": "Find distros"
     },
     "how": {
       "stepLabel": "Step {number}",
@@ -29,9 +29,9 @@
     },
     "trust": {
       "appsLabel": "Apps tracked",
-      "appsValue": "6,200+",
+      "appsValue": "500+",
       "reportsLabel": "Reports",
-      "reportsValue": "110k+",
+      "reportsValue": "500+",
       "updatesLabel": "Latest update",
       "updatesValue": "Daily",
       "coverageLabel": "Distros",
@@ -47,7 +47,7 @@
       "title": "Ready to check your setup?",
       "subtitle": "Find out what runs today and which distro makes it easiest to switch.",
       "ctaPrimary": "Start searching",
-      "ctaSecondary": "Browse ratings"
+      "ctaSecondary": "Find distros"
     },
     "quiz": {
       "kicker": "Distro Finder",
@@ -124,6 +124,7 @@
   "Nav": {
     "home": "Home",
     "apps": "Apps",
+    "contribute": "Contribute",
     "games": "Games (ProtonDB)"
   },
   "DistroTaglines": {
@@ -139,6 +140,11 @@
     "zorin": "A polished, Windows-like experience with friendly defaults.",
     "debian": "Rock-solid base with long-term stability.",
     "pikaos": "Ubuntu-based gaming distro tuned for low latency."
+  },
+  "LocaleSuggester": {
+    "message": "It looks like your browser is set to {language}.",
+    "action": "Switch to {language}?",
+    "close": "Dismiss"
   },
   "Ratings": {
     "filterLabel": "Filter by rating",
@@ -158,6 +164,137 @@
     "label": "Sort by",
     "popularity": "Popularity",
     "releaseDate": "Release Date",
-    "rating": "Rating"
+    "rating": "Compatibility"
+  },
+  "Categories": {
+    "Audio": "Audio",
+    "Business": "Business",
+    "Communication": "Communication",
+    "Development": "Development",
+    "Distribution": "Distribution",
+    "Education": "Education",
+    "Engineering": "Engineering",
+    "Finance": "Finance",
+    "Game Development": "Game Development",
+    "Graphics": "Graphics",
+    "Multimedia": "Multimedia",
+    "Productivity": "Productivity",
+    "Scientific": "Scientific",
+    "Text Editor": "Text Editor",
+    "Utility": "Utility",
+    "Utility/App": "Utility/App",
+    "Video": "Video",
+    "Video Editing": "Video Editing",
+    "Web Browser": "Web Browser"
+  },
+  "Licenses": {
+    "Freeware": "Freeware",
+    "Open Source": "Open Source",
+    "Proprietary": "Proprietary",
+    "Shareware": "Shareware"
+  },
+  "Filters": {
+    "category": "Category",
+    "license": "License",
+    "alternatives": "Has Native Alternatives",
+    "all": "All",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "AppCard": {
+    "version": "Version",
+    "release": "Released",
+    "alternatives": "Native Alternatives"
+  },
+  "Footer": {
+    "description": "The definitive compatibility index for Windows apps on Linux. Curated by the community, for the community.",
+    "links": {
+      "product": "Product",
+      "apps": "Apps Database",
+      "distros": "Distro Quiz",
+      "games": "ProtonDB (Games)",
+      "resources": "Resources",
+      "github": "GitHub",
+      "contribute": "Contribute",
+      "about": "About WinuxDB",
+      "legal": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "copyright": "© {year} WinuxDB. Not affiliated with Microsoft, WineHQ, or ProtonDB."
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: February 22, 2026",
+    "intro": "WinuxDB is a community-driven project dedicated to mapping Windows application compatibility on Linux. We value transparency and your privacy.",
+    "sections": {
+      "data": {
+        "title": "1. Data Collection",
+        "content": "WinuxDB does not require registration and does not collect personal identifiers such as names, email addresses, or IP addresses. We are a search and reference tool, not a data-harvesting platform."
+      },
+      "cookies": {
+        "title": "2. Local Storage & Preferences",
+        "content": "We use your browser's local storage or minimal cookies solely to remember your language preference and UI settings. This data never leaves your device."
+      },
+      "links": {
+        "title": "3. External Links",
+        "content": "Our database contains links to external websites (e.g., WineHQ, GitHub, official software sites). We are not responsible for the privacy practices or content of these third-party services."
+      }
+    }
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "lastUpdated": "Last updated: February 22, 2026",
+    "intro": "By using WinuxDB, you agree to the following terms. This project is created by the community, for the community, and is intended for informational purposes only.",
+    "sections": {
+      "noWarranty": {
+        "title": "1. No Warranty",
+        "content": "Information on WinuxDB is provided on an 'as-is' and 'as-available' basis. Compatibility ratings are based on community reports and may not reflect your specific hardware or software configuration. We do not guarantee that any application will run perfectly or at all."
+      },
+      "liability": {
+        "title": "2. Limitation of Liability",
+        "content": "WinuxDB, its contributors, and maintainers are not liable for any system instability, data loss, hardware damage, or financial loss resulting from the use of information found on this site. You use Wine, Proton, and other compatibility layers at your own risk."
+      },
+      "affiliation": {
+        "title": "3. No Affiliation",
+        "content": "WinuxDB is an independent community project. We are not affiliated with, endorsed by, or sponsored by Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (ProtonDB), or any software author listed in our database."
+      }
+    }
+  },
+  "About": {
+    "title": "About WinuxDB",
+    "subtitle": "Bridging the gap between Windows and Linux",
+    "mission": {
+      "title": "Our Mission",
+      "content": "WinuxDB was born from a simple observation: the biggest hurdle for most users switching to Linux isn't the interface or the terminal—it's the fear of losing their essential applications. We aim to eliminate 'compatibility anxiety' by providing clear, community-verified data on what runs, what doesn't, and how to get the most out of Wine compatibility layers."
+    },
+    "history": {
+      "title": "Community-First",
+      "content": "Inspired by the success of ProtonDB for gaming, WinuxDB focuses on the productivity, creative, and utility apps that power our daily lives. We are not a corporate entity; we are a group of enthusiasts building the resource we wish we had when we first switched."
+    }
+  },
+  "Contribute": {
+    "title": "Contribute to WinuxDB",
+    "subtitle": "Help us build the ultimate compatibility index",
+    "intro": "WinuxDB is an open-source project. Every rating, bug report, and line of code is a gift to the Linux community.",
+    "sections": {
+      "reporting": {
+        "title": "1. Report Compatibility",
+        "content": "The most valuable way to contribute is by reporting how apps run on your system. You can submit reports directly via our GitHub repository by editing the src/lib/data/apps.jsonl file."
+      },
+      "code": {
+        "title": "2. Code & Design",
+        "content": "Our codebase is built with Next.js and TypeScript. We welcome PRs for UI improvements, performance optimizations, and new features. Check our GitHub issues for 'good first issues'."
+      },
+      "governance": {
+        "title": "3. Governance",
+        "content": "WinuxDB follows a benevolent community model. Major architectural changes are discussed in GitHub Discussions, and all data updates require a peer-review process via Pull Requests to ensure accuracy."
+      }
+    }
+  },
+  "NotFound": {
+    "title": "404 - App Not Found",
+    "message": "It seems this page has a 'Borked' rating. We couldn't find the resource you were looking for.",
+    "cta": "Return to Base"
   }
 }

@@ -2,9 +2,16 @@ import type { Metadata } from 'next'
 import { IBM_Plex_Mono, Saira, Saira_Condensed } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
+import { getMessages, setRequestLocale } from 'next-intl/server'
+import SmoothScroll from '@/components/atoms/SmoothScroll'
+import LocaleSuggester from '@/components/molecules/LocaleSuggester'
+import SiteFooter from '@/components/organisms/SiteFooter'
 import { routing } from '@/i18n/routing'
 import './globals.css'
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
 
 const saira = Saira({
   variable: '--font-body',
@@ -43,6 +50,9 @@ export default async function LocaleLayout({
     notFound()
   }
 
+  // Enable static rendering
+  setRequestLocale(locale)
+
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages()
@@ -50,7 +60,12 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className="dark">
       <body className={`${saira.variable} ${sairaCondensed.variable} ${ibmPlexMono.variable} antialiased`}>
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
+          <SmoothScroll />
+          <LocaleSuggester />
+          {children}
+          <SiteFooter />
+        </NextIntlClientProvider>
       </body>
     </html>
   )

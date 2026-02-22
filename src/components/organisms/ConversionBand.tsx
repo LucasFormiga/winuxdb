@@ -17,7 +17,7 @@ export default function ConversionBand() {
           <Link href="/apps">{t('ctaPrimary')}</Link>
         </Button>
         <Button asChild variant="secondary" size="lg">
-          <Link href="/apps">{t('ctaSecondary')}</Link>
+          <Link href="#quiz">{t('ctaSecondary')}</Link>
         </Button>
       </div>
     </section>

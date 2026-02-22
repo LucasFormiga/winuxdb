@@ -12,6 +12,7 @@ export default function LanguageSelector() {
   const pathname = usePathname()
 
   function onSelectChange(nextLocale: string) {
+    localStorage.setItem('dismissed-locale-suggestion', 'true')
     router.replace(pathname, { locale: nextLocale })
   }
 

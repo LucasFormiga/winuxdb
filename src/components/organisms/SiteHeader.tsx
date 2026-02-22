@@ -7,7 +7,8 @@ import { Link, usePathname } from '@/i18n/routing'
 
 const navLinks = [
   { href: '/', labelKey: 'home' },
-  { href: '/apps', labelKey: 'apps' }
+  { href: '/apps', labelKey: 'apps' },
+  { href: '/contribute', labelKey: 'contribute' }
 ]
 
 export default function SiteHeader() {

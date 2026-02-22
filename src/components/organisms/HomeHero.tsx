@@ -20,7 +20,7 @@ export default function HomeHero() {
             <Link href="/apps">{t('ctaPrimary')}</Link>
           </Button>
           <Button asChild variant="secondary" size="lg">
-            <Link href="/apps">{t('ctaSecondary')}</Link>
+            <Link href="#quiz">{t('ctaSecondary')}</Link>
           </Button>
         </div>
       </div>

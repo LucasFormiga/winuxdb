@@ -49,6 +49,7 @@
 }
 
 :root {
+  scroll-behavior: smooth;
   --radius: 0.625rem;
   --background: oklch(0.148 0.012 285);
   --foreground: oklch(0.97 0.01 80);

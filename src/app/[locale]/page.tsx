@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import ConversionBand from '@/components/organisms/ConversionBand'
 import DistroQuiz from '@/components/organisms/DistroQuiz'
 import HighlightsGrid from '@/components/organisms/HighlightsGrid'
@@ -7,8 +7,10 @@ import HowItWorks from '@/components/organisms/HowItWorks'
 import SiteHeader from '@/components/organisms/SiteHeader'
 import TrustStrip from '@/components/organisms/TrustStrip'
 
-export default function Home() {
-  const t = useTranslations('Home')
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  const t = await getTranslations('Home')
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -22,7 +24,7 @@ export default function Home() {
           <HowItWorks />
           <TrustStrip />
           <HighlightsGrid />
-          <section className="space-y-6">
+          <section id="quiz" className="space-y-6">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{t('quizKicker')}</p>
               <h2 className="mt-2 text-2xl font-semibold">{t('quizTitle')}</h2>
