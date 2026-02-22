@@ -22,10 +22,10 @@
 - [x] Task: Implement Search input with debounce [e538990]
     - [x] Write tests for search filtering
     - [x] Implement Search component
-- [~] Task: Implement Filtering and Sorting controls
+- [x] Task: Implement Filtering and Sorting controls [d14450a]
     - [ ] Write tests for filter/sort logic
     - [ ] Implement Filter/Sort components
-- [ ] Task: Integrate Search/Filter/Sort with the main Apps List
+- [~] Task: Integrate Search/Filter/Sort with the main Apps List
     - [ ] Write integration tests for discovery flow
     - [ ] Implement main Page listing logic
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Search and Discovery' (Protocol in workflow.md)
