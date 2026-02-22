@@ -1,0 +1,11 @@
+{
+  "Index": {
+    "title": "Para começar, edite o arquivo page.tsx."
+  },
+  "LanguageSelector": {
+    "label": "Idioma",
+    "en": "Inglês",
+    "pt": "Português",
+    "es": "Espanhol"
+  }
+}
