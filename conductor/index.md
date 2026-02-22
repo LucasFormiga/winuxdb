@@ -1,0 +1,1 @@
+# Project Context\n\n## Definition\n- [Product Definition](./product.md)\n- [Product Guidelines](./product-guidelines.md)\n- [Tech Stack](./tech-stack.md)\n\n## Workflow\n- [Workflow](./workflow.md)\n- [Code Style Guides](./code_styleguides/)\n\n## Management\n- [Tracks Registry](./tracks.md)\n- [Tracks Directory](./tracks/)
