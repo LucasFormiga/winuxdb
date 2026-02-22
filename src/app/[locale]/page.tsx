@@ -1,11 +1,52 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import LanguageSelector from "@/components/molecules/LanguageSelector";
 import AppCard from "@/components/molecules/AppCard";
+import SearchInput from "@/components/molecules/SearchInput";
+import FilterSort, { SortOption } from "@/components/molecules/FilterSort";
 import { APPS } from "@/lib/data/apps";
+import type { Rating } from "@/lib/types";
 import Image from "next/image";
+
+const RATING_ORDER: Record<Rating, number> = {
+  NATIVE: 5,
+  PLATINUM: 4,
+  GOLD: 3,
+  SILVER: 2,
+  BRONZE: 1,
+  BORKED: 0,
+};
 
 export default function Home() {
   const t = useTranslations("Index");
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState<Rating | "ALL">("ALL");
+  const [sort, setSort] = useState<SortOption>("popularity");
+
+  const filteredApps = useMemo(() => {
+    return APPS.filter((app) => {
+      const matchesSearch = app.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
+      const matchesFilter = filter === "ALL" || app.rating === filter;
+      return matchesSearch && matchesFilter;
+    }).sort((a, b) => {
+      if (sort === "popularity") {
+        return b.popularity - a.popularity;
+      }
+      if (sort === "releaseDate") {
+        return (
+          new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
+        );
+      }
+      if (sort === "rating") {
+        return RATING_ORDER[b.rating] - RATING_ORDER[a.rating];
+      }
+      return 0;
+    });
+  }, [search, filter, sort]);
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-zinc-50 font-sans dark:bg-black">
@@ -31,10 +72,25 @@ export default function Home() {
           </p>
         </section>
 
+        <section className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <SearchInput onChange={setSearch} />
+          <FilterSort
+            activeFilter={filter}
+            activeSort={sort}
+            onFilterChange={setFilter}
+            onSortChange={setSort}
+          />
+        </section>
+
         <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {APPS.map((app) => (
+          {filteredApps.map((app) => (
             <AppCard key={app.id} app={app} />
           ))}
+          {filteredApps.length === 0 && (
+            <div className="col-span-full py-20 text-center text-muted-foreground">
+              No apps found matching your criteria.
+            </div>
+          )}
         </section>
       </main>
     </div>
