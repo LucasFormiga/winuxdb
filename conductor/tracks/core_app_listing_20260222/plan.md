@@ -19,10 +19,10 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Core UI Components' (Protocol in workflow.md)
 
 ## Phase 3: Search and Discovery
-- [ ] Task: Implement Search input with debounce
-    - [ ] Write tests for search filtering
-    - [ ] Implement Search component
-- [ ] Task: Implement Filtering and Sorting controls
+- [x] Task: Implement Search input with debounce [e538990]
+    - [x] Write tests for search filtering
+    - [x] Implement Search component
+- [~] Task: Implement Filtering and Sorting controls
     - [ ] Write tests for filter/sort logic
     - [ ] Implement Filter/Sort components
 - [ ] Task: Integrate Search/Filter/Sort with the main Apps List
