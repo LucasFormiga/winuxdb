@@ -211,6 +211,7 @@
   },
   "Footer": {
     "description": "O índice definitivo de compatibilidade para apps Windows no Linux. Curado pela comunidade, para a comunidade.",
+    "madeIn": "Feito com amor por LucasFormiga no Brasil para a comunidade.",
     "links": {
       "product": "Produto",
       "apps": "Base de Apps",
