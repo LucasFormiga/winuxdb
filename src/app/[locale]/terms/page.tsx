@@ -21,7 +21,7 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
           <section className="glass-panel rounded-3xl p-8 sm:p-12">
             <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">{t('title')}</h1>
             <p className="mt-4 text-sm text-muted-foreground">{t('lastUpdated')}</p>
-            
+
             <div className="mt-10 space-y-12 leading-relaxed text-muted-foreground">
               <p className="text-lg text-foreground/90">{t('intro')}</p>
 

@@ -29,7 +29,7 @@ export default function AppsContent({ apps }: AppsContentProps) {
   const [category, setCategory] = useState('ALL')
   const [license, setLicense] = useState('ALL')
   const [alternatives, setAlternatives] = useState<'ALL' | 'YES' | 'NO'>('ALL')
-  
+
   const containerRef = useRef<HTMLDivElement>(null)
   const [columns, setColumns] = useState(1)
 
@@ -55,15 +55,17 @@ export default function AppsContent({ apps }: AppsContentProps) {
   const filteredApps = useMemo(() => {
     return apps
       .filter((app) => {
-        const matchesSearch = app.name.toLowerCase().includes(search.toLowerCase()) || 
-                             app.author.toLowerCase().includes(search.toLowerCase())
+        const matchesSearch =
+          app.name.toLowerCase().includes(search.toLowerCase()) ||
+          app.author.toLowerCase().includes(search.toLowerCase())
         const matchesRating = rating === 'ALL' || app.rating === rating
         const matchesCategory = category === 'ALL' || app.category === category
         const matchesLicense = license === 'ALL' || app.license === license
-        const matchesAlternatives = alternatives === 'ALL' || 
-                                   (alternatives === 'YES' && app.recommendedAlternatives.length > 0) ||
-                                   (alternatives === 'NO' && app.recommendedAlternatives.length === 0)
-        
+        const matchesAlternatives =
+          alternatives === 'ALL' ||
+          (alternatives === 'YES' && app.recommendedAlternatives.length > 0) ||
+          (alternatives === 'NO' && app.recommendedAlternatives.length === 0)
+
         return matchesSearch && matchesRating && matchesCategory && matchesLicense && matchesAlternatives
       })
       .sort((a, b) => {
@@ -116,16 +118,16 @@ export default function AppsContent({ apps }: AppsContentProps) {
               <div className="max-w-2xl">
                 <SearchInput onChange={setSearch} />
               </div>
-              <FilterSort 
-                activeRating={rating} 
-                activeSort={sort} 
+              <FilterSort
+                activeRating={rating}
+                activeSort={sort}
                 activeCategory={category}
                 activeLicense={license}
                 activeAlternatives={alternatives}
                 categories={categories}
                 licenses={licenses}
-                onRatingChange={setRating} 
-                onSortChange={setSort} 
+                onRatingChange={setRating}
+                onSortChange={setSort}
                 onCategoryChange={setCategory}
                 onLicenseChange={setLicense}
                 onAlternativesChange={setAlternatives}
@@ -173,7 +175,9 @@ export default function AppsContent({ apps }: AppsContentProps) {
               {filteredApps.map((app) => (
                 <article key={app.id}>
                   <h2>{app.name}</h2>
-                  <p>{app.category} - {app.license}</p>
+                  <p>
+                    {app.category} - {app.license}
+                  </p>
                   <p>Compatibility: {app.rating}</p>
                   <p>Author: {app.author}</p>
                 </article>

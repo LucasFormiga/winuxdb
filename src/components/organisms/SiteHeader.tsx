@@ -2,11 +2,11 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import LanguageSelector from '@/components/molecules/LanguageSelector'
 import { ThemeSwitcher } from '@/components/molecules/ThemeSwitcher'
 import { Link, usePathname } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
-import { useEffect, useState } from 'react'
 
 const navLinks = [
   { href: '/', labelKey: 'home' },
@@ -28,28 +28,34 @@ export default function SiteHeader() {
   }, [])
 
   return (
-    <header 
-      className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 px-6 lg:px-8",
-        isScrolled ? "py-3" : "py-6"
-      )}
+    <header
+      className={cn('sticky top-0 z-50 w-full transition-all duration-300 px-6 lg:px-8', isScrolled ? 'py-3' : 'py-6')}
     >
-      <div 
+      <div
         className={cn(
-          "mx-auto flex max-w-7xl items-center justify-between transition-all duration-500",
-          isScrolled 
-            ? "glass-header rounded-full px-6 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.4)] border border-white/5" 
-            : "bg-transparent"
+          'mx-auto flex max-w-7xl items-center justify-between transition-all duration-500',
+          isScrolled
+            ? 'glass-header rounded-full px-6 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.4)] border border-white/5'
+            : 'bg-transparent'
         )}
       >
         <div className="flex items-center gap-8">
           <Link href="/" className="group flex items-center gap-3">
             <div className="relative flex size-10 items-center justify-center rounded-full border border-border/70 bg-card/80 transition-transform duration-300 group-hover:scale-110">
-              <Image src="/images/winuxdb-logo.png" alt="WinuxDB" width={32} height={32} className="size-7 z-10" priority />
+              <Image
+                src="/images/winuxdb-logo.png"
+                alt="WinuxDB"
+                width={32}
+                height={32}
+                className="size-7 z-10"
+                priority
+              />
               <div className="absolute inset-0 rounded-full bg-primary/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="flex flex-col">
-              <span className="text-sm font-bold uppercase tracking-[0.3em] text-foreground transition-colors group-hover:text-primary">WinuxDB</span>
+              <span className="text-sm font-bold uppercase tracking-[0.3em] text-foreground transition-colors group-hover:text-primary">
+                WinuxDB
+              </span>
             </div>
           </Link>
 
@@ -61,10 +67,10 @@ export default function SiteHeader() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "px-4 py-2 rounded-full transition-all duration-200",
-                    isActive 
-                      ? "text-primary bg-primary/10 shadow-[0_0_12px_rgba(255,60,60,0.1)]" 
-                      : "text-muted-foreground/80 hover:text-foreground hover:bg-white/5"
+                    'px-4 py-2 rounded-full transition-all duration-200',
+                    isActive
+                      ? 'text-primary bg-primary/10 shadow-[0_0_12px_rgba(255,60,60,0.1)]'
+                      : 'text-muted-foreground/80 hover:text-foreground hover:bg-white/5'
                   )}
                 >
                   {t(link.labelKey)}

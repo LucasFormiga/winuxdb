@@ -45,13 +45,8 @@ export default function LocaleSuggester() {
     <div className="fixed bottom-6 left-6 z-50 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex items-center gap-4 rounded-2xl border border-primary/30 bg-card/95 p-4 shadow-2xl backdrop-blur-xl sm:gap-6">
         <div className="flex flex-col gap-0.5">
-          <p className="text-xs text-muted-foreground">
-            {t('message', { language: LOCALE_NAMES[suggestion] })}
-          </p>
-          <button
-            onClick={handleSwitch}
-            className="text-left text-sm font-bold text-primary hover:underline"
-          >
+          <p className="text-xs text-muted-foreground">{t('message', { language: LOCALE_NAMES[suggestion] })}</p>
+          <button onClick={handleSwitch} className="text-left text-sm font-bold text-primary hover:underline">
             {t('action', { language: LOCALE_NAMES[suggestion] })}
           </button>
         </div>

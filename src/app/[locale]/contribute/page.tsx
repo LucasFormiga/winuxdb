@@ -21,16 +21,16 @@ export default async function ContributePage({ params }: { params: Promise<{ loc
           <section className="glass-panel rounded-3xl p-8 sm:p-12">
             <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">{t('title')}</h1>
             <p className="mt-4 text-lg text-primary/80">{t('subtitle')}</p>
-            
+
             <div className="mt-12 space-y-12 leading-relaxed text-muted-foreground">
               <p className="text-xl text-foreground/90">{t('intro')}</p>
 
               <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-foreground">{t('sections.reporting.title')}</h2>
                 <p className="text-lg">{t('sections.reporting.content')}</p>
-                <a 
-                  href="https://github.com/LucasFormiga/winuxdb" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/LucasFormiga/winuxdb"
+                  target="_blank"
                   rel="noreferrer"
                   className="inline-block rounded-full bg-primary/10 px-6 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/20"
                 >
@@ -50,7 +50,11 @@ export default async function ContributePage({ params }: { params: Promise<{ loc
 
               <div className="mt-16 rounded-3xl border border-border/60 bg-card/40 p-8 text-center">
                 <p className="text-sm">
-                  Ready to start? Visit us on <a href="https://github.com/LucasFormiga/winuxdb" className="text-primary underline">GitHub</a> and let's make Linux better together.
+                  Ready to start? Visit us on{' '}
+                  <a href="https://github.com/LucasFormiga/winuxdb" className="text-primary underline">
+                    GitHub
+                  </a>{' '}
+                  and let's make Linux better together.
                 </p>
               </div>
             </div>

@@ -17,12 +17,10 @@ export default function NotFound() {
             <div className="flex size-24 items-center justify-center rounded-full border border-border/70 bg-card/80 text-muted-foreground/40 shadow-2xl">
               <Ban className="size-12" />
             </div>
-            
+
             <div className="space-y-4">
               <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">{t('title')}</h1>
-              <p className="mx-auto max-w-md text-lg text-muted-foreground">
-                {t('message')}
-              </p>
+              <p className="mx-auto max-w-md text-lg text-muted-foreground">{t('message')}</p>
             </div>
 
             <Button asChild size="lg" className="mt-4">

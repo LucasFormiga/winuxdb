@@ -1,13 +1,12 @@
-import type { Metadata } from 'next'
 import { IBM_Plex_Mono, Saira, Saira_Condensed } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages, setRequestLocale, getTranslations } from 'next-intl/server'
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import SmoothScroll from '@/components/atoms/SmoothScroll'
 import { ThemeProvider } from '@/components/atoms/ThemeProvider'
 import LocaleSuggester from '@/components/molecules/LocaleSuggester'
-import SiteHeader from '@/components/organisms/SiteHeader'
 import SiteFooter from '@/components/organisms/SiteFooter'
+import SiteHeader from '@/components/organisms/SiteHeader'
 import { routing } from '@/i18n/routing'
 import './globals.css'
 
@@ -38,10 +37,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'Metadata' })
   const baseUrl = 'https://winuxdb.com'
 
-  const languages = routing.locales.reduce((acc, l) => {
-    acc[l] = `${baseUrl}${l === 'en' ? '' : `/${l}`}`
-    return acc
-  }, {} as Record<string, string>)
+  const languages = routing.locales.reduce(
+    (acc, l) => {
+      acc[l] = `${baseUrl}${l === 'en' ? '' : `/${l}`}`
+      return acc
+    },
+    {} as Record<string, string>
+  )
 
   return {
     metadataBase: new URL(baseUrl),
@@ -50,10 +52,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       default: 'WinuxDB - Windows App Compatibility Database for Linux'
     },
     description: t('description'),
-    keywords: ['Linux', 'Wine', 'Proton', 'Compatibility', 'Windows Apps on Linux', 'Gaming on Linux', 'WineHQ', 'Software database'],
+    keywords: [
+      'Linux',
+      'Wine',
+      'Proton',
+      'Compatibility',
+      'Windows Apps on Linux',
+      'Gaming on Linux',
+      'WineHQ',
+      'Software database'
+    ],
     alternates: {
       canonical: '/',
-      languages: languages,
+      languages: languages
     },
     openGraph: {
       title: 'WinuxDB',
@@ -67,19 +78,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
           url: '/images/winuxdb-logo.png',
           width: 800,
           height: 800,
-          alt: 'WinuxDB Logo',
-        },
-      ],
+          alt: 'WinuxDB Logo'
+        }
+      ]
     },
     twitter: {
       card: 'summary_large_image',
       title: 'WinuxDB',
       description: t('description'),
-      images: ['/images/winuxdb-logo.png'],
+      images: ['/images/winuxdb-logo.png']
     },
     robots: {
       index: true,
-      follow: true,
+      follow: true
     }
   }
 }
@@ -93,16 +104,12 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params
 
-  // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as any)) {
     notFound()
   }
 
-  // Enable static rendering
   setRequestLocale(locale)
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
   const messages = await getMessages()
 
   const jsonLd = {
@@ -121,16 +128,9 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${saira.variable} ${sairaCondensed.variable} ${ibmPlexMono.variable} antialiased`}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Necessary adjustment */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <NextIntlClientProvider messages={messages}>
             <SmoothScroll />
             <LocaleSuggester />

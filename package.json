@@ -14,6 +14,7 @@
     "lint:fix": "biome lint ./src --fix",
     "format": "biome format ./src --write",
     "check": "biome check ./src --write",
+    "pretest": "npm run lint",
     "test": "vitest run"
   },
   "dependencies": {

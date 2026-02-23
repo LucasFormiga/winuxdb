@@ -71,7 +71,9 @@ export default function FilterSort({
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="ALL" className="text-xs">{t('Filters.all')}</SelectItem>
+            <SelectItem value="ALL" className="text-xs">
+              {t('Filters.all')}
+            </SelectItem>
             {categories.map((cat) => (
               <SelectItem key={cat} value={cat} className="text-xs">
                 {t(`Categories.${cat}`)}
@@ -91,7 +93,9 @@ export default function FilterSort({
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="ALL" className="text-xs">{t('Filters.all')}</SelectItem>
+            <SelectItem value="ALL" className="text-xs">
+              {t('Filters.all')}
+            </SelectItem>
             {licenses.map((lic) => (
               <SelectItem key={lic} value={lic} className="text-xs">
                 {t(`Licenses.${lic}`)}
@@ -111,9 +115,15 @@ export default function FilterSort({
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="ALL" className="text-xs">{t('Filters.all')}</SelectItem>
-            <SelectItem value="YES" className="text-xs">{t('Filters.yes')}</SelectItem>
-            <SelectItem value="NO" className="text-xs">{t('Filters.no')}</SelectItem>
+            <SelectItem value="ALL" className="text-xs">
+              {t('Filters.all')}
+            </SelectItem>
+            <SelectItem value="YES" className="text-xs">
+              {t('Filters.yes')}
+            </SelectItem>
+            <SelectItem value="NO" className="text-xs">
+              {t('Filters.no')}
+            </SelectItem>
           </SelectContent>
         </Select>
       </div>

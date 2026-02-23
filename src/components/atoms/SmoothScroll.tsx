@@ -8,12 +8,11 @@ export default function SmoothScroll() {
       const target = e.target as HTMLElement
       const anchor = target.closest('a')
 
-      if (anchor && anchor.hash && anchor.origin === window.location.origin && anchor.pathname === window.location.pathname) {
+      if (anchor?.hash && anchor.origin === window.location.origin && anchor.pathname === window.location.pathname) {
         e.preventDefault()
         const element = document.querySelector(anchor.hash)
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' })
-          // Update the URL without refreshing or triggering standard navigation
           window.history.pushState(null, '', anchor.hash)
         }
       }

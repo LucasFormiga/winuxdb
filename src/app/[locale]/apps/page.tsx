@@ -1,4 +1,4 @@
-import { setRequestLocale, getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getApps } from '@/lib/data/apps-loader'
 import AppsContent from './AppsContent'
 
@@ -12,6 +12,6 @@ export default async function AppsPage({ params }: { params: Promise<{ locale: s
   const { locale } = await params
   setRequestLocale(locale)
   const apps = getApps()
-  
+
   return <AppsContent apps={apps} />
 }
