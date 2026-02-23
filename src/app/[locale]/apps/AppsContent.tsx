@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import AppCard from '@/components/molecules/AppCard'
 import FilterSort, { type SortOption } from '@/components/molecules/FilterSort'
 import SearchInput from '@/components/molecules/SearchInput'
+import { Button } from '@/components/ui/button'
 import type { App, Rating } from '@/lib/types'
 
 const RATING_ORDER: Record<Rating, number> = {
@@ -105,13 +106,20 @@ export default function AppsContent({ apps }: AppsContentProps) {
 
         <main className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 pb-20 pt-12 lg:px-8">
           <section className="glass-panel space-y-8 rounded-3xl px-6 py-10 sm:px-10">
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                <span>{t('kicker')}</span>
-                <span className="text-primary/80">•</span>
-                <span>{t('kickerSecondary')}</span>
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                  <span>{t('kicker')}</span>
+                  <span className="text-primary/80">•</span>
+                  <span>{t('kickerSecondary')}</span>
+                </div>
+                <h1 className="text-4xl font-semibold leading-tight sm:text-6xl">{t('title')}</h1>
               </div>
-              <h1 className="text-4xl font-semibold leading-tight sm:text-6xl">{t('title')}</h1>
+              <Button asChild size="lg" className="self-start lg:self-auto">
+                <a href="https://forms.gle/1iX4BgLv2myNTvoLA" target="_blank" rel="noreferrer">
+                  {t('submitReview')}
+                </a>
+              </Button>
             </div>
 
             <div className="flex flex-col gap-8">

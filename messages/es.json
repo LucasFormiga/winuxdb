@@ -113,7 +113,8 @@
     "subtitleLong": "Busca en el índice de WinuxDB y ve cómo funcionan apps Windows en Linux, con calificaciones, licencias y lanzamientos.",
     "kicker": "Base de apps",
     "kickerSecondary": "Calificaciones de compatibilidad",
-    "emptyState": "No hay apps que coincidan con tus filtros."
+    "emptyState": "No hay apps que coincidan con tus filtros.",
+    "submitReview": "Enviar Reseña"
   },
   "LanguageSelector": {
     "label": "Idioma",
@@ -220,6 +221,7 @@
       "resources": "Recursos",
       "github": "GitHub",
       "contribute": "Contribuir",
+      "submitReview": "Enviar reseña de app",
       "about": "Sobre WinuxDB",
       "legal": "Legal",
       "privacy": "Privacidad",

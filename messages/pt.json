@@ -113,7 +113,8 @@
     "subtitleLong": "Pesquise no índice da WinuxDB e veja como apps Windows se comportam no Linux, com notas, licenças e lançamentos.",
     "kicker": "Base de apps",
     "kickerSecondary": "Notas de compatibilidade",
-    "emptyState": "Nenhum app encontrado com esses filtros."
+    "emptyState": "Nenhum app encontrado com esses filtros.",
+    "submitReview": "Enviar Avaliação"
   },
   "LanguageSelector": {
     "label": "Idioma",
@@ -220,6 +221,7 @@
       "resources": "Recursos",
       "github": "GitHub",
       "contribute": "Contribuir",
+      "submitReview": "Enviar avaliação do app",
       "about": "Sobre WinuxDB",
       "legal": "Legal",
       "privacy": "Privacidade",

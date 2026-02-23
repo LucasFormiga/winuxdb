@@ -58,6 +58,14 @@ export default async function SiteFooter() {
               <Link href="/contribute" className="transition-colors hover:text-foreground">
                 {t('links.contribute')}
               </Link>
+              <a
+                href="https://forms.gle/1iX4BgLv2myNTvoLA"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-foreground"
+              >
+                {t('links.submitReview')}
+              </a>
               <Link href="/about" className="transition-colors hover:text-foreground">
                 {t('links.about')}
               </Link>
