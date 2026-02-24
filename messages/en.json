@@ -340,7 +340,9 @@
     "sections": {
       "reporting": {
         "title": "1. Report Compatibility",
-        "content": "The most valuable way to contribute is by reporting how apps run on your system. You can submit reports directly via our GitHub repository by editing the src/lib/data/apps.jsonl file."
+        "content": "The most valuable way to contribute is by reporting how apps run on your system. You can submit reports directly via our GitHub repository by editing the src/lib/data/apps.jsonl file.",
+        "cta": "Submit App Review",
+        "githubRepo": "GitHub Repository"
       },
       "code": {
         "title": "2. Code & Design",

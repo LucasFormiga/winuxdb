@@ -340,7 +340,9 @@
     "sections": {
       "reporting": {
         "title": "1. Relate a Compatibilidade",
-        "content": "A forma mais valiosa de contribuir é relatando como os apps rodam no seu sistema. Você pode enviar relatos diretamente pelo nosso repositório no GitHub editando o arquivo src/lib/data/apps.jsonl."
+        "content": "A forma mais valiosa de contribuir é relatando como os apps rodam no seu sistema. Você pode enviar relatos diretamente pelo nosso repositório no GitHub editando o arquivo src/lib/data/apps.jsonl.",
+        "cta": "Enviar avaliação do app",
+        "githubRepo": "Repositório no GitHub"
       },
       "code": {
         "title": "2. Código e Design",
