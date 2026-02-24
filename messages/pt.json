@@ -61,50 +61,99 @@
       "tryInBrowser": "Testar no navegador",
       "downloadFlavor": "Baixar {flavor}",
       "questions": {
-        "priority": {
-          "label": "O que importa mais agora?",
+        "activity": {
+          "label": "O que você vai fazer mais?",
           "options": {
-            "stability": "Estabilidade e suporte longo",
-            "gaming": "Desempenho em jogos",
-            "latest": "Novidades e recursos",
-            "performance": "Velocidade em qualquer hardware"
+            "general": "Web, Escritório, Uso geral",
+            "gaming": "Jogos (Steam, Proton, Lutris)",
+            "creative": "Criativo Pro (Vídeo, Áudio, 3D)",
+            "dev": "Desenvolvimento de Software"
           }
         },
-        "experience": {
-          "label": "Qual seu nível no Linux?",
+        "gpu": {
+          "label": "Qual é a arquitetura da sua GPU?",
           "options": {
-            "beginner": "Iniciante",
-            "intermediate": "Confortável",
-            "advanced": "Avançado"
+            "nvidia": "NVIDIA (Precisa de drivers proprietários)",
+            "amd_intel": "AMD / Intel (Drivers código aberto)",
+            "old": "Hardware antigo / Gráficos integrados"
           }
         },
-        "desktop": {
-          "label": "Estilo de desktop",
+        "device": {
+          "label": "Onde você vai instalar?",
           "options": {
-            "gnome": "Limpo e focado (GNOME)",
-            "kde": "Flexível e familiar (KDE)",
-            "tiling": "Tiling / teclado",
-            "classic": "Layout tradicional",
+            "desktop": "PC Desktop",
+            "laptop": "Notebook",
+            "handheld": "Portátil / Console (Steam Deck)"
+          }
+        },
+        "updates": {
+          "label": "Como você quer as atualizações?",
+          "options": {
+            "stable": "Estável & Previsível (Instale e esqueça)",
+            "rolling": "Tecnologia de Ponta (Rolling Release)",
+            "atomic": "Inquebrável (Imutável / Atomic)"
+          }
+        },
+        "ui": {
+          "label": "Paradigma Visual",
+          "options": {
+            "traditional": "Tradicional (Estilo Windows)",
+            "modern": "Moderno / Gestos (Estilo Mac/GNOME)",
+            "tiling": "Foco no teclado / Tiling",
             "any": "Sem preferência"
           }
         },
-        "hardware": {
-          "label": "Seu hardware",
+        "philosophy": {
+          "label": "Liberdade de Software",
           "options": {
-            "new": "Novo ou potente",
-            "mid": "Intermediário",
-            "old": "Antigo ou simples"
+            "functionality": "Funcionalidade primeiro (Proprietário está ok)",
+            "foss": "Estritamente Código Aberto (Purista FOSS)"
           }
         },
-        "rolling": {
-          "label": "Estilo de atualização",
+        "customization": {
+          "label": "Profundidade de Personalização",
           "options": {
-            "fixed": "Lançamentos previsíveis",
-            "rolling": "Rolling / sempre novo",
-            "atomic": "Imutável / atomic"
+            "ready": "Polido e pronto para uso",
+            "canvas": "Tela em branco (Eu quero construir)"
+          }
+        },
+        "battery": {
+          "label": "Gerenciamento de Energia",
+          "options": {
+            "important": "Sim, foco em duração de bateria",
+            "dont_care": "Não, o desempenho importa mais"
+          }
+        },
+        "rollback": {
+          "label": "Necessidade de Snapshot / Rollback",
+          "options": {
+            "essential": "Essencial (Desfazer instantaneamente uma má atualização)",
+            "dont_care": "Desejável, mas não é um fator decisivo"
+          }
+        },
+        "software": {
+          "label": "Acesso a Software",
+          "options": {
+            "curated": "Loja Curada / Flatpaks",
+            "aur_wild": "O \"Velho Oeste\" (AUR, compilar do zero)"
           }
         }
-      }
+      },
+      "stepLabel": "Pergunta {current} de {total}",
+      "back": "Voltar",
+      "skip": "Pular",
+      "finish": "Finalizar",
+      "topMatches": "Melhores Resultados",
+      "realTimeAnalysis": "Análise em tempo real",
+      "basedOn": "Baseado em",
+      "packageManager": "Gerenciador de Pacotes",
+      "releaseModel": "Modelo de Lançamento",
+      "targetExperience": "Experiência Alvo",
+      "specialistChoice": "Escolha do Especialista",
+      "getFlavor": "Baixar {flavor}",
+      "Fixed": "Lançamento Fixo",
+      "Rolling": "Rolling Release",
+      "Atomic": "Atômico / Imutável"
     }
   },
   "Apps": {
@@ -197,18 +246,21 @@
     "alternatives": "Alternativas Nativas"
   },
   "DistroTaglines": {
-    "ubuntu": "Estável, polida e com uma comunidade enorme.",
-    "linux-mint": "Confortável, clássica e perfeita para quem vem do Windows.",
-    "fedora": "Rápida, moderna e sempre alinhada ao upstream.",
+    "ubuntu": "Estável, polido e com uma comunidade enorme.",
+    "linux-mint": "Confortável, clássico e perfeito para quem vem do Windows.",
+    "fedora": "Rápido, moderno e sempre alinhado ao upstream.",
     "popos": "Base Ubuntu com foco em produtividade e ótimo suporte de hardware.",
-    "arch": "Base mínima, controle total e release contínuo.",
+    "arch": "Base mínima, controle total e atualizações contínuas.",
     "endeavouros": "O poder do Arch com instalação fácil e forte comunidade.",
-    "cachyos": "Arch focado em desempenho, com pacotes otimizados para CPU.",
-    "bazzite": "Gaming estilo SteamOS em Fedora Atomic, pronta para jogar.",
-    "nobara": "Fedora ajustada para jogos, streaming e criação.",
+    "cachyos": "Arch otimizado para desempenho, com pacotes específicos para CPU.",
+    "bazzite": "Gaming estilo SteamOS em Fedora Atomic, pronto para jogar.",
+    "nobara": "Fedora ajustado para jogos, streaming e criação.",
     "zorin": "Experiência polida, parecida com Windows e fácil de usar.",
     "debian": "Base sólida com estabilidade de longo prazo.",
-    "pikaos": "Ubuntu gamer com baixa latência e ajustes prontos."
+    "pikaos": "Ubuntu gamer com baixa latência e ajustes prontos.",
+    "opensuse": "A escolha para administradores e desenvolvedores com ferramentas únicas.",
+    "nixos": "Configuração declarativa, reprodutível e inquebrável.",
+    "manjaro": "Arch acessível com foco na facilidade para o usuário."
   },
   "Footer": {
     "description": "O índice definitivo de compatibilidade para apps Windows no Linux. Curado pela comunidade, para a comunidade.",

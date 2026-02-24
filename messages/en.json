@@ -61,50 +61,99 @@
       "tryInBrowser": "Try in browser",
       "downloadFlavor": "{flavor} downloads",
       "questions": {
-        "priority": {
-          "label": "What matters most right now?",
+        "activity": {
+          "label": "What will you do most?",
           "options": {
-            "stability": "Stability and long-term support",
-            "gaming": "Gaming performance",
-            "latest": "Latest features",
-            "performance": "Speed on any hardware"
+            "general": "Web, Office, General use",
+            "gaming": "Gaming (Steam, Proton, Lutris)",
+            "creative": "Creative Pro (Video, Audio, 3D)",
+            "dev": "Software Development"
           }
         },
-        "experience": {
-          "label": "How comfortable are you with Linux?",
+        "gpu": {
+          "label": "What is your GPU architecture?",
           "options": {
-            "beginner": "New here",
-            "intermediate": "Comfortable",
-            "advanced": "Power user"
+            "nvidia": "NVIDIA (Needs proprietary drivers)",
+            "amd_intel": "AMD / Intel (Open source drivers)",
+            "old": "Old hardware / Integrated graphics"
           }
         },
-        "desktop": {
-          "label": "Preferred desktop style",
+        "device": {
+          "label": "Where are you installing it?",
           "options": {
-            "gnome": "Clean and focused (GNOME)",
-            "kde": "Flexible and familiar (KDE)",
-            "tiling": "Tiling / keyboard-driven",
-            "classic": "Traditional layout",
+            "desktop": "Desktop PC",
+            "laptop": "Laptop",
+            "handheld": "Handheld / Console (Steam Deck)"
+          }
+        },
+        "updates": {
+          "label": "How do you want updates?",
+          "options": {
+            "stable": "Stable & Predictable (Set and forget)",
+            "rolling": "Bleeding Edge (Rolling Release)",
+            "atomic": "Unbreakable (Immutable / Atomic)"
+          }
+        },
+        "ui": {
+          "label": "Visual Paradigm",
+          "options": {
+            "traditional": "Traditional (Windows-like)",
+            "modern": "Modern / Gesture-heavy (Mac/GNOME-like)",
+            "tiling": "Keyboard-centric / Tiling",
             "any": "No preference"
           }
         },
-        "hardware": {
-          "label": "How old is your hardware?",
+        "philosophy": {
+          "label": "Software Freedom",
           "options": {
-            "new": "New or high-end",
-            "mid": "Mid-range",
-            "old": "Older or low-power"
+            "functionality": "Functionality first (Proprietary is fine)",
+            "foss": "Strictly Open Source (FOSS purist)"
           }
         },
-        "rolling": {
-          "label": "Update style",
+        "customization": {
+          "label": "Customization Depth",
           "options": {
-            "fixed": "Predictable releases",
-            "rolling": "Rolling / always fresh",
-            "atomic": "Immutable / atomic"
+            "ready": "Polished & ready out of the box",
+            "canvas": "Blank canvas (I want to build it)"
+          }
+        },
+        "battery": {
+          "label": "Power Management",
+          "options": {
+            "important": "Yes, maximum battery life",
+            "dont_care": "No, performance matters more"
+          }
+        },
+        "rollback": {
+          "label": "Snapshot / Rollback Needs",
+          "options": {
+            "essential": "Essential (Instantly undo a bad update)",
+            "dont_care": "Nice to have, not a dealbreaker"
+          }
+        },
+        "software": {
+          "label": "Software Access",
+          "options": {
+            "curated": "Curated App Store / Flatpaks",
+            "aur_wild": "The \"Wild West\" (AUR, compile from source)"
           }
         }
-      }
+      },
+      "stepLabel": "Question {current} of {total}",
+      "back": "Back",
+      "skip": "Skip",
+      "finish": "Finish",
+      "topMatches": "Top Matches",
+      "realTimeAnalysis": "Real-time Analysis",
+      "basedOn": "Based on",
+      "packageManager": "Package Manager",
+      "releaseModel": "Release Model",
+      "targetExperience": "Target Experience",
+      "specialistChoice": "Specialist Choice",
+      "getFlavor": "Get {flavor}",
+      "Fixed": "Fixed Release",
+      "Rolling": "Rolling Release",
+      "Atomic": "Atomic / Immutable"
     }
   },
   "Apps": {
@@ -141,9 +190,12 @@
     "cachyos": "Performance-tuned Arch with CPU-optimized packages.",
     "bazzite": "SteamOS-like gaming on Fedora Atomic, ready out of the box.",
     "nobara": "Fedora tuned for gaming, streaming, and creators.",
-    "zorin": "A polished, Windows-like experience with friendly defaults.",
+    "zorin": "Polished, Windows-like experience with friendly defaults.",
     "debian": "Rock-solid base with long-term stability.",
-    "pikaos": "Ubuntu-based gaming distro tuned for low latency."
+    "pikaos": "Ubuntu-based gaming distro tuned for low latency.",
+    "opensuse": "The choice for sysadmins and developers with unique configuration tools.",
+    "nixos": "Declarative, reproducible, and unbreakable system configuration.",
+    "manjaro": "Accessible Arch-based distro with a focus on user-friendliness."
   },
   "LocaleSuggester": {
     "message": "It looks like your browser is set to {language}.",
