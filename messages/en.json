@@ -138,7 +138,13 @@
             "aur_wild": "The \"Wild West\" (AUR, compile from source)"
           }
         }
-      }
+      },
+      "stepLabel": "Question {current} of {total}",
+      "back": "Back",
+      "skip": "Skip",
+      "finish": "Finish",
+      "topMatches": "Top Matches",
+      "realTimeAnalysis": "Real-time Analysis"
     }
   },
   "Apps": {

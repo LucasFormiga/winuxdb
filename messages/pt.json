@@ -138,7 +138,13 @@
             "aur_wild": "O \"Velho Oeste\" (AUR, compilar do zero)"
           }
         }
-      }
+      },
+      "stepLabel": "Pergunta {current} de {total}",
+      "back": "Voltar",
+      "skip": "Pular",
+      "finish": "Finalizar",
+      "topMatches": "Melhores Resultados",
+      "realTimeAnalysis": "Análise em tempo real"
     }
   },
   "Apps": {

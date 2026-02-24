@@ -25,88 +25,98 @@ export const DISTRO_QUESTIONS = [
   {
     id: 'activity',
     label: 'What will you do most?',
+    icon: 'Activity',
     options: [
-      { id: 'general', label: 'Web, Office, General use' },
-      { id: 'gaming', label: 'Gaming (Steam, Proton, Lutris)' },
-      { id: 'creative', label: 'Creative Pro (Video, Audio, 3D)' },
-      { id: 'dev', label: 'Software Development' }
+      { id: 'general', label: 'Web, Office, General use', icon: 'Globe' },
+      { id: 'gaming', label: 'Gaming (Steam, Proton, Lutris)', icon: 'Gamepad2' },
+      { id: 'creative', label: 'Creative Pro (Video, Audio, 3D)', icon: 'Palette' },
+      { id: 'dev', label: 'Software Development', icon: 'Code2' }
     ]
   },
   {
     id: 'gpu',
     label: 'What is your GPU architecture?',
+    icon: 'Cpu',
     options: [
-      { id: 'nvidia', label: 'NVIDIA (Needs proprietary drivers)' },
-      { id: 'amd_intel', label: 'AMD / Intel (Open source drivers)' },
-      { id: 'old', label: 'Old hardware / Integrated graphics' }
+      { id: 'nvidia', label: 'NVIDIA (Needs proprietary drivers)', icon: 'Zap' },
+      { id: 'amd_intel', label: 'AMD / Intel (Open source drivers)', icon: 'Cpu' },
+      { id: 'old', label: 'Old hardware / Integrated graphics', icon: 'History' }
     ]
   },
   {
     id: 'device',
     label: 'Where are you installing it?',
+    icon: 'Monitor',
     options: [
-      { id: 'desktop', label: 'Desktop PC' },
-      { id: 'laptop', label: 'Laptop' },
-      { id: 'handheld', label: 'Handheld / Console (Steam Deck)' }
+      { id: 'desktop', label: 'Desktop PC', icon: 'Monitor' },
+      { id: 'laptop', label: 'Laptop', icon: 'Laptop' },
+      { id: 'handheld', label: 'Handheld / Console (Steam Deck)', icon: 'Smartphone' }
     ]
   },
   {
     id: 'updates',
     label: 'How do you want updates?',
+    icon: 'RefreshCw',
     options: [
-      { id: 'stable', label: 'Stable & Predictable (Set and forget)' },
-      { id: 'rolling', label: 'Bleeding Edge (Rolling Release)' },
-      { id: 'atomic', label: 'Unbreakable (Immutable / Atomic)' }
+      { id: 'stable', label: 'Stable & Predictable (Set and forget)', icon: 'ShieldCheck' },
+      { id: 'rolling', label: 'Bleeding Edge (Rolling Release)', icon: 'Rocket' },
+      { id: 'atomic', label: 'Unbreakable (Immutable / Atomic)', icon: 'Lock' }
     ]
   },
   {
     id: 'ui',
     label: 'Visual Paradigm',
+    icon: 'Layout',
     options: [
-      { id: 'traditional', label: 'Traditional (Windows-like)' },
-      { id: 'modern', label: 'Modern / Gesture-heavy (Mac/GNOME-like)' },
-      { id: 'tiling', label: 'Keyboard-centric / Tiling' },
-      { id: 'any', label: 'No preference' }
+      { id: 'traditional', label: 'Traditional (Windows-like)', icon: 'Layout' },
+      { id: 'modern', label: 'Modern / Gesture-heavy (Mac/GNOME-like)', icon: 'AppWindow' },
+      { id: 'tiling', label: 'Keyboard-centric / Tiling', icon: 'Columns' },
+      { id: 'any', label: 'No preference', icon: 'Sparkles' }
     ]
   },
   {
     id: 'philosophy',
     label: 'Software Freedom',
+    icon: 'Heart',
     options: [
-      { id: 'functionality', label: 'Functionality first (Proprietary is fine)' },
-      { id: 'foss', label: 'Strictly Open Source (FOSS purist)' }
+      { id: 'functionality', label: 'Functionality first (Proprietary is fine)', icon: 'Plug' },
+      { id: 'foss', label: 'Strictly Open Source (FOSS purist)', icon: 'Heart' }
     ]
   },
   {
     id: 'customization',
     label: 'Customization Depth',
+    icon: 'Wand2',
     options: [
-      { id: 'ready', label: 'Polished & ready out of the box' },
-      { id: 'canvas', label: 'Blank canvas (I want to build it)' }
+      { id: 'ready', label: 'Polished & ready out of the box', icon: 'CheckCircle2' },
+      { id: 'canvas', label: 'Blank canvas (I want to build it)', icon: 'Eraser' }
     ]
   },
   {
     id: 'battery',
     label: 'Power Management',
+    icon: 'Battery',
     options: [
-      { id: 'important', label: 'Yes, maximum battery life' },
-      { id: 'dont_care', label: 'No, performance matters more' }
+      { id: 'important', label: 'Yes, maximum battery life', icon: 'BatteryCharging' },
+      { id: 'dont_care', label: 'No, performance matters more', icon: 'Zap' }
     ]
   },
   {
     id: 'rollback',
     label: 'Snapshot / Rollback Needs',
+    icon: 'Undo2',
     options: [
-      { id: 'essential', label: 'Essential (Instantly undo a bad update)' },
-      { id: 'dont_care', label: 'Nice to have, not a dealbreaker' }
+      { id: 'essential', label: 'Essential (Instantly undo a bad update)', icon: 'History' },
+      { id: 'dont_care', label: 'Nice to have, not a dealbreaker', icon: 'ThumbsUp' }
     ]
   },
   {
     id: 'software',
     label: 'Software Access',
+    icon: 'Package',
     options: [
-      { id: 'curated', label: 'Curated App Store / Flatpaks' },
-      { id: 'aur_wild', label: 'The "Wild West" (AUR, compile from source)' }
+      { id: 'curated', label: 'Curated App Store / Flatpaks', icon: 'ShoppingBag' },
+      { id: 'aur_wild', label: 'The "Wild West" (AUR, compile from source)', icon: 'Flame' }
     ]
   }
 ]
@@ -357,11 +367,11 @@ export const DISTROS: Distro[] = [
     distroseaUrl: 'https://distrosea.com/select/cachyos/',
     weights: {
       gaming: 9, dev: 7,
-      amd_intel: 9, nvidia: 7,
+      amd_intel: 9, nvidia: 9,
       desktop: 9, handheld: 7,
       rolling: 9,
-      functionality: 7,
-      ready: 6,
+      functionality: 9,
+      ready: 9,
       aur_wild: 9
     },
     flavors: [
@@ -379,7 +389,7 @@ export const DISTROS: Distro[] = [
       },
       {
         id: 'cachyos-cosmic', name: 'COSMIC', desktop: 'COSMIC', url: 'https://cachyos.org/download/', screenshot: 'https://cachyos.org/_astro/kde.BnaypD8L_13lcLT.webp', tags: ['latest'], distroseaUrl: 'https://distrosea.com/select/cachyos/',
-        weights: { modern: 6 }
+        weights: { modern: 9 }
       },
       {
         id: 'cachyos-handheld', name: 'Handheld', desktop: 'KDE', url: 'https://cachyos.org/download/', screenshot: 'https://cachyos.org/_astro/handheld.DYNjpH4Q_bJDzA.webp', tags: ['gaming'], distroseaUrl: 'https://distrosea.com/select/cachyos/',

@@ -138,7 +138,13 @@
             "aur_wild": "El \"Salvaje Oeste\" (AUR, compilar desde código)"
           }
         }
-      }
+      },
+      "stepLabel": "Pregunta {current} de {total}",
+      "back": "Atrás",
+      "skip": "Saltar",
+      "finish": "Finalizar",
+      "topMatches": "Mejores Resultados",
+      "realTimeAnalysis": "Análisis en tiempo real"
     }
   },
   "Apps": {
