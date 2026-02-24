@@ -10,36 +10,74 @@ import { DISTRO_QUESTIONS, DISTROS } from '@/lib/data/distros'
 type Answers = Record<string, string>
 
 const DEFAULT_ANSWERS: Answers = {
-  priority: 'stability',
-  experience: 'beginner',
-  desktop: 'any',
-  hardware: 'mid',
-  rolling: 'fixed'
+  activity: 'general',
+  gpu: 'amd_intel',
+  device: 'desktop',
+  updates: 'stable',
+  ui: 'any',
+  philosophy: 'functionality',
+  customization: 'ready',
+  battery: 'dont_care',
+  rollback: 'dont_care',
+  software: 'curated'
 }
 
-function scoreDistro(answers: Answers, weights: Record<string, number>) {
-  return Object.values(answers).reduce((total, value) => {
-    return total + (weights[value] ?? 0)
-  }, 0)
+function scoreDistro(distro: (typeof DISTROS)[number], answers: Answers) {
+  let score = 0
+
+  // 1. Base weights from answers with Priority Multipliers
+  for (const [key, value] of Object.entries(answers)) {
+    let weight = distro.weights[value] ?? 0
+
+    // Activity and GPU are critical path decisions, they get 2x impact
+    if (key === 'activity' || key === 'gpu') {
+      weight *= 2
+    }
+
+    score += weight
+  }
+
+  // 2. Hardware Gating (Specialist "Deal-breaker" logic)
+  if (answers.gpu === 'nvidia') {
+    // Strongly discourage distros where NVIDIA is historically painful out of the box
+    if (['debian', 'arch'].includes(distro.id)) score -= 20
+    // Boost distros with pre-baked NVIDIA drivers
+    if (['popos', 'bazzite', 'nobara', 'pikaos'].includes(distro.id)) score += 10
+  }
+
+  // 3. Form Factor Awareness
+  if (answers.device === 'handheld') {
+    // Bazzite and CachyOS are the clear winners here
+    if (['bazzite', 'cachyos'].includes(distro.id)) score += 15
+    // Penalize desktop-only focused distros
+    if (['linux-mint', 'zorin', 'debian'].includes(distro.id)) score -= 15
+  }
+
+  return score
 }
 
 function pickFlavor(answers: Answers, flavors: (typeof DISTROS)[number]['flavors']) {
   const preferenceMap: Record<string, string[]> = {
-    gnome: ['gnome'],
-    kde: ['kde'],
+    modern: ['gnome'],
+    traditional: ['kde', 'classic'],
     tiling: ['tiling'],
-    classic: ['classic'],
-    any: ['gnome', 'kde', 'classic']
+    any: ['flagship']
   }
 
-  const preferences = preferenceMap[answers.desktop] ?? []
-  const exactMatch = flavors.find((flavor) => preferences.some((tag) => flavor.tags.includes(tag)))
+  const preferences = preferenceMap[answers.ui] ?? []
 
-  if (exactMatch) {
-    return exactMatch
+  // If user likes specific desktop, find it
+  if (answers.ui !== 'any') {
+    const exactMatch = flavors.find((flavor) => preferences.some((tag) => flavor.tags.includes(tag)))
+    if (exactMatch) return exactMatch
+  } else {
+    // If no preference, pick the flagship experience
+    const flagship = flavors.find((f) => f.isFlagship)
+    if (flagship) return flagship
   }
 
-  if (answers.hardware === 'old') {
+  // Fallback: If hardware is old, prioritize lightweight tags
+  if (answers.gpu === 'old') {
     const lightweight = flavors.find((flavor) => ['performance', 'old'].some((tag) => flavor.tags.includes(tag)))
     if (lightweight) return lightweight
   }
@@ -55,7 +93,7 @@ export default function DistroQuiz() {
   const results = useMemo(() => {
     const scored = DISTROS.map((distro) => ({
       distro,
-      score: scoreDistro(answers, distro.weights)
+      score: scoreDistro(distro, answers)
     }))
       .sort((a, b) => b.score - a.score)
       .slice(0, 3)

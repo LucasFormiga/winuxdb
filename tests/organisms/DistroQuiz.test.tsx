@@ -16,8 +16,8 @@ describe('DistroQuiz', () => {
       </NextIntlClientProvider>
     )
 
-    fireEvent.click(screen.getByRole('button', { name: /flexible and familiar/i }))
-    expect(screen.getAllByText(/kde/i).length).toBeGreaterThan(0)
+    fireEvent.click(screen.getByRole('button', { name: /Traditional/i }))
+    expect(screen.getAllByText(/kde|cinnamon/i).length).toBeGreaterThan(0)
   })
 
   it('resets answers to defaults', () => {
@@ -27,9 +27,9 @@ describe('DistroQuiz', () => {
       </NextIntlClientProvider>
     )
 
-    fireEvent.click(screen.getByRole('button', { name: /rolling/i }))
+    fireEvent.click(screen.getByRole('button', { name: /Bleeding Edge/i }))
     fireEvent.click(screen.getByRole('button', { name: /reset/i }))
-    expect(screen.getByRole('button', { name: /stability and long-term support/i })).toHaveClass(
+    expect(screen.getByRole('button', { name: /Web, Office, General use/i })).toHaveClass(
       'border-primary/60'
     )
   })
