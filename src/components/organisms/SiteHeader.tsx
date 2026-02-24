@@ -78,14 +78,22 @@ export default function SiteHeader() {
               )
             })}
             <div className="mx-2 h-4 w-px bg-border/40" />
-            <a
-              href="https://protondb.com"
+            <Link
+              href="https://protondb.com/?utm_source=winuxdb"
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2 text-muted-foreground/80 transition-colors hover:text-foreground hover:underline decoration-primary underline-offset-4"
             >
               {t('games')}
-            </a>
+            </Link>
+            <Link
+              href="https://areweanticheatyet.com/?utm_source=winuxdb"
+              target="_blank"
+              rel="noreferrer"
+              className="px-4 py-2 text-muted-foreground/80 transition-colors hover:text-foreground hover:underline decoration-primary underline-offset-4"
+            >
+              {t('antiCheat')}
+            </Link>
           </nav>
         </div>
 

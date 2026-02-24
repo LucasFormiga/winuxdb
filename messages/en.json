@@ -175,7 +175,8 @@
     "home": "Home",
     "apps": "Apps",
     "contribute": "Contribute",
-    "games": "Games (ProtonDB)"
+    "games": "Games",
+    "antiCheat": "Games with Anti-Cheat"
   },
   "Metadata": {
     "description": "WinuxDB is the definitive Linux compatibility database for Windows applications. Search thousands of apps, check Wine and Proton ratings, and find the best Linux distro for your workflow."
@@ -264,12 +265,13 @@
   },
   "Footer": {
     "description": "The definitive compatibility index for Windows apps on Linux. Curated by the community, for the community.",
-    "madeIn": "Made with love by LucasFormiga in Brazil for the community.",
+    "madeIn": "Made with {love} by <link>LucasFormiga</link> in {br} for the community.",
     "links": {
       "product": "Product",
       "apps": "Apps Database",
       "distros": "Distro Quiz",
-      "games": "ProtonDB (Games)",
+      "games": "Games",
+      "antiCheat": "Anti-Cheat Games",
       "resources": "Resources",
       "github": "GitHub",
       "contribute": "Contribute",
@@ -279,7 +281,7 @@
       "privacy": "Privacy Policy",
       "terms": "Terms of Service"
     },
-    "copyright": "© {year} WinuxDB. Not affiliated with Microsoft, WineHQ, or ProtonDB."
+    "copyright": "© {year} WinuxDB. Not affiliated with Microsoft, WineHQ, ProtonDB, or 'Are We Anti-Cheat Yet?'."
   },
   "Privacy": {
     "title": "Privacy Policy",
@@ -315,7 +317,7 @@
       },
       "affiliation": {
         "title": "3. No Affiliation",
-        "content": "WinuxDB is an independent community project. We are not affiliated with, endorsed by, or sponsored by Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (Proton), ProtonDB, or any software author listed in our database."
+        "content": "WinuxDB is an independent community project. We are not affiliated with, endorsed by, or sponsored by Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (Proton), ProtonDB, AWACY (Are We Anti-Cheat Yet?), or any software author listed in our database."
       }
     }
   },

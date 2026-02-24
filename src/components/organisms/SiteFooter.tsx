@@ -32,14 +32,22 @@ export default async function SiteFooter() {
               <Link href="/#quiz" className="transition-colors hover:text-foreground">
                 {t('links.distros')}
               </Link>
-              <a
-                href="https://protondb.com"
+              <Link
+                href="https://protondb.com/?utm_source=winuxdb"
                 target="_blank"
                 rel="noreferrer"
                 className="transition-colors hover:text-foreground"
               >
                 {t('links.games')}
-              </a>
+              </Link>
+              <Link
+                href="https://areweanticheatyet.com/?utm_source=winuxdb"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-foreground"
+              >
+                {t('links.antiCheat')}
+              </Link>
             </nav>
           </div>
 
@@ -47,25 +55,25 @@ export default async function SiteFooter() {
           <div className="flex flex-col gap-4">
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('links.resources')}</h3>
             <nav className="flex flex-col gap-3 text-sm text-muted-foreground">
-              <a
+              <Link
                 href="https://github.com/LucasFormiga/winuxdb"
                 target="_blank"
                 rel="noreferrer"
                 className="transition-colors hover:text-foreground"
               >
                 {t('links.github')}
-              </a>
+              </Link>
               <Link href="/contribute" className="transition-colors hover:text-foreground">
                 {t('links.contribute')}
               </Link>
-              <a
+              <Link
                 href="https://forms.gle/1iX4BgLv2myNTvoLA"
                 target="_blank"
                 rel="noreferrer"
                 className="transition-colors hover:text-foreground"
               >
                 {t('links.submitReview')}
-              </a>
+              </Link>
               <Link href="/about" className="transition-colors hover:text-foreground">
                 {t('links.about')}
               </Link>
@@ -77,7 +85,22 @@ export default async function SiteFooter() {
         <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-border/40 pt-8 sm:flex-row">
           <div className="flex flex-col items-center gap-2 text-[0.7rem] uppercase tracking-wider text-muted-foreground/60 sm:items-start">
             <p>{t('copyright', { year: currentYear })}</p>
-            <p>{t('madeIn')}</p>
+            <p>
+              {t.rich('madeIn', {
+                love: '❤️',
+                br: '🇧🇷',
+                link: (chunks) => (
+                  <Link
+                    href="https://github.com/LucasFormiga"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="transition-colors hover:text-foreground"
+                  >
+                    {chunks}
+                  </Link>
+                )
+              })}
+            </p>
           </div>
           <div className="flex gap-6 text-[0.7rem] uppercase tracking-wider text-muted-foreground/60">
             <Link href="/privacy" className="transition-colors hover:text-foreground">
