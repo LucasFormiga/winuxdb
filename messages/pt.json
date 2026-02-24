@@ -90,7 +90,7 @@
           "label": "Como você quer as atualizações?",
           "options": {
             "stable": "Estável & Previsível (Instale e esqueça)",
-            "rolling": "Bleeding Edge (Rolling Release)",
+            "rolling": "Tecnologia de Ponta (Rolling Release)",
             "atomic": "Inquebrável (Imutável / Atomic)"
           }
         },
@@ -120,7 +120,7 @@
         "battery": {
           "label": "Gerenciamento de Energia",
           "options": {
-            "important": "Sim, duração máxima da bateria",
+            "important": "Sim, foco em duração de bateria",
             "dont_care": "Não, o desempenho importa mais"
           }
         },
@@ -128,7 +128,7 @@
           "label": "Necessidade de Snapshot / Rollback",
           "options": {
             "essential": "Essencial (Desfazer instantaneamente uma má atualização)",
-            "dont_care": "Bom ter, mas não é um fator decisivo"
+            "dont_care": "Desejável, mas não é um fator decisivo"
           }
         },
         "software": {
@@ -144,7 +144,16 @@
       "skip": "Pular",
       "finish": "Finalizar",
       "topMatches": "Melhores Resultados",
-      "realTimeAnalysis": "Análise em tempo real"
+      "realTimeAnalysis": "Análise em tempo real",
+      "basedOn": "Baseado em",
+      "packageManager": "Gerenciador de Pacotes",
+      "releaseModel": "Modelo de Lançamento",
+      "targetExperience": "Experiência Alvo",
+      "specialistChoice": "Escolha do Especialista",
+      "getFlavor": "Baixar {flavor}",
+      "Fixed": "Lançamento Fixo",
+      "Rolling": "Rolling Release",
+      "Atomic": "Atômico / Imutável"
     }
   },
   "Apps": {
@@ -237,15 +246,15 @@
     "alternatives": "Alternativas Nativas"
   },
   "DistroTaglines": {
-    "ubuntu": "Estável, polida e com uma comunidade enorme.",
-    "linux-mint": "Confortável, clássica e perfeita para quem vem do Windows.",
-    "fedora": "Rápida, moderna e sempre alinhada ao upstream.",
+    "ubuntu": "Estável, polido e com uma comunidade enorme.",
+    "linux-mint": "Confortável, clássico e perfeito para quem vem do Windows.",
+    "fedora": "Rápido, moderno e sempre alinhado ao upstream.",
     "popos": "Base Ubuntu com foco em produtividade e ótimo suporte de hardware.",
-    "arch": "Base mínima, controle total e release contínuo.",
+    "arch": "Base mínima, controle total e atualizações contínuas.",
     "endeavouros": "O poder do Arch com instalação fácil e forte comunidade.",
-    "cachyos": "Arch focado em desempenho, com pacotes otimizados para CPU.",
-    "bazzite": "Gaming estilo SteamOS em Fedora Atomic, pronta para jogar.",
-    "nobara": "Fedora ajustada para jogos, streaming e criação.",
+    "cachyos": "Arch otimizado para desempenho, com pacotes específicos para CPU.",
+    "bazzite": "Gaming estilo SteamOS em Fedora Atomic, pronto para jogar.",
+    "nobara": "Fedora ajustado para jogos, streaming e criação.",
     "zorin": "Experiência polida, parecida com Windows e fácil de usar.",
     "debian": "Base sólida com estabilidade de longo prazo.",
     "pikaos": "Ubuntu gamer com baixa latência e ajustes prontos.",

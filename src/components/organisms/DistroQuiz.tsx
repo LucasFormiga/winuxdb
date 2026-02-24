@@ -1,12 +1,86 @@
 'use client'
 
-import * as Icons from 'lucide-react'
+import {
+  Activity,
+  AppWindow,
+  Battery,
+  BatteryCharging,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  Code2,
+  Columns,
+  Cpu,
+  Download,
+  Eraser,
+  Flame,
+  Gamepad2,
+  Globe,
+  Heart,
+  History,
+  Laptop,
+  Layout,
+  Lock,
+  Monitor,
+  Palette,
+  Plug,
+  RefreshCw,
+  Rocket,
+  RotateCcw,
+  ShieldCheck,
+  ShoppingBag,
+  Smartphone,
+  Sparkles,
+  ThumbsUp,
+  Trophy,
+  Undo2,
+  Wand2,
+  Zap
+} from 'lucide-react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { DISTRO_QUESTIONS, DISTROS } from '@/lib/data/distros'
+
+const ICON_MAP = {
+  Activity,
+  AppWindow,
+  Battery,
+  BatteryCharging,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  Code2,
+  Columns,
+  Cpu,
+  Download,
+  Eraser,
+  Flame,
+  Gamepad2,
+  Globe,
+  Heart,
+  History,
+  Laptop,
+  Layout,
+  Lock,
+  Monitor,
+  Palette,
+  Plug,
+  RefreshCw,
+  Rocket,
+  RotateCcw,
+  ShieldCheck,
+  ShoppingBag,
+  Smartphone,
+  Sparkles,
+  ThumbsUp,
+  Trophy,
+  Undo2,
+  Wand2,
+  Zap
+}
 
 type Answers = Record<string, string>
 
@@ -140,7 +214,7 @@ export default function DistroQuiz() {
     setCurrentStep(0)
   }
 
-  const QuestionIcon = Icons[currentQuestion.icon as keyof typeof Icons] as React.ElementType
+  const QuestionIcon = ICON_MAP[currentQuestion.icon as keyof typeof ICON_MAP] || Activity
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
@@ -151,8 +225,13 @@ export default function DistroQuiz() {
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary/80">{t('kicker')}</p>
             <h3 className="mt-2 text-2xl font-bold">{t('title')}</h3>
           </div>
-          <Button variant="ghost" size="sm" onClick={handleReset} className="text-muted-foreground hover:text-foreground">
-            <Icons.RotateCcw className="mr-2 h-4 w-4" />
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleReset}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <RotateCcw className="mr-2 h-4 w-4" />
             {t('reset')}
           </Button>
         </div>
@@ -164,10 +243,7 @@ export default function DistroQuiz() {
             <span>{Math.round(progress)}%</span>
           </div>
           <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-border/40">
-            <div
-              className="h-full bg-primary transition-all duration-500 ease-out"
-              style={{ width: `${progress}%` }}
-            />
+            <div className="h-full bg-primary transition-all duration-500 ease-out" style={{ width: `${progress}%` }} />
           </div>
         </div>
 
@@ -177,15 +253,13 @@ export default function DistroQuiz() {
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
               <QuestionIcon className="h-6 w-6" />
             </div>
-            <h4 className="text-xl font-semibold tracking-tight">
-              {t(`questions.${currentQuestion.id}.label`)}
-            </h4>
+            <h4 className="text-xl font-semibold tracking-tight">{t(`questions.${currentQuestion.id}.label`)}</h4>
           </div>
 
           <div className="mt-8 grid gap-3">
             {currentQuestion.options.map((option) => {
               const active = answers[currentQuestion.id] === option.id
-              const OptionIcon = Icons[option.icon as keyof typeof Icons] as React.ElementType
+              const OptionIcon = ICON_MAP[option.icon as keyof typeof ICON_MAP] || Activity
 
               return (
                 <button
@@ -198,19 +272,23 @@ export default function DistroQuiz() {
                       : 'border-border/60 hover:border-primary/40 hover:bg-primary/5'
                   }`}
                 >
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
-                    active ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary'
-                  }`}>
+                  <div
+                    className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
+                      active
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary'
+                    }`}
+                  >
                     <OptionIcon className="h-5 w-5" />
                   </div>
                   <div className="flex-1">
-                    <p className={`text-sm font-semibold ${active ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}>
+                    <p
+                      className={`text-sm font-semibold ${active ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}
+                    >
                       {t(`questions.${currentQuestion.id}.options.${option.id}`)}
                     </p>
                   </div>
-                  {active && (
-                    <Icons.CheckCircle2 className="h-5 w-5 text-primary" />
-                  )}
+                  {active && <CheckCircle2 className="h-5 w-5 text-primary" />}
                 </button>
               )
             })}
@@ -223,10 +301,10 @@ export default function DistroQuiz() {
             variant="outline"
             size="sm"
             disabled={currentStep === 0}
-            onClick={() => setCurrentStep(prev => prev - 1)}
+            onClick={() => setCurrentStep((prev) => prev - 1)}
             className="rounded-xl border-border/60"
           >
-            <Icons.ChevronLeft className="mr-2 h-4 w-4" />
+            <ChevronLeft className="mr-2 h-4 w-4" />
             {t('back')}
           </Button>
           <div className="flex gap-2">
@@ -244,13 +322,13 @@ export default function DistroQuiz() {
             size="sm"
             onClick={() => {
               if (currentStep < DISTRO_QUESTIONS.length - 1) {
-                setCurrentStep(prev => prev + 1)
+                setCurrentStep((prev) => prev + 1)
               }
             }}
             className="rounded-xl"
           >
             {currentStep === DISTRO_QUESTIONS.length - 1 ? t('finish') : t('skip')}
-            <Icons.ChevronRight className="ml-2 h-4 w-4" />
+            <ChevronRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
       </div>
@@ -262,57 +340,118 @@ export default function DistroQuiz() {
           <span className="text-[10px] font-medium text-muted-foreground/40">{t('realTimeAnalysis')}</span>
         </div>
         {results.map(({ distro, flavor, rank }) => (
-          <div key={distro.id} className={`group relative rounded-3xl border transition-all duration-500 ${
-            rank === 1 ? 'border-primary/30 bg-card/80 shadow-lg shadow-primary/5' : 'border-border/60 bg-card/40 opacity-80 hover:opacity-100'
-          }`}>
-            <div className="p-5">
+          <div
+            key={distro.id}
+            className={`group relative rounded-3xl border transition-all duration-500 ${
+              rank === 1
+                ? 'border-primary/40 bg-card p-2 shadow-2xl shadow-primary/10 ring-1 ring-primary/20'
+                : 'border-border/60 bg-card/40 opacity-80 hover:opacity-100'
+            }`}
+          >
+            <div className={rank === 1 ? 'p-6' : 'p-5'}>
               <div className="flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className={`text-[10px] font-bold uppercase tracking-widest ${rank === 1 ? 'text-primary' : 'text-muted-foreground'}`}>
-                      Rank #{rank}
+                    <span
+                      className={`text-[10px] font-bold uppercase tracking-widest ${rank === 1 ? 'text-primary' : 'text-muted-foreground'}`}
+                    >
+                      {rank === 1 ? `🏆 ${t('specialistChoice')}` : `Rank #${rank}`}
                     </span>
-                    {rank === 1 && <Icons.Trophy className="h-3 w-3 text-primary" />}
                   </div>
-                  <h4 className="mt-1 text-xl font-bold tracking-tight">{distro.name}</h4>
+                  <h4 className={`mt-1 font-bold tracking-tight ${rank === 1 ? 'text-3xl' : 'text-xl'}`}>
+                    {distro.name}
+                  </h4>
                 </div>
-                <Badge variant={rank === 1 ? 'default' : 'secondary'} className="rounded-lg px-2 py-0.5 text-[10px] uppercase tracking-wider">
+                <Badge
+                  variant={rank === 1 ? 'default' : 'secondary'}
+                  className="rounded-lg px-2 py-0.5 text-[10px] uppercase tracking-wider"
+                >
                   {rank === 1 ? t('bestFit') : t('alternate')}
                 </Badge>
               </div>
 
-              <div className="mt-4 overflow-hidden rounded-2xl border border-border/40 bg-black/20">
+              <p
+                className={`mt-3 text-muted-foreground leading-relaxed ${rank === 1 ? 'text-base' : 'text-sm line-clamp-2'}`}
+              >
+                {tTaglines(distro.id, { fallback: distro.tagline })}
+              </p>
+
+              {/* Enhanced Stats for Rank #1 */}
+              {rank === 1 && (
+                <div className="mt-6 grid grid-cols-2 gap-3 border-y border-border/40 py-6">
+                  <div className="space-y-1">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+                      {t('basedOn')}
+                    </p>
+                    <p className="text-sm font-semibold">{distro.basedOn}</p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+                      {t('packageManager')}
+                    </p>
+                    <p className="text-sm font-semibold">{distro.packageManager}</p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+                      {t('releaseModel')}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <History className="h-3 w-3 text-primary" />
+                      <p className="text-sm font-semibold">{t(distro.releaseModel)}</p>
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+                      {t('targetExperience')}
+                    </p>
+                    <p className="text-sm font-semibold">{flavor.desktop}</p>
+                  </div>
+                </div>
+              )}
+
+              <div
+                className={`mt-6 overflow-hidden rounded-2xl border border-border/40 bg-black/20 ${rank === 1 ? 'h-56' : 'h-32'}`}
+              >
                 <Image
                   src={flavor.screenshot}
                   alt={`${distro.name} ${flavor.name} screenshot`}
                   width={1200}
                   height={720}
-                  className="h-32 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
 
-              <div className="mt-4 flex flex-wrap items-center gap-2">
+              <div className="mt-6 flex flex-wrap items-center gap-2">
                 <div className="flex items-center gap-1.5 rounded-lg bg-muted px-2 py-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
-                  <Icons.Monitor className="h-3 w-3" />
+                  <Monitor className="h-3 w-3" />
                   {flavor.desktop}
                 </div>
-                {distro.baseTags.slice(0, 2).map((tag) => (
+                {distro.baseTags.slice(0, 3).map((tag) => (
                   <Badge key={tag} variant="outline" className="text-[9px] uppercase tracking-tighter border-border/40">
                     {tag}
                   </Badge>
                 ))}
               </div>
 
-              <div className="mt-5 flex flex-wrap items-center gap-2">
-                <Button asChild size="sm" className="h-8 rounded-xl px-4 text-xs font-semibold">
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <Button
+                  asChild
+                  size={rank === 1 ? 'lg' : 'sm'}
+                  className={`rounded-xl font-bold ${rank === 1 ? 'flex-1' : 'px-4 text-xs'}`}
+                >
                   <a href={distro.url} target="_blank" rel="noreferrer">
                     {t('visitSite')}
                   </a>
                 </Button>
-                <Button asChild variant="secondary" size="sm" className="h-8 rounded-xl px-4 text-xs font-semibold">
+                <Button
+                  asChild
+                  variant="secondary"
+                  size={rank === 1 ? 'lg' : 'sm'}
+                  className={`rounded-xl font-bold ${rank === 1 ? 'flex-1' : 'px-4 text-xs'}`}
+                >
                   <a href={flavor.url} target="_blank" rel="noreferrer">
-                    <Icons.Download className="mr-2 h-3 w-3" />
-                    {flavor.name}
+                    <Download className="mr-2 h-4 w-4" />
+                    {rank === 1 ? t('getFlavor', { flavor: flavor.name }) : flavor.name}
                   </a>
                 </Button>
               </div>

@@ -144,7 +144,16 @@
       "skip": "Skip",
       "finish": "Finish",
       "topMatches": "Top Matches",
-      "realTimeAnalysis": "Real-time Analysis"
+      "realTimeAnalysis": "Real-time Analysis",
+      "basedOn": "Based on",
+      "packageManager": "Package Manager",
+      "releaseModel": "Release Model",
+      "targetExperience": "Target Experience",
+      "specialistChoice": "Specialist Choice",
+      "getFlavor": "Get {flavor}",
+      "Fixed": "Fixed Release",
+      "Rolling": "Rolling Release",
+      "Atomic": "Atomic / Immutable"
     }
   },
   "Apps": {
@@ -181,7 +190,7 @@
     "cachyos": "Performance-tuned Arch with CPU-optimized packages.",
     "bazzite": "SteamOS-like gaming on Fedora Atomic, ready out of the box.",
     "nobara": "Fedora tuned for gaming, streaming, and creators.",
-    "zorin": "A polished, Windows-like experience with friendly defaults.",
+    "zorin": "Polished, Windows-like experience with friendly defaults.",
     "debian": "Rock-solid base with long-term stability.",
     "pikaos": "Ubuntu-based gaming distro tuned for low latency.",
     "opensuse": "The choice for sysadmins and developers with unique configuration tools.",

@@ -90,7 +90,7 @@
           "label": "¿Cómo quieres las actualizaciones?",
           "options": {
             "stable": "Estable y Predecible (Instalar y olvidar)",
-            "rolling": "Última tecnología (Rolling Release)",
+            "rolling": "Última Tecnología (Rolling Release)",
             "atomic": "Irrompible (Inmutable / Atomic)"
           }
         },
@@ -107,7 +107,7 @@
           "label": "Libertad de Software",
           "options": {
             "functionality": "Funcionalidad primero (Propietario está bien)",
-            "foss": "Estrictamente Código Abierto (Purista FOSS)"
+            "foss": "Estrictamente Código Aberto (Purista FOSS)"
           }
         },
         "customization": {
@@ -120,7 +120,7 @@
         "battery": {
           "label": "Gestión de Energía",
           "options": {
-            "important": "Sí, máxima duración de la batería",
+            "important": "Sí, prioridad a la duración de batería",
             "dont_care": "No, el rendimiento importa más"
           }
         },
@@ -128,7 +128,7 @@
           "label": "Necesidad de Snapshot / Rollback",
           "options": {
             "essential": "Esencial (Deshacer instantáneamente una mala actualización)",
-            "dont_care": "Bueno tenerlo, pero no es decisivo"
+            "dont_care": "Deseable, pero no es determinante"
           }
         },
         "software": {
@@ -144,7 +144,16 @@
       "skip": "Saltar",
       "finish": "Finalizar",
       "topMatches": "Mejores Resultados",
-      "realTimeAnalysis": "Análisis en tiempo real"
+      "realTimeAnalysis": "Análisis en tiempo real",
+      "basedOn": "Basado en",
+      "packageManager": "Gestor de Paquetes",
+      "releaseModel": "Modelo de Lanzamiento",
+      "targetExperience": "Experiencia Objetivo",
+      "specialistChoice": "Elección del Especialista",
+      "getFlavor": "Descargar {flavor}",
+      "Fixed": "Lanzamiento Fijo",
+      "Rolling": "Rolling Release",
+      "Atomic": "Atómico / Inmutable"
     }
   },
   "Apps": {
@@ -237,20 +246,20 @@
     "alternatives": "Alternativas Nativas"
   },
   "DistroTaglines": {
-    "ubuntu": "Estable, pulida y con una comunidad enorme.",
-    "linux-mint": "Cómoda, clásica y perfecta para quienes vienen de Windows.",
-    "fedora": "Rápida, moderna y alineada con el upstream.",
+    "ubuntu": "Estable, pulido y con una comunidad enorme.",
+    "linux-mint": "Cómodo, clásico e ideal para quienes vienen de Windows.",
+    "fedora": "Rápido, moderno y alineado con el upstream.",
     "popos": "Base Ubuntu con foco en productividad y gran soporte de hardware.",
-    "arch": "Base mínima, control total y rolling release.",
+    "arch": "Base mínima, control total y actualizaciones continuas.",
     "endeavouros": "El poder de Arch con instalación sencilla y comunidad activa.",
-    "cachyos": "Arch optimizada para rendimiento, con paquetes afinados para CPU.",
-    "bazzite": "Gaming estilo SteamOS en Fedora Atomic, lista para jugar.",
-    "nobara": "Fedora ajustada para juegos, streaming y creación.",
+    "cachyos": "Arch optimizado para rendimiento, con paquetes específicos para CPU.",
+    "bazzite": "Gaming estilo SteamOS en Fedora Atomic, listo para jugar.",
+    "nobara": "Fedora ajustado para juegos, streaming y creación.",
     "zorin": "Experiencia pulida, estilo Windows y muy fácil de usar.",
     "debian": "Base sólida con estabilidad a largo plazo.",
-    "pikaos": "Ubuntu gamer con baja latência y ajustes listos.",
+    "pikaos": "Ubuntu gamer con baja latencia y ajustes listos.",
     "opensuse": "La elección para administradores y desarrolladores con herramientas únicas.",
-    "nixos": "Configuración declarativa, reproducible e inquebrable.",
+    "nixos": "Configuração declarativa, reprodutível e inquebrável.",
     "manjaro": "Arch accesible con enfoque en la facilidad para el usuario."
   },
   "Footer": {
