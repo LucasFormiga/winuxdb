@@ -219,7 +219,7 @@ export default function DistroQuiz() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
       {/* Consultation Panel */}
-      <div className="flex flex-col rounded-3xl border border-border/60 bg-card/60 p-8 shadow-sm">
+      <div className="flex flex-col rounded-3xl border border-border/60 bg-card/60 p-5 sm:p-8 shadow-sm">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary/80">{t('kicker')}</p>
@@ -248,15 +248,15 @@ export default function DistroQuiz() {
         </div>
 
         {/* Question Area */}
-        <div className="mt-10 flex-1">
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <QuestionIcon className="h-6 w-6" />
+        <div className="mt-8 sm:mt-10 flex-1">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl bg-primary/10 text-primary shrink-0">
+              <QuestionIcon className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <h4 className="text-xl font-semibold tracking-tight">{t(`questions.${currentQuestion.id}.label`)}</h4>
+            <h4 className="text-lg sm:text-xl font-semibold tracking-tight leading-tight">{t(`questions.${currentQuestion.id}.label`)}</h4>
           </div>
 
-          <div className="mt-8 grid gap-3">
+          <div className="mt-6 sm:mt-8 grid gap-3">
             {currentQuestion.options.map((option) => {
               const active = answers[currentQuestion.id] === option.id
               const OptionIcon = ICON_MAP[option.icon as keyof typeof ICON_MAP] || Activity
@@ -266,29 +266,29 @@ export default function DistroQuiz() {
                   key={option.id}
                   type="button"
                   onClick={() => handleOptionSelect(option.id)}
-                  className={`group relative flex items-center gap-4 rounded-2xl border p-4 text-left transition-all duration-200 ${
+                  className={`group relative flex items-center gap-3 sm:gap-4 rounded-xl sm:rounded-2xl border p-3 sm:p-4 text-left transition-all duration-200 ${
                     active
                       ? 'border-primary bg-primary/5 shadow-[0_0_20px_rgba(255,60,60,0.05)]'
                       : 'border-border/60 hover:border-primary/40 hover:bg-primary/5'
                   }`}
                 >
                   <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
+                    className={`flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl transition-colors shrink-0 ${
                       active
                         ? 'bg-primary text-primary-foreground'
                         : 'bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary'
                     }`}
                   >
-                    <OptionIcon className="h-5 w-5" />
+                    <OptionIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <p
-                      className={`text-sm font-semibold ${active ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}
+                      className={`text-xs sm:text-sm font-semibold leading-tight ${active ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}
                     >
                       {t(`questions.${currentQuestion.id}.options.${option.id}`)}
                     </p>
                   </div>
-                  {active && <CheckCircle2 className="h-5 w-5 text-primary" />}
+                  {active && <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 text-primary shrink-0" />}
                 </button>
               )
             })}
@@ -296,23 +296,23 @@ export default function DistroQuiz() {
         </div>
 
         {/* Navigation */}
-        <div className="mt-8 flex items-center justify-between border-t border-border/40 pt-6">
+        <div className="mt-8 flex items-center justify-between border-t border-border/40 pt-6 gap-2">
           <Button
             variant="ghost"
             size="sm"
             disabled={currentStep === 0}
             onClick={() => setCurrentStep((prev) => prev - 1)}
-            className="rounded-xl border-border/60"
+            className="rounded-xl border-border/60 px-2 sm:px-3"
           >
-            <ChevronLeft className="mr-2 h-4 w-4" />
-            {t('back')}
+            <ChevronLeft className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">{t('back')}</span>
           </Button>
-          <div className="flex gap-2">
+          <div className="hidden xs:flex gap-1.5 sm:gap-2">
             {DISTRO_QUESTIONS.map((_, idx) => (
               <div
                 key={idx}
-                className={`h-1 w-4 rounded-full transition-all ${
-                  idx === currentStep ? 'bg-primary w-8' : idx < currentStep ? 'bg-primary/40' : 'bg-border/40'
+                className={`h-1 w-2 sm:w-4 rounded-full transition-all ${
+                  idx === currentStep ? 'bg-primary w-4 sm:w-8' : idx < currentStep ? 'bg-primary/40' : 'bg-border/40'
                 }`}
               />
             ))}
@@ -325,10 +325,10 @@ export default function DistroQuiz() {
                 setCurrentStep((prev) => prev + 1)
               }
             }}
-            className="rounded-xl"
+            className="rounded-xl px-2 sm:px-3"
           >
-            {currentStep === DISTRO_QUESTIONS.length - 1 ? t('finish') : t('skip')}
-            <ChevronRight className="ml-2 h-4 w-4" />
+            <span>{currentStep === DISTRO_QUESTIONS.length - 1 ? t('finish') : t('skip')}</span>
+            <ChevronRight className="ml-1 sm:ml-2 h-4 w-4" />
           </Button>
         </div>
       </div>
@@ -344,12 +344,12 @@ export default function DistroQuiz() {
             key={distro.id}
             className={`group relative rounded-3xl border transition-all duration-500 ${
               rank === 1
-                ? 'border-primary/40 bg-card p-2 shadow-2xl shadow-primary/10 ring-1 ring-primary/20'
+                ? 'border-primary/40 bg-card p-1 sm:p-2 shadow-2xl shadow-primary/10 ring-1 ring-primary/20'
                 : 'border-border/60 bg-card/40 opacity-80 hover:opacity-100'
             }`}
           >
-            <div className={rank === 1 ? 'p-6' : 'p-5'}>
-              <div className="flex items-center justify-between">
+            <div className={rank === 1 ? 'p-5 sm:p-6' : 'p-4 sm:p-5'}>
+              <div className="flex items-center justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2">
                     <span
@@ -358,27 +358,27 @@ export default function DistroQuiz() {
                       {rank === 1 ? `🏆 ${t('specialistChoice')}` : `Rank #${rank}`}
                     </span>
                   </div>
-                  <h4 className={`mt-1 font-bold tracking-tight ${rank === 1 ? 'text-3xl' : 'text-xl'}`}>
+                  <h4 className={`mt-1 font-bold tracking-tight ${rank === 1 ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'}`}>
                     {distro.name}
                   </h4>
                 </div>
                 <Badge
                   variant={rank === 1 ? 'default' : 'secondary'}
-                  className="rounded-lg px-2 py-0.5 text-[10px] uppercase tracking-wider"
+                  className="rounded-lg px-2 py-0.5 text-[10px] uppercase tracking-wider shrink-0"
                 >
                   {rank === 1 ? t('bestFit') : t('alternate')}
                 </Badge>
               </div>
 
               <p
-                className={`mt-3 text-muted-foreground leading-relaxed ${rank === 1 ? 'text-base' : 'text-sm line-clamp-2'}`}
+                className={`mt-3 text-muted-foreground leading-relaxed ${rank === 1 ? 'text-sm sm:text-base' : 'text-xs sm:text-sm line-clamp-2'}`}
               >
                 {tTaglines(distro.id, { fallback: distro.tagline })}
               </p>
 
               {/* Enhanced Stats for Rank #1 */}
               {rank === 1 && (
-                <div className="mt-6 grid grid-cols-2 gap-3 border-y border-border/40 py-6">
+                <div className="mt-6 grid grid-cols-1 xs:grid-cols-2 gap-4 border-y border-border/40 py-6">
                   <div className="space-y-1">
                     <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
                       {t('basedOn')}
@@ -410,7 +410,7 @@ export default function DistroQuiz() {
               )}
 
               <div
-                className={`mt-6 overflow-hidden rounded-2xl border border-border/40 bg-black/20 ${rank === 1 ? 'h-56' : 'h-32'}`}
+                className={`mt-6 overflow-hidden rounded-xl sm:rounded-2xl border border-border/40 bg-black/20 ${rank === 1 ? 'h-40 sm:h-56' : 'h-24 sm:h-32'}`}
               >
                 <Image
                   src={flavor.screenshot}
@@ -451,7 +451,9 @@ export default function DistroQuiz() {
                 >
                   <a href={flavor.url} target="_blank" rel="noreferrer">
                     <Download className="mr-2 h-4 w-4" />
-                    {rank === 1 ? t('getFlavor', { flavor: flavor.name }) : flavor.name}
+                    <span className="truncate">
+                      {rank === 1 ? t('getFlavor', { flavor: flavor.name }) : flavor.name}
+                    </span>
                   </a>
                 </Button>
               </div>
