@@ -28,14 +28,24 @@ export default async function ContributePage({ params }: { params: Promise<{ loc
               <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-foreground">{t('sections.reporting.title')}</h2>
                 <p className="text-lg">{t('sections.reporting.content')}</p>
-                <a
-                  href="https://github.com/LucasFormiga/winuxdb"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-block rounded-full bg-primary/10 px-6 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/20"
-                >
-                  GitHub Repository →
-                </a>
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href="https://github.com/LucasFormiga/winuxdb"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block rounded-full bg-primary/10 px-6 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/20"
+                  >
+                    {t('sections.reporting.githubRepo')} →
+                  </a>
+                  <a
+                    href="https://forms.gle/1iX4BgLv2myNTvoLA"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block rounded-full bg-primary/10 px-6 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/20"
+                  >
+                    {t('sections.reporting.cta')} →
+                  </a>
+                </div>
               </div>
 
               <div className="space-y-4">

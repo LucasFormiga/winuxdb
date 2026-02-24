@@ -175,7 +175,8 @@
     "home": "Inicio",
     "apps": "Apps",
     "contribute": "Contribuir",
-    "games": "Juegos (ProtonDB)"
+    "games": "Juegos",
+    "antiCheat": "Juegos con Anti-Cheat"
   },
   "Metadata": {
     "description": "WinuxDB es la base de datos definitiva de compatibilidad Linux para aplicaciones de Windows. Busque miles de aplicaciones, verifique las calificaciones de Wine y Proton, y encuentre la mejor distribución de Linux para su flujo de trabajo."
@@ -264,12 +265,13 @@
   },
   "Footer": {
     "description": "El índice definitivo de compatibilidad para apps Windows en Linux. Curado por la comunidad, para la comunidad.",
-    "madeIn": "Hecho con amor por LucasFormiga en Brasil para la comunidad.",
+    "madeIn": "Hecho con {love} por <link>LucasFormiga</link> en {br} para la comunidad.",
     "links": {
       "product": "Producto",
       "apps": "Base de Apps",
       "distros": "Distro Quiz",
-      "games": "ProtonDB (Juegos)",
+      "games": "Juegos",
+      "antiCheat": "Juegos con Anti-Cheat",
       "resources": "Recursos",
       "github": "GitHub",
       "contribute": "Contribuir",
@@ -279,7 +281,7 @@
       "privacy": "Privacidad",
       "terms": "Términos de Uso"
     },
-    "copyright": "© {year} WinuxDB. No afiliado con Microsoft, WineHQ o ProtonDB."
+    "copyright": "© {year} WinuxDB. No afiliado con Microsoft, WineHQ, ProtonDB o 'Are We Anti-Cheat Yet?'."
   },
   "Privacy": {
     "title": "Política de Privacidad",
@@ -315,7 +317,7 @@
       },
       "affiliation": {
         "title": "3. Sin Afiliación",
-        "content": "WinuxDB es un proyecto comunitario independiente. No estamos afiliados, respaldados ni patrocinados por Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (Proton), ProtonDB ni ningún autor de software listado en nuestra base."
+        "content": "WinuxDB es un proyecto comunitario independiente. No estamos afiliados, respaldados ni patrocinados por Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (Proton), ProtonDB, AWACY (Are We Anti-Cheat Yet?) ni ningún autor de software listado en nuestra base."
       }
     }
   },
@@ -338,7 +340,9 @@
     "sections": {
       "reporting": {
         "title": "1. Informe Compatibilidad",
-        "content": "La forma más valiosa de contribuir es informando cómo funcionan las aplicaciones en su sistema. Puede enviar informes directamente a través de nuestro repositorio de GitHub editando el archivo src/lib/data/apps.jsonl."
+        "content": "La forma más valiosa de contribuir es informando cómo funcionan las aplicaciones en su sistema. Puede enviar informes directamente a través de nuestro repositorio de GitHub editando el archivo src/lib/data/apps.jsonl.",
+        "cta": "Enviar reseña de app",
+        "githubRepo": "Repositorio de GitHub"
       },
       "code": {
         "title": "2. Código y Diseño",

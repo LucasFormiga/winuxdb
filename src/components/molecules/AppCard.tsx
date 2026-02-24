@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, Hash, Image as ImageIcon, Sparkles, Users } from 'lucide-react'
+import { ArrowRight, Calendar, Hash, Image as ImageIcon, Star, Users } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import RatingMedal from '@/components/atoms/RatingMedal'
@@ -37,12 +37,8 @@ export default function AppCard({ app }: AppCardProps) {
           </div>
           <div className="absolute top-3 right-3 flex flex-col items-end gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <div className="flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-[0.6rem] font-bold text-white backdrop-blur-md border border-white/10">
-              <Sparkles className="size-2.5 text-yellow-400" />
               {Array.from({ length: 5 }).map((_, i) => (
-                <div
-                  key={i}
-                  className={`size-1 rounded-full ${i < app.popularity ? 'bg-yellow-400' : 'bg-white/20'}`}
-                />
+                <Star key={i} className={`size-4 ${i < app.popularity ? 'text-yellow-400' : 'text-white/20'}`} />
               ))}
             </div>
           </div>

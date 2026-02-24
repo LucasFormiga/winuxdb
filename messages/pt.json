@@ -175,7 +175,8 @@
     "home": "Início",
     "apps": "Apps",
     "contribute": "Contribuir",
-    "games": "Jogos (ProtonDB)"
+    "games": "Jogos",
+    "antiCheat": "Jogos com Anti-Cheat"
   },
   "Metadata": {
     "description": "A WinuxDB é a base de dados definitiva de compatibilidade Linux para aplicativos Windows. Pesquise milhares de apps, confira notas de Wine e Proton, e encontre a melhor distro Linux para o seu fluxo de trabalho."
@@ -264,12 +265,13 @@
   },
   "Footer": {
     "description": "O índice definitivo de compatibilidade para apps Windows no Linux. Curado pela comunidade, para a comunidade.",
-    "madeIn": "Feito com amor por LucasFormiga no Brasil para a comunidade.",
+    "madeIn": "Feito com {love} por <link>LucasFormiga</link> no {br} para a comunidade.",
     "links": {
       "product": "Produto",
       "apps": "Base de Apps",
       "distros": "Distro Quiz",
-      "games": "ProtonDB (Jogos)",
+      "games": "Jogos",
+      "antiCheat": "Jogos com Anti-Cheat",
       "resources": "Recursos",
       "github": "GitHub",
       "contribute": "Contribuir",
@@ -279,7 +281,7 @@
       "privacy": "Privacidade",
       "terms": "Termos de Uso"
     },
-    "copyright": "© {year} WinuxDB. Não afiliado com a Microsoft, WineHQ ou ProtonDB."
+    "copyright": "© {year} WinuxDB. Não afiliado com a Microsoft, WineHQ, ProtonDB ou 'Are We Anti-Cheat Yet?'."
   },
   "Privacy": {
     "title": "Política de Privacidade",
@@ -315,7 +317,7 @@
       },
       "affiliation": {
         "title": "3. Sem Afiliação",
-        "content": "A WinuxDB é um projeto comunitário independente. Não somos afiliados, endossados ou patrocinados pela Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (Proton), ProtonDB ou qualquer autor de software listado em nossa base."
+        "content": "A WinuxDB é um projeto comunitário independente. Não somos afiliados, endossados ou patrocinados pela Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (Proton), ProtonDB, AWACY (Are We Anti-Cheat Yet?) ou qualquer autor de software listado em nossa base."
       }
     }
   },
@@ -338,7 +340,9 @@
     "sections": {
       "reporting": {
         "title": "1. Relate a Compatibilidade",
-        "content": "A forma mais valiosa de contribuir é relatando como os apps rodam no seu sistema. Você pode enviar relatos diretamente pelo nosso repositório no GitHub editando o arquivo src/lib/data/apps.jsonl."
+        "content": "A forma mais valiosa de contribuir é relatando como os apps rodam no seu sistema. Você pode enviar relatos diretamente pelo nosso repositório no GitHub editando o arquivo src/lib/data/apps.jsonl.",
+        "cta": "Enviar avaliação do app",
+        "githubRepo": "Repositório no GitHub"
       },
       "code": {
         "title": "2. Código e Design",
