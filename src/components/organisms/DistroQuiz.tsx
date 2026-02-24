@@ -298,7 +298,7 @@ export default function DistroQuiz() {
         {/* Navigation */}
         <div className="mt-8 flex items-center justify-between border-t border-border/40 pt-6">
           <Button
-            variant="outline"
+            variant="ghost"
             size="sm"
             disabled={currentStep === 0}
             onClick={() => setCurrentStep((prev) => prev - 1)}
