@@ -4,6 +4,8 @@ export interface App {
   id: string
   name: string
   logo?: string
+  description?: string
+  screenshots?: string[]
   version: string
   recommendedVersion: string
   rating: Rating
@@ -14,4 +16,16 @@ export interface App {
   releaseDate: string
   popularity: number
   recommendedAlternatives: string[]
+  instructions?: {
+    wine?: {
+      bottles?: string
+      playonlinux?: string
+      general?: string
+    }
+    proton?: {
+      valve?: string
+      ge?: string
+      cachyos?: string
+    }
+  }
 }

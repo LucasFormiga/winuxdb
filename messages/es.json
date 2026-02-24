@@ -350,6 +350,17 @@
       }
     }
   },
+  "AppDetail": {
+    "about": "Acerca de {name}",
+    "compatibility": "Compatibilidad y Configuración",
+    "noInstructions": "Aún no hay instrucciones de compatibilidad específicas para esta aplicación.",
+    "screenshots": "Capturas de pantalla",
+    "alternatives": "Alternativas nativas de Linux",
+    "details": "Detalles de la aplicación",
+    "author": "Autor",
+    "license": "Licencia",
+    "category": "Categoría"
+  },
   "NotFound": {
     "title": "404 - App no encontrada",
     "message": "Parece que esta página tiene una calificación 'Borked'. No pudimos encontrar el recurso que estabas buscando.",

@@ -350,6 +350,17 @@
       }
     }
   },
+  "AppDetail": {
+    "about": "About {name}",
+    "compatibility": "Compatibility & Setup",
+    "noInstructions": "No specific compatibility instructions available for this app yet.",
+    "screenshots": "Screenshots",
+    "alternatives": "Native Linux Alternatives",
+    "details": "App Details",
+    "author": "Author",
+    "license": "License",
+    "category": "Category"
+  },
   "NotFound": {
     "title": "404 - App Not Found",
     "message": "It seems this page has a 'Borked' rating. We couldn't find the resource you were looking for.",

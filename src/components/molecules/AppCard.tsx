@@ -5,6 +5,7 @@ import RatingMedal from '@/components/atoms/RatingMedal'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import type { App } from '@/lib/types'
+import { Link } from '@/i18n/routing'
 
 interface AppCardProps {
   app: App
@@ -16,8 +17,9 @@ export default function AppCard({ app }: AppCardProps) {
   const tLic = useTranslations('Licenses')
 
   return (
-    <Card className="group flex h-full flex-col overflow-hidden border-border/60 bg-card/80 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_24px_60px_rgba(0,0,0,0.5)]">
-      <CardHeader className="p-0">
+    <Link href={`/apps/${app.id}`} className="block h-full">
+      <Card className="group flex h-full flex-col overflow-hidden border-border/60 bg-card/80 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_24px_60px_rgba(0,0,0,0.5)]">
+        <CardHeader className="p-0">
         <div className="relative flex aspect-video w-full items-center justify-center">
           <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-white/95 p-3 shadow-sm ring-1 ring-black/5 sm:h-24 sm:w-24">
             {app.logo ? (
@@ -119,5 +121,6 @@ export default function AppCard({ app }: AppCardProps) {
         )}
       </CardContent>
     </Card>
+  </Link>
   )
 }

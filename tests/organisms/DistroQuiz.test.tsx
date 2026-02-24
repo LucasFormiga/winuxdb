@@ -56,7 +56,7 @@ describe('DistroQuiz', () => {
     expect(screen.getByText(/Specialist Choice/i)).toBeInTheDocument()
 
     // Check for technical specs in the top card
-    const topCard = screen.getByText(/Specialist Choice/i).closest('.group')
+    const topCard = screen.getByText(/Specialist Choice/i).closest('.group') as HTMLElement
     if (topCard) {
       expect(within(topCard).getByText(/Based on/i)).toBeInTheDocument()
       expect(within(topCard).getByText(/Package Manager/i)).toBeInTheDocument()
