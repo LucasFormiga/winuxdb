@@ -5,11 +5,12 @@ export default function HowItWorks() {
   const steps = [
     { title: t('step1.title'), description: t('step1.description') },
     { title: t('step2.title'), description: t('step2.description') },
-    { title: t('step3.title'), description: t('step3.description') }
+    { title: t('step3.title'), description: t('step3.description') },
+    { title: t('step4.title'), description: t('step4.description') }
   ]
 
   return (
-    <section className="grid gap-6 rounded-3xl border border-border/60 bg-card/40 p-6 sm:grid-cols-3">
+    <section className="grid gap-6 rounded-3xl border border-border/60 bg-card/40 p-6 sm:grid-cols-2 lg:grid-cols-4">
       {steps.map((step, index) => (
         <div key={step.title} className="space-y-3">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">

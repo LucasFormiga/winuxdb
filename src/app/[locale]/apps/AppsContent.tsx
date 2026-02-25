@@ -2,40 +2,36 @@
 
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useTranslations } from 'next-intl'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react'
 import AppCard from '@/components/molecules/AppCard'
 import FilterSort, { type SortOption } from '@/components/molecules/FilterSort'
 import SearchInput from '@/components/molecules/SearchInput'
 import { Button } from '@/components/ui/button'
+import { usePathname, useRouter } from '@/i18n/routing'
 import type { App, Rating } from '@/lib/types'
-
-const RATING_ORDER: Record<Rating, number> = {
-  NATIVE: 5,
-  PLATINUM: 4,
-  GOLD: 3,
-  SILVER: 2,
-  BRONZE: 1,
-  BORKED: 0
-}
 
 interface AppsContentProps {
   apps: App[]
+  categories: string[]
+  licenses: string[]
+  initialFilters: {
+    search: string
+    category: string
+    rating: Rating | 'ALL'
+    license: string
+    sort: SortOption
+    alternatives: 'ALL' | 'YES' | 'NO'
+  }
 }
 
-export default function AppsContent({ apps }: AppsContentProps) {
+export default function AppsContent({ apps, categories, licenses, initialFilters }: AppsContentProps) {
   const t = useTranslations('Apps')
-  const [search, setSearch] = useState('')
-  const [rating, setRating] = useState<Rating | 'ALL'>('ALL')
-  const [sort, setSort] = useState<SortOption>('rating')
-  const [category, setCategory] = useState('ALL')
-  const [license, setLicense] = useState('ALL')
-  const [alternatives, setAlternatives] = useState<'ALL' | 'YES' | 'NO'>('ALL')
+  const router = useRouter()
+  const pathname = usePathname()
+  const [isPending, startTransition] = useTransition()
 
   const containerRef = useRef<HTMLDivElement>(null)
   const [columns, setColumns] = useState(1)
-
-  const categories = useMemo(() => Array.from(new Set(apps.map((a) => a.category))).sort(), [apps])
-  const licenses = useMemo(() => Array.from(new Set(apps.map((a) => a.license))).sort(), [apps])
 
   // Update columns based on container width
   useEffect(() => {
@@ -53,35 +49,43 @@ export default function AppsContent({ apps }: AppsContentProps) {
     return () => window.removeEventListener('resize', updateColumns)
   }, [])
 
-  const filteredApps = useMemo(() => {
-    return apps
-      .filter((app) => {
-        const matchesSearch =
-          app.name.toLowerCase().includes(search.toLowerCase()) ||
-          app.author.toLowerCase().includes(search.toLowerCase())
-        const matchesRating = rating === 'ALL' || app.rating === rating
-        const matchesCategory = category === 'ALL' || app.category === category
-        const matchesLicense = license === 'ALL' || app.license === license
-        const matchesAlternatives =
-          alternatives === 'ALL' ||
-          (alternatives === 'YES' && app.recommendedAlternatives.length > 0) ||
-          (alternatives === 'NO' && app.recommendedAlternatives.length === 0)
+  const updateFilters = useCallback(
+    (newFilters: Partial<typeof initialFilters>) => {
+      const params = new URLSearchParams()
+      const filters = { ...initialFilters, ...newFilters }
 
-        return matchesSearch && matchesRating && matchesCategory && matchesLicense && matchesAlternatives
+      if (filters.search) params.set('search', filters.search)
+      if (filters.category !== 'ALL') params.set('category', filters.category)
+      if (filters.rating !== 'ALL') params.set('rating', filters.rating)
+      if (filters.license !== 'ALL') params.set('license', filters.license)
+      if (filters.sort !== 'popularity') params.set('sort', filters.sort)
+      if (filters.alternatives !== 'ALL') params.set('alternatives', filters.alternatives)
+
+      startTransition(() => {
+        router.push(`${pathname}?${params.toString()}`)
       })
-      .sort((a, b) => {
-        if (sort === 'popularity') {
-          return b.popularity - a.popularity
-        }
-        if (sort === 'releaseDate') {
-          return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
-        }
-        if (sort === 'rating') {
-          return RATING_ORDER[b.rating] - RATING_ORDER[a.rating]
-        }
-        return 0
-      })
-  }, [apps, search, rating, sort, category, license, alternatives])
+    },
+    [initialFilters, pathname, router]
+  )
+
+  const handleSearchChange = useCallback((v: string) => updateFilters({ search: v }), [updateFilters])
+  const handleRatingChange = useCallback((v: Rating | 'ALL') => updateFilters({ rating: v }), [updateFilters])
+  const handleSortChange = useCallback((v: SortOption) => updateFilters({ sort: v }), [updateFilters])
+  const handleCategoryChange = useCallback((v: string) => updateFilters({ category: v }), [updateFilters])
+  const handleLicenseChange = useCallback((v: string) => updateFilters({ license: v }), [updateFilters])
+  const handleAlternativesChange = useCallback(
+    (v: 'ALL' | 'YES' | 'NO') => updateFilters({ alternatives: v }),
+    [updateFilters]
+  )
+
+  // Filter for alternatives client-side if it's not implemented in getApps yet
+  const filteredApps = useMemo(() => {
+    if (initialFilters.alternatives === 'ALL') return apps
+    return apps.filter((app) => {
+      const hasAlts = (app.recommendedAlternatives?.length || 0) > 0
+      return initialFilters.alternatives === 'YES' ? hasAlts : !hasAlts
+    })
+  }, [apps, initialFilters.alternatives])
 
   const rows = useMemo(() => {
     const result = []
@@ -93,7 +97,7 @@ export default function AppsContent({ apps }: AppsContentProps) {
 
   const rowVirtualizer = useWindowVirtualizer({
     count: rows.length,
-    estimateSize: () => 440, // Increased estimate for larger cards
+    estimateSize: () => 440,
     overscan: 5,
     scrollMargin: containerRef.current?.offsetTop ?? 0
   })
@@ -123,22 +127,23 @@ export default function AppsContent({ apps }: AppsContentProps) {
             </div>
 
             <div className="flex flex-col gap-8">
-              <div className="max-w-2xl">
-                <SearchInput onChange={setSearch} />
+              <div className="max-w-2xl flex items-center gap-4">
+                <SearchInput defaultValue={initialFilters.search} onChange={handleSearchChange} />
+                {isPending && <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary" />}
               </div>
               <FilterSort
-                activeRating={rating}
-                activeSort={sort}
-                activeCategory={category}
-                activeLicense={license}
-                activeAlternatives={alternatives}
+                activeRating={initialFilters.rating}
+                activeSort={initialFilters.sort}
+                activeCategory={initialFilters.category}
+                activeLicense={initialFilters.license}
+                activeAlternatives={initialFilters.alternatives}
                 categories={categories}
                 licenses={licenses}
-                onRatingChange={setRating}
-                onSortChange={setSort}
-                onCategoryChange={setCategory}
-                onLicenseChange={setLicense}
-                onAlternativesChange={setAlternatives}
+                onRatingChange={handleRatingChange}
+                onSortChange={handleSortChange}
+                onCategoryChange={handleCategoryChange}
+                onLicenseChange={handleLicenseChange}
+                onAlternativesChange={handleAlternativesChange}
               />
             </div>
           </section>

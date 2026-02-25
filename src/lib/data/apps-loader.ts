@@ -45,8 +45,11 @@ export function getApps(): App[] {
 
       return {
         id: data.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+        slug: slugify(data.name),
         name: data.name,
         logo: logoFile ? `/images/apps/${logoFile}` : undefined,
+        description: data.description,
+        screenshots: data.screenshots,
         version: data.version,
         recommendedVersion: data.recommendedVersion,
         rating: data.compatibility,
@@ -56,7 +59,15 @@ export function getApps(): App[] {
         author: data.author,
         releaseDate: data.releaseDate,
         popularity: data.popularity,
-        recommendedAlternatives: data.recommendedAlternatives || []
+        recommendedAlternatives: data.recommendedAlternatives || [],
+        nativeAlternatives: data.nativeAlternatives || [],
+        isVerified: data.isVerified ?? false,
+        gpuCompatibility: data.gpuCompatibility,
+        instructions: data.instructions
       }
     })
+}
+
+export function getApp(id: string): App | undefined {
+  return getApps().find((app) => app.id === id)
 }

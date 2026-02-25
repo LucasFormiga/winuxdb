@@ -31,6 +31,16 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
               </div>
 
               <div className="space-y-4">
+                <h2 className="text-xl font-semibold text-foreground">{t('sections.accounts.title')}</h2>
+                <p>{t('sections.accounts.content')}</p>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-xl font-semibold text-foreground">{t('sections.storage.title')}</h2>
+                <p>{t('sections.storage.content')}</p>
+              </div>
+
+              <div className="space-y-4">
                 <h2 className="text-xl font-semibold text-foreground">{t('sections.cookies.title')}</h2>
                 <p>{t('sections.cookies.content')}</p>
               </div>

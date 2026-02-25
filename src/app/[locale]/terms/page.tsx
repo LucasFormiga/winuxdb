@@ -26,6 +26,11 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
               <p className="text-lg text-foreground/90">{t('intro')}</p>
 
               <div className="space-y-4">
+                <h2 className="text-xl font-semibold text-foreground">{t('sections.moderation.title')}</h2>
+                <p>{t('sections.moderation.content')}</p>
+              </div>
+
+              <div className="space-y-4">
                 <h2 className="text-xl font-semibold text-foreground">{t('sections.noWarranty.title')}</h2>
                 <p>{t('sections.noWarranty.content')}</p>
               </div>

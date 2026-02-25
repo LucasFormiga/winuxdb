@@ -253,7 +253,9 @@ export default function DistroQuiz() {
             <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl bg-primary/10 text-primary shrink-0">
               <QuestionIcon className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <h4 className="text-lg sm:text-xl font-semibold tracking-tight leading-tight">{t(`questions.${currentQuestion.id}.label`)}</h4>
+            <h4 className="text-lg sm:text-xl font-semibold tracking-tight leading-tight">
+              {t(`questions.${currentQuestion.id}.label`)}
+            </h4>
           </div>
 
           <div className="mt-6 sm:mt-8 grid gap-3">
@@ -358,7 +360,9 @@ export default function DistroQuiz() {
                       {rank === 1 ? `🏆 ${t('specialistChoice')}` : `Rank #${rank}`}
                     </span>
                   </div>
-                  <h4 className={`mt-1 font-bold tracking-tight ${rank === 1 ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'}`}>
+                  <h4
+                    className={`mt-1 font-bold tracking-tight ${rank === 1 ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'}`}
+                  >
                     {distro.name}
                   </h4>
                 </div>

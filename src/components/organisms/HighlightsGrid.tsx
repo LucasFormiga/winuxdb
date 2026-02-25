@@ -1,11 +1,11 @@
 import { getTranslations } from 'next-intl/server'
 import AppCard from '@/components/molecules/AppCard'
-import { getApps } from '@/lib/data/apps-loader'
+import { getApps } from '@/lib/actions/apps'
 
 export default async function HighlightsGrid() {
   const t = await getTranslations('Home.highlights')
-  const apps = getApps()
-  const highlights = [...apps].sort((a, b) => b.popularity - a.popularity).slice(0, 4)
+  const { apps = [] } = await getApps({ limit: 50 })
+  const highlights = [...apps].sort((a, b) => (b.popularity ?? 0) - (a.popularity ?? 0)).slice(0, 4)
 
   return (
     <section className="space-y-6">

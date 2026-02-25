@@ -1,6 +1,5 @@
 {
   "Home": {
-    "subtitle": "Compatibilidade Wine",
     "quizKicker": "Mude com inteligência",
     "quizTitle": "Encontre a distro Linux certa",
     "quizSubtitle": "Responda algumas perguntas e vamos indicar uma distro e um sabor que combinam com seu estilo.",
@@ -25,12 +24,16 @@
       "step3": {
         "title": "Migre com confiança",
         "description": "Planeje sua mudança com dados claros e relatos da comunidade."
+      },
+      "step4": {
+        "title": "Colabore com relatos",
+        "description": "Envie seus próprios reviews para ajudar outros a migrar com segurança."
       }
     },
     "trust": {
       "appsLabel": "Apps mapeados",
       "appsValue": "500+",
-      "reportsLabel": "Relatórios",
+      "reportsLabel": "Reviews",
       "reportsValue": "500+",
       "updatesLabel": "Atualizações",
       "updatesValue": "Diárias",
@@ -59,7 +62,6 @@
       "suggestedFlavor": "Sabor sugerido",
       "visitSite": "Site oficial",
       "tryInBrowser": "Testar no navegador",
-      "downloadFlavor": "Baixar {flavor}",
       "questions": {
         "activity": {
           "label": "O que você vai fazer mais?",
@@ -87,7 +89,7 @@
           }
         },
         "updates": {
-          "label": "Como você quer as atualizações?",
+          "label": "Como você quer as updates?",
           "options": {
             "stable": "Estável & Previsível (Instale e esqueça)",
             "rolling": "Tecnologia de Ponta (Rolling Release)",
@@ -101,34 +103,6 @@
             "modern": "Moderno / Gestos (Estilo Mac/GNOME)",
             "tiling": "Foco no teclado / Tiling",
             "any": "Sem preferência"
-          }
-        },
-        "philosophy": {
-          "label": "Liberdade de Software",
-          "options": {
-            "functionality": "Funcionalidade primeiro (Proprietário está ok)",
-            "foss": "Estritamente Código Aberto (Purista FOSS)"
-          }
-        },
-        "customization": {
-          "label": "Profundidade de Personalização",
-          "options": {
-            "ready": "Polido e pronto para uso",
-            "canvas": "Tela em branco (Eu quero construir)"
-          }
-        },
-        "battery": {
-          "label": "Gerenciamento de Energia",
-          "options": {
-            "important": "Sim, foco em duração de bateria",
-            "dont_care": "Não, o desempenho importa mais"
-          }
-        },
-        "rollback": {
-          "label": "Necessidade de Snapshot / Rollback",
-          "options": {
-            "essential": "Essencial (Desfazer instantaneamente uma má atualização)",
-            "dont_care": "Desejável, mas não é um fator decisivo"
           }
         },
         "software": {
@@ -158,8 +132,6 @@
   },
   "Apps": {
     "title": "Explore a compatibilidade",
-    "subtitle": "Compatibilidade Wine",
-    "subtitleLong": "Pesquise no índice da WinuxDB e veja como apps Windows se comportam no Linux, com notas, licenças e lançamentos.",
     "kicker": "Base de apps",
     "kickerSecondary": "Notas de compatibilidade",
     "emptyState": "Nenhum app encontrado com esses filtros.",
@@ -176,7 +148,22 @@
     "apps": "Apps",
     "contribute": "Contribuir",
     "games": "Jogos",
-    "antiCheat": "Jogos com Anti-Cheat"
+    "antiCheat": "Jogos com Anti-Cheat",
+    "login": "Entrar",
+    "menu": "Menu",
+    "navigation": "Navegação",
+    "external": "Externo",
+    "theme": "Tema",
+    "language": "Idioma"
+  },
+  "Login": {
+    "title": "Bem-vindo",
+    "subtitle": "Junte-se à comunidade WinuxDB para contribuir e acompanhar seus apps favoritos.",
+    "google": "Continuar com Google",
+    "github": "Continuar com GitHub",
+    "discord": "Continuar com Discord",
+    "backToHome": "Voltar ao Início",
+    "terms": "Ao continuar, você concorda com nossos <terms>Termos de Uso</terms> e nossa <privacy>Política de Privacidade</privacy>."
   },
   "Metadata": {
     "description": "A WinuxDB é a base de dados definitiva de compatibilidade Linux para aplicativos Windows. Pesquise milhares de apps, confira notas de Wine e Proton, e encontre a melhor distro Linux para o seu fluxo de trabalho."
@@ -202,6 +189,7 @@
   },
   "Sort": {
     "label": "Ordenar por",
+    "name": "Nome",
     "popularity": "Popularidade",
     "releaseDate": "Data de lançamento",
     "rating": "Compatibilidade"
@@ -215,6 +203,7 @@
     "Education": "Educação",
     "Engineering": "Engenharia",
     "Finance": "Finanças",
+    "Game": "Jogos",
     "Game Development": "Desenvolvimento de Jogos",
     "Graphics": "Gráficos",
     "Multimedia": "Multimídia",
@@ -274,50 +263,65 @@
       "antiCheat": "Jogos com Anti-Cheat",
       "resources": "Recursos",
       "github": "GitHub",
+      "x": "X (Twitter)",
       "contribute": "Contribuir",
+      "guidelines": "Diretrizes da Comunidade",
       "submitReview": "Enviar avaliação do app",
+      "reportBug": "Relatar um Erro",
       "about": "Sobre WinuxDB",
       "legal": "Legal",
       "privacy": "Privacidade",
-      "terms": "Termos de Uso"
+      "terms": "Termos de Serviço"
     },
     "copyright": "© {year} WinuxDB. Não afiliado com a Microsoft, WineHQ, ProtonDB ou 'Are We Anti-Cheat Yet?'."
   },
   "Privacy": {
     "title": "Política de Privacidade",
-    "lastUpdated": "Última atualização: 22 de fevereiro de 2026",
-    "intro": "A WinuxDB é um projeto movido pela comunidade dedicado a mapear a compatibilidade de aplicativos Windows no Linux. Valorizamos a transparência e a sua privacidade.",
+    "lastUpdated": "Última atualização: 25 de fevereiro de 2026",
+    "intro": "A WinuxDB é um projeto movido pela comunidade dedicado a mapear a compatibilidade de aplicativos Windows no Linux. Valoramos a transparência e a sua privacidade.",
     "sections": {
       "data": {
         "title": "1. Coleta de Dados",
-        "content": "A WinuxDB não exige cadastro e não coleta identificadores pessoais como nomes, endereços de e-mail ou endereços IP. Somos uma ferramenta de busca e referência, não uma plataforma de coleta de dados."
+        "content": "A WinuxDB coleta o mínimo de informações para fornecer seus serviços. Quando você cria uma conta, armazenamos seu apelido, avatar (via provedores sociais) e idioma preferido. Para relatos de compatibilidade, armazenamos o perfil de hardware que você escolhe compartilhar. Não vendemos nem compartilhamos seus dados pessoais com terceiros."
+      },
+      "accounts": {
+        "title": "2. Contas de Usuário",
+        "content": "Utilizamos autenticação social (Google, GitHub, Discord) para simplificar a criação de contas. Recebemos apenas as informações básicas de perfil necessárias para identificar sua conta e exibir suas contribuições."
+      },
+      "storage": {
+        "title": "3. Armazenamento e Gestão de Dados",
+        "content": "Seus perfis de hardware e avaliações são armazenados em nosso banco de dados seguro. Você pode gerenciar, atualizar ou realizar a exclusão lógica (soft-delete) de seus perfis a qualquer momento. Quando um dispositivo é excluído, ele permanece em nosso banco de dados para preservar o histórico das avaliações, mas deixa de estar vinculado ao seu perfil ativo."
       },
       "cookies": {
-        "title": "2. Armazenamento Local e Preferências",
-        "content": "Usamos o armazenamento local do seu navegador ou cookies mínimos apenas para lembrar sua preferência de idioma e configurações de interface. Esses dados nunca saem do seu dispositivo."
+        "title": "4. Armazenamento Local e Preferências",
+        "content": "Usamos o armazenamento local do seu navegador ou cookies mínimos apenas para manter sua sessão e lembrar sua preferência de idioma. Esses dados são essenciais para o funcionamento correto do site."
       },
       "links": {
-        "title": "3. Links Externos",
-        "content": "Nossa base de dados contém links para sites externos (ex: WineHQ, GitHub, sites oficiais de software). Não somos responsáveis pelas práticas de privacidade ou conteúdo desses serviços de terceiros."
+        "title": "5. Links Externos",
+        "content": "Nossa base de dados contém links para sites externos (ex: ProtonDB, Are We Anti-Cheat Yet?, GitHub). Não somos responsáveis pelas práticas de privacidade ou conteúdo desses serviços de terceiros."
       }
     }
   },
   "Terms": {
-    "title": "Termos de Uso",
-    "lastUpdated": "Última atualização: 22 de fevereiro de 2026",
+    "title": "Termos de Serviço",
+    "lastUpdated": "Última atualização: 25 de fevereiro de 2026",
     "intro": "Ao usar a WinuxDB, você concorda com os seguintes termos. Este projeto é criado pela comunidade, para a comunidade, e destina-se apenas a fins informativos.",
     "sections": {
+      "moderation": {
+        "title": "1. Moderação da Comunidade",
+        "content": "Todos os usuários devem seguir nossas Diretrizes da Comunidade. Os mantenedores da WinuxDB reservam-se o direito de moderar conteúdo, ocultar avaliações e suspender ou banir contas que violem estas diretrizes, incluindo aquelas envolvidas em assédio, discriminação ou desinformação intencional."
+      },
       "noWarranty": {
-        "title": "1. Isenção de Garantia",
-        "content": "As informações na WinuxDB são fornecidas 'como estão'. As notas de compatibilidade baseiam-se em relatos da comunidade e podem não refletir sua configuração específica de hardware ou software. Não garantimos que qualquer aplicativo funcionará perfeitamente ou sequer funcionará."
+        "title": "2. Isenção de Garantia",
+        "content": "As informações na WinuxDB são fornecidas 'como estão'. As notas de compatibilidade baseiam-se em relatos da comunidade e podem não refletir sua configuração específica. Não garantimos que qualquer aplicativo funcionará perfeitamente ou sequer funcionará."
       },
       "liability": {
-        "title": "2. Limitação de Responsabilidade",
-        "content": "A WinuxDB, seus colaboradores e mantenedores não são responsáveis por qualquer instabilidade do sistema, perda de dados, danos ao hardware ou prejuízo financeiro resultante do uso das informações encontradas neste site. Você usa o Wine, Proton e outras camadas de compatibilidade por sua conta e risco."
+        "title": "3. Limitação de Responsabilidade",
+        "content": "A WinuxDB, seus colaboradores e mantenedores não são responsáveis por qualquer instabilidade do sistema, perda de dados, danos ao hardware ou prejuízo financeiro resultante do uso das informações encontradas neste site. Você usa camadas de compatibilidade por sua conta e risco."
       },
       "affiliation": {
-        "title": "3. Sem Afiliação",
-        "content": "A WinuxDB é um projeto comunitário independente. Não somos afiliados, endossados ou patrocinados pela Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (Proton), ProtonDB, AWACY (Are We Anti-Cheat Yet?) ou qualquer autor de software listado em nossa base."
+        "title": "4. Sem Afiliação",
+        "content": "A WinuxDB é um projeto comunitário independente. Não somos afiliados, endossados ou patrocinados pela Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (Proton), ProtonDB, Are We Anti-Cheat Yet? (AWACY), ou qualquer autor de software listado aqui."
       }
     }
   },
@@ -336,27 +340,287 @@
   "Contribute": {
     "title": "Contribua com a WinuxDB",
     "subtitle": "Ajude-nos a construir o índice definitivo de compatibilidade",
-    "intro": "A WinuxDB é um projeto de código aberto. Cada avaliação, relato de bug e linha de código é um presente para a comunidade Linux.",
+    "intro": "A WinuxDB é um projeto de código aberto. Cada nota, relato e linha de código ajuda a comunidade Linux a crescer.",
     "sections": {
       "reporting": {
-        "title": "1. Relate a Compatibilidade",
-        "content": "A forma mais valiosa de contribuir é relatando como os apps rodam no seu sistema. Você pode enviar relatos diretamente pelo nosso repositório no GitHub editando o arquivo src/lib/data/apps.jsonl.",
-        "cta": "Enviar avaliação do app",
+        "title": "1. Relatos de Compatibilidade em Tempo Real",
+        "content": "A maneira mais rápida de contribuir é relatando como os apps rodam no seu sistema. Entre, crie seu perfil de hardware e envie avaliações diretamente na página de qualquer aplicativo.",
+        "cta": "Buscar Apps para Avaliar",
         "githubRepo": "Repositório no GitHub"
       },
-      "code": {
-        "title": "2. Código e Design",
-        "content": "Nossa base de código é construída com Next.js e TypeScript. Recebemos PRs para melhorias na interface, otimizações de desempenho e novos recursos. Confira os 'good first issues' no GitHub."
+      "issues": {
+        "title": "2. Relate Problemas e Bugs",
+        "content": "Encontrou um erro no site ou dados incorretos? Você pode relatar diretamente pelo nosso formulário de feedback. Valoramos sua ajuda para manter a WinuxDB limpa e precisa.",
+        "cta": "Relatar um Erro"
       },
-      "governance": {
-        "title": "3. Governança",
-        "content": "A WinuxDB segue um modelo comunitário benevolente. Mudanças arquiteturais importantes são debatidas nas GitHub Discussions, e todas as atualizações de dados passam por revisão via Pull Requests para garantir a precisão."
+      "code": {
+        "title": "3. Código e Design",
+        "content": "Nossa base de código é aberta e construída com Next.js. Recebemos Pull Requests para melhorias na interface, otimizações de desempenho e novos recursos. Confira nosso GitHub para 'good first issues'.",
+        "githubRepo": "Repositório no GitHub"
+      },
+      "data": {
+        "title": "4. Integridade dos Dados",
+        "content": "Embora os relatos em tempo real sejam a fonte primária, nossa base continua sendo o banco de dados de apps curado pela comunidade. Contribuições técnicas para nossa estrutura de dados são sempre bem-vindas via GitHub."
       }
     }
+  },
+  "Guidelines": {
+    "title": "Diretrizes da Comunidade",
+    "subtitle": "Mantendo um banco de dados de compatibilidade seguro e preciso",
+    "intro": "A WinuxDB é um espaço para colaboração e informações técnicas úteis. Para garantir a qualidade dos nossos dados e a segurança dos nossos usuários, exigimos que todos os colaboradores sigam estas diretrizes.",
+    "sections": {
+      "respect": {
+        "title": "1. Respeite a Todos",
+        "content": "Temos tolerância zero para discriminação, assédio ou discurso de ódio. Isso inclui, mas não se limita a comentários baseados em gênero, identidade e expressão de gênero, orientação sexual, deficiência, aparência física, tamanho do corpo, raça, idade, religião ou nacionalidade. Estamos aqui para falar de software, mas tratamos as pessoas com dignidade."
+      },
+      "trolls": {
+        "title": "2. Sem Trolls ou Assédio",
+        "content": "Desinformação intencional, comentários inflamatórios ou ataques pessoais a outros usuários ou desenvolvedores são estritamente proibidos. O assédio inclui comentários ofensivos, intimidação deliberada, perseguição, seguimento ou atenção sexual indesejada."
+      },
+      "integrity": {
+        "title": "3. Precisão e Integridade",
+        "content": "Relate suas experiências com honestidade. Não envie avaliações falsas nem copie relatos de outras fontes sem verificação. Detalhes técnicos de alta qualidade (Distro, Kernel, versão do Wine) são o que tornam a WinuxDB valiosa."
+      },
+      "legal": {
+        "title": "4. Proteção Legal e Isenção de Responsabilidade",
+        "content": "A WinuxDB é um recurso de informação movido pela comunidade. O criador do projeto e os colaboradores não são responsáveis por qualquer dano ao sistema, perda de dados ou problemas legais resultantes do uso das informações ou softwares linkados aqui. Use camadas de compatibilidade e ajustes da comunidade por sua conta e risco."
+      },
+      "enforcement": {
+        "title": "5. Aplicação",
+        "content": "Violações destas diretrizes podem resultar na remoção imediata do seu conteúdo e/ou banimento permanente da plataforma. A moderação fica a critério exclusivo dos mantenedores do projeto."
+      }
+    }
+  },
+  "AppDetail": {
+    "about": "Sobre o {name}",
+    "compatibility": "Compatibilidade e Configuração",
+    "noInstructions": "Nenhuma instrução específica de compatibilidade disponível para este aplicativo ainda.",
+    "screenshots": "Capturas de Tela",
+    "alternatives": "Alternativas",
+    "nativeAlternatives": "Alternativas Nativas para Linux",
+    "nativeAlternativesEmpty": "Nenhuma alternativa nativa listada ainda.",
+    "otherAlternatives": "Outras Alternativas",
+    "otherAlternativesEmpty": "Nenhuma alternativa recomendada listada ainda.",
+    "details": "Detalhes do App",
+    "author": "Autor",
+    "license": "Licença",
+    "category": "Categoria",
+    "recommendedVersion": "Versão Recomendada",
+    "performanceTech": "Performance e Tecnologia",
+    "gpuSupport": "Suporte a GPU",
+    "engineRecommendation": "Motor Recomendado",
+    "nativeLinux": "Linux Nativo",
+    "protonEngine": "Proton 9.0+ / GE",
+    "expertInstructions": "Instruções especialistas para Wine e Proton",
+    "wineTitle": "Wine",
+    "protonTitle": "Proton",
+    "reviews": "{count, plural, =0 {Nenhuma avaliação} one {# Avaliação} other {# Avaliações}}",
+    "noReviews": "Nenhuma avaliação ainda",
+    "beTheFirst": "Seja o primeiro a compartilhar sua experiência com {appName} no Linux.",
+    "loginToReview": "Entre para avaliar",
+    "deleteReviewTitle": "Excluir avaliação",
+    "deleteReviewConfirm": "Tem certeza que deseja excluir esta avaliação? Esta ação não pode ser desfeita.",
+    "delete": "Excluir",
+    "banUser": "Banir Usuário",
+    "banReason": "Motivo da suspensão",
+    "banReasonPlaceholder": "ex: Discurso de ódio, Spam, Relatos falsos...",
+    "banConfirm": "Confirmar Suspensão",
+    "admin": "Admin",
+    "verified": "Verificado",
+    "anonymous": "Anônimo",
+    "latest": "Última",
+    "required": "Obrigatório",
+    "commentLimit": "Comentários devem ter 400 caracteres ou menos.",
+    "commentMin": "Comentários devem ter pelo menos 10 caracteres.",
+    "wineDesc": "Compatibilidade padrão",
+    "protonDesc": "Otimizado para Jogos/GPU",
+    "noDevicesFound": "Você precisa adicionar um dispositivo à sua conta primeiro.",
+    "submitReview": "Escrever Avaliação",
+    "reportIssue": "Relatar Problema",
+    "verified": "Verificado",
+    "popularity": "Popularidade",
+    "stability": "Estabilidade",
+    "performance": "Desempenho",
+    "installation": "Instalação",
+    "distroDe": "Distro / DE",
+    "cpuRam": "Processador / RAM",
+    "gpu": "Placa de Vídeo",
+    "kernel": "Kernel",
+    "version": "Versão",
+    "reviewStep1": "Avaliação",
+    "reviewStep2": "Motor",
+    "reviewStep3": "Ajustes",
+    "reviewStep4": "Hardware",
+    "reviewStep5": "Final",
+    "reviewDialogDesc": "Compartilhe sua experiência com {appName} no Linux.",
+    "compatibilityRating": "Nota de Compatibilidade",
+    "experience": "Sua Experiência",
+    "experiencePlaceholder": "Conte como ele roda, ajustes específicos ou bugs encontrados...",
+    "executionEngine": "Motor de Execução",
+    "engineFlavor": "Tipo de Motor",
+    "engineVersion": "Versão",
+    "engineVersionPlaceholder": "Selecione a versão",
+    "engineFlavorPlaceholder": "Selecione o tipo",
+    "flavors": {
+      "valve": "Valve Proton",
+      "ge": "GE-Proton",
+      "cachyos": "Proton-CachyOS"
+    },
+    "hardwareDetails": "Selecionar Perfil de PC",
+    "selectPcProfile": "Escolha entre seus PCs salvos",
+    "pcProfileLabel": "Perfil Atual",
+    "stability": "Estabilidade",
+    "performance": "Desempenho",
+    "installation": "Instalação",
+    "tinkerSteps": "Ajustes Realizados",
+    "additionalComments": "Comentários Adicionais",
+    "charLimit": "{count} caracteres restantes",
+    "distro": "Distro",
+    "de": "Interface (DE)",
+    "kernel": "Kernel",
+    "cpu": "CPU",
+    "gpu": "GPU",
+    "ram": "RAM",
+    "presets": {
+      "ratings": {
+        "NATIVE": "Suporte Linux nativo",
+        "PLATINUM": "Perfeito sem ajustes",
+        "GOLD": "Roda perfeito com ajustes",
+        "SILVER": "Problemas ou bugs menores",
+        "BRONZE": "Roda, mas crasha muito",
+        "BORKED": "Não funciona de jeito nenhum"
+      },
+      "stability": {
+        "perfect": "Perfeito",
+        "minor": "Problemas Menores",
+        "crashes_occ": "Crasha Ocasionalmente",
+        "crashes_const": "Crasha Constantemente"
+      },
+      "performance": {
+        "native": "Como Nativo",
+        "good": "Bom",
+        "slow": "Notavelmente Lento",
+        "unusable": "Inutilizável"
+      },
+      "installation": {
+        "easy": "Fácil (Sem ajustes)",
+        "tweaks": "Exigiu Ajustes",
+        "difficult": "Difícil",
+        "failed": "Falhou"
+      },
+      "tinkering": {
+        "none": "Nenhum ajuste necessário",
+        "tricks": "Winetricks / Protontricks",
+        "launch": "Opções de Inicialização",
+        "dll": "Overrides de DLL específicos",
+        "env": "Variáveis de Ambiente"
+      }
+    },
+    "cancel": "Cancelar",
+    "next": "Próximo",
+    "back": "Voltar",
+    "submitting": "Enviando...",
+    "submit": "Enviar Avaliação",
+    "nativeBanner": {
+      "title": "Aplicativo Nativo",
+      "description": "Este aplicativo possui uma versão nativa para Linux fornecida diretamente pelo desenvolvedor. Como ele roda sem camadas de compatibilidade como Wine ou Proton, relatos da comunidade não são necessários. Aproveite o melhor desempenho e estabilidade possíveis!",
+      "featurePerformance": "Desempenho Otimizado",
+      "featureHardware": "Suporte Total ao Hardware"
+    }
+  },
+  "UserMenu": {
+    "profile": "Perfil",
+    "settings": "Configurações",
+    "logout": "Sair",
+    "user": "Usuário"
   },
   "NotFound": {
     "title": "404 - App Não Encontrado",
     "message": "Parece que esta página recebeu uma nota 'Borked'. Não conseguimos encontrar o recurso que você está procurando.",
     "cta": "Voltar ao Início"
+  },
+  "Banned": {
+    "title": "Conta Suspensa",
+    "message": "Sua conta foi suspensa por violar nossas diretrizes da comunidade ou termos de serviço.",
+    "submessage": "Se você acredita que isso é um erro, entre em contato com o suporte através do nosso repositório no GitHub.",
+    "cta": "Voltar ao Início"
+  },
+  "Account": {
+    "title": "Configurações de Conta",
+    "subtitle": "Gerencie suas preferências e perfis de hardware",
+    "tabs": {
+      "preferences": "Preferências",
+      "devices": "Dispositivos",
+      "reportBug": "Relatar um Erro"
+    },
+    "preferences": {
+      "title": "Preferências",
+      "description": "Personalize seu perfil e experiência no site",
+      "nickname": "Apelido",
+      "nicknamePlaceholder": "Seu nome de usuário",
+      "language": "Idioma Padrão",
+      "save": "Salvar Alterações",
+      "saving": "Salvando..."
+    }
+  },
+  "AccountDevices": {
+    "title": "Perfis de Hardware",
+    "description": "Gerencie até 5 dispositivos para relatar contribuições mais rápido",
+    "addDevice": "Adicionar Dispositivo",
+    "maxDevices": "Você atingiu o limite de 5 dispositivos.",
+    "noDevices": "Nenhum dispositivo adicionado ainda. Adicione seu primeiro perfil de hardware para simplificar os relatos.",
+    "primary": "Principal",
+    "setPrimary": "Definir como Principal",
+    "delete": "Excluir Dispositivo",
+    "deleteConfirm": "Tem certeza que deseja excluir este dispositivo?",
+    "wizard": {
+      "title": "Adicionar Novo Dispositivo",
+      "step1": "Método",
+      "step2": "Importar",
+      "step3": "Detalhes",
+      "step4": "Finalizar",
+      "methodTitle": "Como você gostaria de adicionar seu dispositivo?",
+      "methodDesc": "Escolha sua forma preferida de criar seu perfil de hardware.",
+      "methodSteam": "Informações do Sistema Steam",
+      "methodSteamDesc": "A maneira mais rápida. Copie e cole seu relatório de hardware do Steam.",
+      "methodManual": "Entrada Manual",
+      "methodManualDesc": "Digite os detalhes do seu hardware manualmente.",
+      "steamInputLabel": "Informações do Sistema Steam",
+      "steamInputPlaceholder": "Cole o texto de Steam -> Ajuda -> Informações do Sistema aqui...",
+      "steamGuideTitle": "Como obter as informações do Steam",
+      "steamGuideStep1": "Abra o Steam e clique em 'Ajuda' no menu superior.",
+      "steamGuideStep2": "Selecione 'Informações do Sistema'.",
+      "steamGuideStep3": "Aguarde carregar, depois clique com o botão direito -> Copiar todo o texto para a área de transferência.",
+      "steamGuideStep4": "Cole no campo acima.",
+      "parsing": "Analisando relatório de hardware...",
+      "parseError": "Não foi possível analisar o relatório. Verifique o formato ou tente a entrada manual.",
+      "manualTitle": "Configuração de Hardware",
+      "manualDesc": "Verifique ou insira os detalhes do seu sistema para relatórios precisos.",
+      "sectionOS": "Sistema Operacional",
+      "sectionHardware": "Componentes de Hardware",
+      "hardwareLabel": "Hardware",
+      "distro": "Distribuição",
+      "distroPlaceholder": "ex: CachyOS, Fedora, Arch",
+      "distroVersion": "Versão",
+      "distroVersionPlaceholder": "ex: 41, Rolling",
+      "kernel": "Kernel",
+      "kernelPlaceholder": "ex: Linux, XanMod",
+      "kernelVersion": "Versão do Kernel",
+      "kernelVersionPlaceholder": "ex: 6.13.2",
+      "cpu": "Processador (CPU)",
+      "cpuPlaceholder": "ex: AMD Ryzen 7 5800X",
+      "gpu": "Placa de Vídeo (GPU)",
+      "gpuPlaceholder": "ex: NVIDIA RTX 3080",
+      "gpuDriver": "Versão do Driver",
+      "gpuDriverPlaceholder": "ex: 570.86.16",
+      "ram": "Memória (RAM)",
+      "ramPlaceholder": "ex: 32GB",
+      "finalizeTitle": "Quase Pronto",
+      "finalizeDesc": "Dê um nome ao seu perfil de hardware para identificá-lo facilmente.",
+      "deviceName": "Nome do Perfil",
+      "deviceNamePlaceholder": "ex: PC Principal, ThinkPad, Steam Deck",
+      "summaryTitle": "Resumo da Configuração",
+      "finish": "Criar Perfil de Hardware"
+    }
   }
 }

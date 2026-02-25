@@ -7,7 +7,7 @@ export default async function SiteFooter() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative mt-20 border-t border-border/40 bg-card/30">
+    <footer className="relative border-t border-border/40 bg-card/30">
       <div className="surface-grid absolute inset-0 opacity-10 dark:opacity-20" />
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-4 lg:gap-8">
@@ -17,9 +17,29 @@ export default async function SiteFooter() {
               <div className="flex size-10 items-center justify-center rounded-full border border-border/70 bg-card/80">
                 <Image src="/images/winuxdb-logo.png" alt="WinuxDB" width={32} height={32} className="size-7" />
               </div>
-              <span className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">WinuxDB</span>
+              <div className="flex flex-col">
+                <span className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground leading-none">
+                  WinuxDB
+                </span>
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/40 ml-[2px] mt-1">
+                  Beta
+                </span>
+              </div>
             </Link>
             <p className="max-w-md text-sm leading-7 text-muted-foreground">{t('description')}</p>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://x.com/WinuxDB"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground/40 transition-colors hover:text-foreground"
+                aria-label="Follow WinuxDB on X"
+              >
+                <svg viewBox="0 0 24 24" className="size-4 fill-current">
+                  <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                </svg>
+              </a>
+            </div>
           </div>
 
           {/* Product Links */}
@@ -63,6 +83,14 @@ export default async function SiteFooter() {
               >
                 {t('links.github')}
               </Link>
+              <Link
+                href="https://x.com/WinuxDB"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-foreground"
+              >
+                {t('links.x')}
+              </Link>
               <Link href="/contribute" className="transition-colors hover:text-foreground">
                 {t('links.contribute')}
               </Link>
@@ -73,6 +101,14 @@ export default async function SiteFooter() {
                 className="transition-colors hover:text-foreground"
               >
                 {t('links.submitReview')}
+              </Link>
+              <Link
+                href="https://forms.gle/hySiJzrRHsmCySrW7"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-foreground"
+              >
+                {t('links.reportBug')}
               </Link>
               <Link href="/about" className="transition-colors hover:text-foreground">
                 {t('links.about')}
@@ -105,6 +141,9 @@ export default async function SiteFooter() {
           <div className="flex gap-6 text-[0.7rem] uppercase tracking-wider text-muted-foreground/60">
             <Link href="/privacy" className="transition-colors hover:text-foreground">
               {t('links.privacy')}
+            </Link>
+            <Link href="/guidelines" className="transition-colors hover:text-foreground">
+              {t('links.guidelines')}
             </Link>
             <Link href="/terms" className="transition-colors hover:text-foreground">
               {t('links.terms')}

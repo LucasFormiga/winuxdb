@@ -7,20 +7,27 @@ import { Input } from '@/components/ui/input'
 
 interface SearchInputProps {
   onChange: (value: string) => void
+  defaultValue?: string
   debounceMs?: number
 }
 
-export default function SearchInput({ onChange, debounceMs = 300 }: SearchInputProps) {
+export default function SearchInput({ onChange, defaultValue = '', debounceMs = 300 }: SearchInputProps) {
   const t = useTranslations('Search')
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(defaultValue)
+
+  useEffect(() => {
+    setValue(defaultValue)
+  }, [defaultValue])
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      onChange(value)
+      if (value !== defaultValue) {
+        onChange(value)
+      }
     }, debounceMs)
 
     return () => clearTimeout(handler)
-  }, [value, onChange, debounceMs])
+  }, [value, onChange, debounceMs, defaultValue])
 
   return (
     <div className="relative w-full max-w-sm">

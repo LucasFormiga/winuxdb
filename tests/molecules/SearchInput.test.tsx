@@ -1,28 +1,20 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { NextIntlClientProvider } from "next-intl";
 import { describe, it, expect, vi } from "vitest";
 import SearchInput from "@/components/molecules/SearchInput";
-import messages from "../../messages/en.json";
+
+// Mocks are in setup.ts
 
 describe("SearchInput", () => {
   it("renders with placeholder", () => {
-    render(
-      <NextIntlClientProvider locale="en" messages={messages}>
-        <SearchInput onChange={vi.fn()} />
-      </NextIntlClientProvider>
-    );
-    expect(screen.getByPlaceholderText(/search apps/i)).toBeDefined();
+    render(<SearchInput onChange={vi.fn()} />);
+    expect(screen.getByPlaceholderText('Search.placeholder')).toBeDefined();
   });
 
   it("calls onChange with debounced value", async () => {
     const onChange = vi.fn();
-    render(
-      <NextIntlClientProvider locale="en" messages={messages}>
-        <SearchInput onChange={onChange} />
-      </NextIntlClientProvider>
-    );
+    render(<SearchInput onChange={onChange} />);
 
-    const input = screen.getByPlaceholderText(/search apps/i);
+    const input = screen.getByPlaceholderText('Search.placeholder');
     fireEvent.change(input, { target: { value: "test" } });
 
     // Should not be called immediately

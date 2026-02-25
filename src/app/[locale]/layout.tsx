@@ -1,5 +1,4 @@
 import { IBM_Plex_Mono, Saira, Saira_Condensed } from 'next/font/google'
-import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import SmoothScroll from '@/components/atoms/SmoothScroll'
@@ -7,7 +6,9 @@ import { ThemeProvider } from '@/components/atoms/ThemeProvider'
 import LocaleSuggester from '@/components/molecules/LocaleSuggester'
 import SiteFooter from '@/components/organisms/SiteFooter'
 import SiteHeader from '@/components/organisms/SiteHeader'
+import { TooltipProvider } from '@/components/ui/tooltip'
 import { routing } from '@/i18n/routing'
+import { getUserData } from '@/lib/actions/auth'
 import './globals.css'
 
 export function generateStaticParams() {
@@ -104,13 +105,10 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params
 
-  if (!routing.locales.includes(locale as any)) {
-    notFound()
-  }
-
   setRequestLocale(locale)
 
   const messages = await getMessages()
+  const user = await getUserData()
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -132,11 +130,13 @@ export default async function LocaleLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <NextIntlClientProvider messages={messages}>
-            <SmoothScroll />
-            <LocaleSuggester />
-            <SiteHeader />
-            {children}
-            <SiteFooter />
+            <TooltipProvider>
+              <SmoothScroll />
+              <LocaleSuggester />
+              <SiteHeader user={user} />
+              {children}
+              <SiteFooter />
+            </TooltipProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

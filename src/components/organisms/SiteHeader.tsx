@@ -1,10 +1,14 @@
 'use client'
 
+import { ExternalLink, LogIn, Menu } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import LanguageSelector from '@/components/molecules/LanguageSelector'
 import { ThemeSwitcher } from '@/components/molecules/ThemeSwitcher'
+import { UserMenu } from '@/components/molecules/UserMenu'
+import { Button } from '@/components/ui/button'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Link, usePathname } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 
@@ -14,10 +18,23 @@ const navLinks = [
   { href: '/contribute', labelKey: 'contribute' }
 ]
 
-export default function SiteHeader() {
+const externalLinks = [
+  { href: 'https://protondb.com/?utm_source=winuxdb', labelKey: 'games' },
+  { href: 'https://areweanticheatyet.com/?utm_source=winuxdb', labelKey: 'antiCheat' }
+]
+
+interface SiteHeaderProps {
+  user?: {
+    nickname: string
+    avatar_url?: string
+  } | null
+}
+
+export default function SiteHeader({ user }: SiteHeaderProps) {
   const t = useTranslations('Nav')
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,37 +46,40 @@ export default function SiteHeader() {
 
   return (
     <header
-      className={cn('sticky top-0 z-50 w-full transition-all duration-300 px-6 lg:px-8', isScrolled ? 'py-3' : 'py-6')}
+      className={cn('sticky top-0 z-50 w-full transition-all duration-300 px-4 lg:px-8', isScrolled ? 'py-2' : 'py-4')}
     >
       <div
         className={cn(
           'mx-auto flex max-w-7xl items-center justify-between transition-all duration-500',
           isScrolled
-            ? 'glass-header rounded-full px-6 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.4)] border border-white/5'
+            ? 'glass-header rounded-2xl px-4 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.4)] border border-white/5'
             : 'bg-transparent'
         )}
       >
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-6">
           <Link href="/" className="group flex items-center gap-3">
-            <div className="relative flex size-10 items-center justify-center rounded-full border border-border/70 bg-card/80 transition-transform duration-300 group-hover:scale-110">
+            <div className="flex w-fit h-fit items-center justify-center">
               <Image
                 src="/images/winuxdb-logo.png"
                 alt="WinuxDB"
-                width={32}
-                height={32}
-                className="size-7 z-10"
+                width={28}
+                height={28}
+                className="size-6 z-10"
                 priority
               />
-              <div className="absolute inset-0 rounded-full bg-primary/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="flex flex-col">
-              <span className="text-sm font-bold uppercase tracking-[0.3em] text-foreground transition-colors group-hover:text-primary">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground transition-colors group-hover:text-primary leading-none">
                 WinuxDB
+              </span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/40 ml-[2px] mt-0.5">
+                Beta
               </span>
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-1 text-[0.7rem] font-bold uppercase tracking-[0.2em] sm:flex">
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-1 text-[0.65rem] font-bold uppercase tracking-[0.15em] lg:flex">
             {navLinks.map((link) => {
               const isActive = pathname === link.href
               return (
@@ -78,28 +98,160 @@ export default function SiteHeader() {
               )
             })}
             <div className="mx-2 h-4 w-px bg-border/40" />
-            <Link
-              href="https://protondb.com/?utm_source=winuxdb"
-              target="_blank"
-              rel="noreferrer"
-              className="px-4 py-2 text-muted-foreground/80 transition-colors hover:text-foreground hover:underline decoration-primary underline-offset-4"
-            >
-              {t('games')}
-            </Link>
-            <Link
-              href="https://areweanticheatyet.com/?utm_source=winuxdb"
-              target="_blank"
-              rel="noreferrer"
-              className="px-4 py-2 text-muted-foreground/80 transition-colors hover:text-foreground hover:underline decoration-primary underline-offset-4"
-            >
-              {t('antiCheat')}
-            </Link>
+            {externalLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="px-4 py-2 text-muted-foreground/80 transition-colors hover:text-foreground flex items-center gap-1.5"
+              >
+                {t(link.labelKey)}
+                <ExternalLink className="size-2.5 opacity-50" />
+              </Link>
+            ))}
           </nav>
         </div>
 
-        <div className="flex items-center gap-4">
-          <ThemeSwitcher />
-          <LanguageSelector />
+        <div className="flex items-center gap-2 sm:gap-4">
+          <div className="hidden items-center gap-2 sm:flex">
+            <ThemeSwitcher />
+            <LanguageSelector />
+          </div>
+
+          {user ? (
+            <UserMenu user={user} />
+          ) : (
+            <Link href="/login">
+              <Button
+                size="sm"
+                className="h-9 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-[0.7rem] uppercase tracking-wider px-5 shadow-[0_4px_12px_rgba(255,60,60,0.25)] hover:shadow-[0_6px_20px_rgba(255,60,60,0.4)] transition-all duration-300"
+              >
+                <LogIn className="size-3.5 mr-2" />
+                {t('login')}
+              </Button>
+            </Link>
+          )}
+
+          {/* Mobile Menu Toggle */}
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden h-9 w-9 rounded-full bg-white/5 border border-white/5"
+              >
+                <Menu className="size-5" />
+                <span className="sr-only">{t('menu')}</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="glass-panel border-none w-[280px] p-6 flex flex-col gap-8">
+              <SheetHeader className="text-left border-none">
+                <div className="flex items-center gap-3">
+                  <div className="relative flex size-9 items-center justify-center rounded-xl border border-border/70 bg-card/80">
+                    <Image
+                      src="/images/winuxdb-logo.png"
+                      alt="WinuxDB"
+                      width={28}
+                      height={28}
+                      className="size-6 z-10"
+                    />
+                    <div className="absolute inset-0 rounded-xl bg-primary/20 blur-md" />
+                  </div>
+                  <div className="flex flex-col">
+                    <SheetTitle className="text-xl font-bold uppercase tracking-[0.2em] text-foreground leading-none">
+                      WinuxDB
+                    </SheetTitle>
+                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/40 ml-[2px] mt-1.5">
+                      Beta
+                    </span>
+                  </div>
+                </div>
+              </SheetHeader>
+
+              <nav className="flex flex-col gap-4">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50 px-2">
+                  {t('navigation')}
+                </span>
+                {navLinks.map((link) => {
+                  const isActive = pathname === link.href
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className={cn(
+                        'px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200 flex items-center justify-between',
+                        isActive
+                          ? 'text-primary bg-primary/10 border border-primary/20'
+                          : 'text-foreground/80 hover:bg-white/5 border border-transparent'
+                      )}
+                    >
+                      {t(link.labelKey)}
+                      {isActive && (
+                        <div className="size-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(255,60,60,0.8)]" />
+                      )}
+                    </Link>
+                  )
+                })}
+              </nav>
+
+              <div className="h-px bg-white/10" />
+
+              <nav className="flex flex-col gap-4">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50 px-2">
+                  {t('external')}
+                </span>
+                {externalLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-4 py-3 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center justify-between hover:bg-white/5"
+                  >
+                    {t(link.labelKey)}
+                    <ExternalLink className="size-3.5 opacity-30" />
+                  </Link>
+                ))}
+              </nav>
+
+              <div className="mt-auto flex flex-col gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                {user && (
+                  <>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-muted-foreground">User</span>
+                      <span className="text-xs font-bold uppercase tracking-wider">{user.nickname}</span>
+                    </div>
+                    <div className="h-px bg-white/10" />
+                  </>
+                )}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-medium text-muted-foreground">{t('theme')}</span>
+                  <ThemeSwitcher />
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-medium text-muted-foreground">{t('language')}</span>
+                  <LanguageSelector />
+                </div>
+                {user && (
+                  <>
+                    <div className="h-px bg-white/10" />
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10 p-0 h-auto font-bold uppercase tracking-wider text-[10px]"
+                      onClick={() => {
+                        import('@/lib/actions/auth').then(({ signOut }) => signOut())
+                        setIsOpen(false)
+                      }}
+                    >
+                      Log Out
+                    </Button>
+                  </>
+                )}
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
