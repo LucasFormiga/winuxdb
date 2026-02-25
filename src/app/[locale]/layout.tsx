@@ -7,6 +7,7 @@ import { ThemeProvider } from '@/components/atoms/ThemeProvider'
 import LocaleSuggester from '@/components/molecules/LocaleSuggester'
 import SiteFooter from '@/components/organisms/SiteFooter'
 import SiteHeader from '@/components/organisms/SiteHeader'
+import { TooltipProvider } from '@/components/ui/tooltip'
 import { routing } from '@/i18n/routing'
 import './globals.css'
 
@@ -132,11 +133,13 @@ export default async function LocaleLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <NextIntlClientProvider messages={messages}>
-            <SmoothScroll />
-            <LocaleSuggester />
-            <SiteHeader />
-            {children}
-            <SiteFooter />
+            <TooltipProvider>
+              <SmoothScroll />
+              <LocaleSuggester />
+              <SiteHeader />
+              {children}
+              <SiteFooter />
+            </TooltipProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

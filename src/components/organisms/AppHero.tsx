@@ -1,4 +1,4 @@
-import { Calendar, Hash, Image as ImageIcon, Sparkles, Users } from 'lucide-react'
+import { Calendar, CheckCircle2, Hash, Image as ImageIcon, Star, Users } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import RatingMedal from '@/components/atoms/RatingMedal'
@@ -11,75 +11,88 @@ interface AppHeroProps {
 
 export default function AppHero({ app }: AppHeroProps) {
   const tCat = useTranslations('Categories')
-  const tLic = useTranslations('Licenses')
+  const t = useTranslations('AppDetail')
 
   return (
-    <section className="glass-panel relative overflow-hidden rounded-[2.5rem] p-8 md:p-12">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
-      
-      <div className="relative z-10 flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-12">
+    <section className="glass-panel relative overflow-hidden rounded-[3rem] p-8 md:p-14">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent" />
+      <div className="surface-grid absolute inset-0 opacity-30" />
+
+      <div className="relative z-10 flex flex-col items-center gap-10 md:flex-row md:items-start md:gap-14">
         {/* Logo Container */}
-        <div className="flex h-32 w-32 shrink-0 items-center justify-center rounded-3xl bg-white/95 p-4 shadow-2xl ring-1 ring-black/5 md:h-40 md:w-40">
-          {app.logo ? (
-            <Image
-              src={app.logo}
-              alt={app.name}
-              className="size-full object-contain"
-              width={160}
-              height={160}
-              priority
-            />
-          ) : (
-            <ImageIcon className="size-16 text-muted-foreground/40" />
-          )}
+        <div className="group relative">
+          <div className="absolute -inset-4 rounded-[2.5rem] bg-primary/20 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+          <div className="relative flex h-36 w-36 shrink-0 items-center justify-center rounded-[2rem] bg-white/95 p-5 shadow-2xl ring-1 ring-black/5 md:h-48 md:w-48">
+            {app.logo ? (
+              <Image
+                src={app.logo}
+                alt={app.name}
+                className="size-full object-contain transition-transform duration-500 group-hover:scale-110"
+                width={192}
+                height={192}
+                priority
+              />
+            ) : (
+              <ImageIcon className="size-20 text-muted-foreground/30" />
+            )}
+          </div>
         </div>
 
         {/* Info Container */}
         <div className="flex flex-1 flex-col items-center text-center md:items-start md:text-left">
-          <div className="mb-4 flex flex-wrap items-center justify-center gap-3 md:justify-start">
-            <RatingMedal rating={app.rating} className="px-4 py-1.5 text-xs" />
-            <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20">
+          <div className="mb-6 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+            <RatingMedal rating={app.rating} className="px-5 py-2 text-xs shadow-xl" />
+            <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20 px-3 py-1.5">
               {tCat(app.category)}
             </Badge>
           </div>
 
-          <h1 className="mb-2 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            {app.name}
-          </h1>
-          
-          <div className="mb-6 flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground md:justify-start">
-            <div className="flex items-center gap-1.5">
-              <Users className="size-4" />
-              <span>{app.author}</span>
+          <div className="mb-2 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+            <h1 className="text-4xl font-black tracking-tight sm:text-6xl lg:text-7xl">{app.name}</h1>
+            {app.isVerified && (
+              <div className="flex items-center gap-1.5 rounded-full bg-blue-500/10 px-4 py-2 text-blue-600 dark:text-blue-400 border border-blue-500/20 shadow-sm">
+                <CheckCircle2 className="size-5 md:size-6" />
+                <span className="text-sm font-bold uppercase tracking-wider md:text-base">{t('verified')}</span>
+              </div>
+            )}
+          </div>
+
+          <div className="mb-8 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground/80 md:justify-start">
+            <div className="flex items-center gap-2">
+              <div className="flex size-7 items-center justify-center rounded-lg bg-muted/50 text-foreground">
+                <Users className="size-4" />
+              </div>
+              <span className="font-medium">{app.author}</span>
             </div>
-            <span className="hidden opacity-40 md:block">•</span>
-            <div className="flex items-center gap-1.5">
-              <Calendar className="size-4" />
-              <span>{app.releaseDate}</span>
+            <div className="flex items-center gap-2">
+              <div className="flex size-7 items-center justify-center rounded-lg bg-muted/50 text-foreground">
+                <Calendar className="size-4" />
+              </div>
+              <span className="font-medium">{app.releaseDate}</span>
             </div>
-            <span className="hidden opacity-40 md:block">•</span>
-            <div className="flex items-center gap-1.5 font-mono">
-              <Hash className="size-4" />
-              <span>{app.version}</span>
+            <div className="flex items-center gap-2">
+              <div className="flex size-7 items-center justify-center rounded-lg bg-muted/50 text-foreground">
+                <Hash className="size-4" />
+              </div>
+              <span className="font-mono font-medium">{app.version}</span>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-6 md:justify-start">
-            <div className="flex items-center gap-2">
-              <div className="flex">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:justify-start">
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground/60">
+                {t('popularity')}
+              </span>
+              <div className="flex items-center gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Sparkles
+                  <Star
                     key={i}
-                    className={`size-4 ${i < app.popularity ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground/30'}`}
+                    className={`size-5 ${i < app.popularity ? 'text-yellow-400 fill-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]' : 'text-muted-foreground/20'}`}
                   />
                 ))}
               </div>
-              <span className="text-sm font-medium">{app.popularity}/5</span>
+              <span className="text-sm font-bold">{app.popularity}/5</span>
             </div>
-            <div className="h-4 w-px bg-border/60" />
-            <Badge variant="outline" className="font-mono text-[0.65rem] uppercase tracking-wider">
-              {tLic(app.license)}
-            </Badge>
           </div>
         </div>
       </div>

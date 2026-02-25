@@ -17,7 +17,9 @@ const mockApp: App = {
   author: 'Test Author',
   releaseDate: '2023-01-01',
   popularity: 100,
-  recommendedAlternatives: []
+  recommendedAlternatives: [],
+  nativeAlternatives: [],
+  isVerified: false
 }
 
 describe('AppCard', () => {

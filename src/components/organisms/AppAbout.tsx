@@ -16,11 +16,9 @@ export default function AppAbout({ app }: AppAboutProps) {
         <FileText className="size-5 text-primary" />
         <h2 className="text-xl font-semibold">{t('about', { name: app.name })}</h2>
       </div>
-      
+
       <div className="prose prose-invert max-w-none">
-        <p className="text-lg leading-relaxed text-muted-foreground/90">
-          {app.description}
-        </p>
+        <p className="text-lg leading-relaxed text-muted-foreground/90">{app.description}</p>
       </div>
     </section>
   )

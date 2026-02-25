@@ -1,5 +1,30 @@
 export type Rating = 'BORKED' | 'BRONZE' | 'SILVER' | 'GOLD' | 'PLATINUM' | 'NATIVE'
 
+export interface HardwareInfo {
+  distro: string
+  kernel: string
+  cpu: string
+  gpu: string
+  ram: string
+  de: string
+}
+
+export interface UserReview {
+  id: string
+  user: {
+    name: string
+    avatar?: string
+  }
+  rating: Rating
+  content: string
+  date: string
+  hardware: HardwareInfo
+  compatibility: {
+    engine: 'Wine' | 'Proton'
+    version: string
+  }
+}
+
 export interface App {
   id: string
   name: string
@@ -16,6 +41,13 @@ export interface App {
   releaseDate: string
   popularity: number
   recommendedAlternatives: string[]
+  nativeAlternatives: string[]
+  isVerified: boolean
+  gpuCompatibility?: {
+    directx?: string
+    opengl?: string
+    vulkan?: string
+  }
   instructions?: {
     wine?: {
       bottles?: string

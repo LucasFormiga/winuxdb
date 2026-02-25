@@ -59,6 +59,9 @@ export function getApps(): App[] {
         releaseDate: data.releaseDate,
         popularity: data.popularity,
         recommendedAlternatives: data.recommendedAlternatives || [],
+        nativeAlternatives: data.nativeAlternatives || [],
+        isVerified: data.isVerified ?? false,
+        gpuCompatibility: data.gpuCompatibility,
         instructions: data.instructions
       }
     })
