@@ -176,7 +176,22 @@
     "apps": "Apps",
     "contribute": "Contribuir",
     "games": "Jogos",
-    "antiCheat": "Jogos com Anti-Cheat"
+    "antiCheat": "Jogos com Anti-Cheat",
+    "login": "Entrar",
+    "menu": "Menu",
+    "navigation": "Navegação",
+    "external": "Externo",
+    "theme": "Tema",
+    "language": "Idioma"
+  },
+  "Login": {
+    "title": "Bem-vindo",
+    "subtitle": "Junte-se à comunidade WinuxDB para contribuir e acompanhar seus apps favoritos.",
+    "google": "Continuar com Google",
+    "github": "Continuar com GitHub",
+    "discord": "Continuar com Discord",
+    "backToHome": "Voltar ao Início",
+    "terms": "Ao continuar, você concorda com nossos <terms>Termos de Uso</terms> e nossa <privacy>Política de Privacidade</privacy>."
   },
   "Metadata": {
     "description": "A WinuxDB é a base de dados definitiva de compatibilidade Linux para aplicativos Windows. Pesquise milhares de apps, confira notas de Wine e Proton, e encontre a melhor distro Linux para o seu fluxo de trabalho."
