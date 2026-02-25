@@ -16,20 +16,24 @@ export default function AppCard({ app }: AppCardProps) {
   const tCat = useTranslations('Categories')
   const tLic = useTranslations('Licenses')
 
+  const logo = app.logo_url || app.logo
+  const rating = (app.overall_rating || app.rating) as any
+  const releaseYear = app.release_date ? app.release_date.split('-')[0] : (app as any).releaseDate?.split('-')[0] || 'N/A'
+
   return (
-    <Link href={`/apps/${app.id}`} className="block h-full">
+    <Link href={`/apps/${app.slug || app.id}`} className="block h-full">
       <Card className="group flex h-full flex-col overflow-hidden border-border/60 bg-card/80 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_24px_60px_rgba(0,0,0,0.5)]">
         <CardHeader className="p-0">
           <div className="relative flex aspect-video w-full items-center justify-center">
             <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-white/95 p-3 shadow-sm ring-1 ring-black/5 sm:h-24 sm:w-24">
-              {app.logo ? (
+              {logo ? (
                 <Image
-                  src={app.logo}
+                  src={logo}
                   alt={app.name}
                   className="size-20 max-h-full max-w-full object-contain"
                   loading="lazy"
-                  width={0}
-                  height={0}
+                  width={96}
+                  height={96}
                 />
               ) : (
                 <ImageIcon className="size-10 text-muted-foreground/60" />
@@ -38,7 +42,7 @@ export default function AppCard({ app }: AppCardProps) {
             <div className="absolute top-3 right-3 flex flex-col items-end gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <div className="flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-[0.6rem] font-bold text-white backdrop-blur-md border border-white/10">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className={`size-4 ${i < app.popularity ? 'text-yellow-400' : 'text-white/20'}`} />
+                  <Star key={i} className={`size-4 ${i < (app.popularity ?? 0) ? 'text-yellow-400' : 'text-white/20'}`} />
                 ))}
               </div>
             </div>
@@ -53,7 +57,7 @@ export default function AppCard({ app }: AppCardProps) {
                 <span className="line-clamp-1">{app.author}</span>
               </div>
             </div>
-            <RatingMedal rating={app.rating} />
+            <RatingMedal rating={rating} />
           </div>
 
           <div className="mt-4 grid grid-cols-2 gap-3 border-y border-border/40 py-3">
@@ -72,7 +76,7 @@ export default function AppCard({ app }: AppCardProps) {
               </p>
               <div className="flex items-center gap-1 text-xs font-mono">
                 <Calendar className="size-3 text-primary/60" />
-                <span>{app.releaseDate.split('-')[0]}</span>
+                <span>{releaseYear}</span>
               </div>
             </div>
           </div>
@@ -82,13 +86,13 @@ export default function AppCard({ app }: AppCardProps) {
               variant="outline"
               className="rounded-md border-border/40 bg-muted/30 px-1.5 py-0 font-mono text-[0.6rem] uppercase tracking-wider text-muted-foreground"
             >
-              {tCat(app.category)}
+              {tCat(app.category || 'Utility')}
             </Badge>
             <Badge
               variant="outline"
               className="rounded-md border-border/40 bg-muted/30 px-1.5 py-0 font-mono text-[0.6rem] uppercase tracking-wider text-muted-foreground"
             >
-              {tLic(app.license)}
+              {tLic(app.license || 'Proprietary')}
             </Badge>
           </div>
 

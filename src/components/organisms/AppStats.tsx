@@ -27,7 +27,7 @@ export default function AppStats({ app }: AppStatsProps) {
             </div>
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground font-medium">{t('license')}</span>
-              <span className="font-bold text-foreground">{tLic(app.license)}</span>
+              <span className="font-bold text-foreground">{tLic(app.license || 'Proprietary')}</span>
             </div>
           </div>
 
@@ -37,7 +37,7 @@ export default function AppStats({ app }: AppStatsProps) {
             </div>
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground font-medium">{t('category')}</span>
-              <span className="font-bold text-foreground">{tCat(app.category)}</span>
+              <span className="font-bold text-foreground">{tCat(app.category || 'Utility')}</span>
             </div>
           </div>
 
@@ -48,7 +48,7 @@ export default function AppStats({ app }: AppStatsProps) {
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground font-medium">{t('recommendedVersion')}</span>
               <Badge className="w-fit mt-1 bg-green-500/10 text-green-500 border-green-500/20 px-2 py-0 text-[0.65rem] font-bold shadow-none">
-                {app.recommendedVersion}
+                {app.recommended_version || app.recommendedVersion || 'Latest'}
               </Badge>
             </div>
           </div>
@@ -93,7 +93,7 @@ export default function AppStats({ app }: AppStatsProps) {
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground font-medium">{t('engineRecommendation')}</span>
               <span className="font-bold text-foreground">
-                {app.rating === 'NATIVE' ? t('nativeLinux') : t('protonEngine')}
+                {(app.overall_rating || app.rating) === 'NATIVE' ? t('nativeLinux') : t('protonEngine')}
               </span>
             </div>
           </div>

@@ -6,9 +6,14 @@ import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Link } from '@/i18n/routing'
+import { signInWithSocial } from '@/lib/actions/auth'
 
 export default function LoginPage() {
   const t = useTranslations('Login')
+
+  const handleSocialLogin = async (provider: 'google' | 'github' | 'discord') => {
+    await signInWithSocial(provider)
+  }
 
   return (
     <div className="relative min-h-[calc(100vh-80px)] flex items-center justify-center p-6 overflow-hidden">
@@ -51,7 +56,7 @@ export default function LoginPage() {
             <Button
               variant="secondary"
               className="relative h-12 bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group/btn"
-              onClick={() => {}}
+              onClick={() => handleSocialLogin('google')}
             >
               <Chrome className="mr-3 size-5 text-[#4285F4]" />
               <span className="flex-1 text-center font-semibold">{t('google')}</span>
@@ -61,7 +66,7 @@ export default function LoginPage() {
             <Button
               variant="secondary"
               className="relative h-12 bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group/btn"
-              onClick={() => {}}
+              onClick={() => handleSocialLogin('github')}
             >
               <Github className="mr-3 size-5 text-foreground" />
               <span className="flex-1 text-center font-semibold">{t('github')}</span>
@@ -71,7 +76,7 @@ export default function LoginPage() {
             <Button
               variant="secondary"
               className="relative h-12 bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group/btn"
-              onClick={() => {}}
+              onClick={() => handleSocialLogin('discord')}
             >
               <MessageSquare className="mr-3 size-5 text-[#5865F2]" />
               <span className="flex-1 text-center font-semibold">{t('discord')}</span>

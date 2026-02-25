@@ -45,6 +45,7 @@ export function getApps(): App[] {
 
       return {
         id: data.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+        slug: slugify(data.name),
         name: data.name,
         logo: logoFile ? `/images/apps/${logoFile}` : undefined,
         description: data.description,

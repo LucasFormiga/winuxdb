@@ -5,7 +5,11 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import type { UserAccount } from '@/lib/types'
 
 interface AccountHeaderProps {
-  user: UserAccount
+  user: {
+    nickname: string
+    email?: string // This might not be present in `profiles` table directly unless joined or passed from auth.users separately
+    avatar_url?: string // This also might be different
+  }
 }
 
 export default function AccountHeader({ user }: AccountHeaderProps) {
@@ -19,7 +23,7 @@ export default function AccountHeader({ user }: AccountHeaderProps) {
         <div className="group relative">
           <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl transition-all duration-500 group-hover:bg-primary/30" />
           <Avatar className="size-24 border-4 border-background shadow-2xl md:size-32">
-            <AvatarImage src={user.avatarUrl} />
+            <AvatarImage src={user.avatar_url} />
             <AvatarFallback className="bg-primary/10 text-primary">
               <User className="size-10 md:size-12" />
             </AvatarFallback>
@@ -28,7 +32,7 @@ export default function AccountHeader({ user }: AccountHeaderProps) {
 
         <div className="space-y-1">
           <h1 className="text-3xl font-black uppercase tracking-tight md:text-5xl">{user.nickname}</h1>
-          <p className="text-lg font-medium text-muted-foreground">{user.email}</p>
+          <p className="text-lg font-medium text-muted-foreground">{user.email || 'Private Email'}</p>
         </div>
       </div>
     </div>

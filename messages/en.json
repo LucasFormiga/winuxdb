@@ -477,7 +477,19 @@
     "next": "Next",
     "back": "Back",
     "submitting": "Submitting...",
-    "submit": "Submit Review"
+    "submit": "Submit Review",
+    "nativeBanner": {
+      "title": "Native Application",
+      "description": "This application has a native Linux version provided directly by the developer. Because it runs without compatibility layers like Wine or Proton, community compatibility reports are not required. Enjoy the best possible performance and stability!",
+      "featurePerformance": "Optimized Performance",
+      "featureHardware": "Full Hardware Support"
+    }
+  },
+  "UserMenu": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Log out",
+    "user": "User"
   },
   "NotFound": {
     "title": "404 - App Not Found",

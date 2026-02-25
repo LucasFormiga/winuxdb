@@ -35,6 +35,7 @@ export interface UserAccount {
 
 export interface UserReview {
   id: string
+  user_id: string
   user: {
     name: string
     avatar?: string
@@ -42,6 +43,9 @@ export interface UserReview {
   rating: Rating
   content: string
   date: string
+  created_at?: string // Match DB
+  wine_proton_version?: string // Match DB
+  app_version_tested?: string // Match DB
   hardware: HardwareInfo
   compatibility: {
     engine: 'Wine' | 'Proton'
@@ -52,21 +56,27 @@ export interface UserReview {
 export interface App {
   id: string
   name: string
-  logo?: string
-  description?: string
-  screenshots?: string[]
-  version: string
-  recommendedVersion: string
-  rating: Rating
+  slug: string
+  logo_url?: string | null
+  logo?: string | null // Keep legacy for compatibility during transition
+  description?: string | null
+  screenshots?: string[] | null
+  version?: string | null
+  recommendedVersion?: string | null
+  recommended_version?: string | null // Match DB
+  rating?: Rating | null
+  overall_rating?: Rating | null // Match DB
   score: number // The 1-5 numerical rating
-  category: string
-  license: string
-  author: string
-  releaseDate: string
-  popularity: number
-  recommendedAlternatives: string[]
-  nativeAlternatives: string[]
-  isVerified: boolean
+  category?: string | null
+  license?: string | null
+  author?: string | null
+  releaseDate?: string | null
+  release_date?: string | null // Match DB
+  popularity?: number
+  recommendedAlternatives?: string[] | null
+  nativeAlternatives?: string[] | null
+  isVerified?: boolean | null
+  is_verified?: boolean | null // Match DB
   gpuCompatibility?: {
     directx?: string
     opengl?: string

@@ -9,6 +9,7 @@ import SiteFooter from '@/components/organisms/SiteFooter'
 import SiteHeader from '@/components/organisms/SiteHeader'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { routing } from '@/i18n/routing'
+import { getUserData } from '@/lib/actions/auth'
 import './globals.css'
 
 export function generateStaticParams() {
@@ -112,6 +113,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale)
 
   const messages = await getMessages()
+  const user = await getUserData()
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -136,7 +138,7 @@ export default async function LocaleLayout({
             <TooltipProvider>
               <SmoothScroll />
               <LocaleSuggester />
-              <SiteHeader />
+              <SiteHeader user={user} />
               {children}
               <SiteFooter />
             </TooltipProvider>

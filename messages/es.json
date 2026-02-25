@@ -477,7 +477,19 @@
     "next": "Siguiente",
     "back": "Atrás",
     "submitting": "Enviando...",
-    "submit": "Enviar Reseña"
+    "submit": "Enviar Reseña",
+    "nativeBanner": {
+      "title": "Aplicación Nativa",
+      "description": "Esta aplicación tiene una versión nativa para Linux proporcionada directamente por el desarrollador. Debido a que se ejecuta sin capas de compatibilidad como Wine o Proton, no se requieren informes de la comunidad. ¡Disfruta del mejor rendimiento y estabilidad posibles!",
+      "featurePerformance": "Rendimiento Optimizado",
+      "featureHardware": "Soporte de Hardware Completo"
+    }
+  },
+  "UserMenu": {
+    "profile": "Perfil",
+    "settings": "Ajustes",
+    "logout": "Cerrar sesión",
+    "user": "Usuario"
   },
   "NotFound": {
     "title": "404 - App no encontrada",

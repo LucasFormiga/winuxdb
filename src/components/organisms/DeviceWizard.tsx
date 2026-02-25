@@ -20,7 +20,7 @@ import {
   Zap
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { Button } from '@/components/ui/button'
@@ -28,11 +28,14 @@ import { Dialog, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import type { UserDevice } from '@/lib/types'
+import { deviceSchema as apiDeviceSchema, type Device } from '@/lib/validations/auth'
 import { cn } from '@/lib/utils'
 import { parseSteamSystemInfo } from '@/lib/utils/steam-parser'
 
-const deviceSchema = z.object({
+// Extend the API schema for the wizard form if needed, or use it directly.
+// The API schema expects snake_case for some fields (distro_version, etc) but the form uses camelCase.
+// We should map them. For now, let's keep the local schema but add steam_sys_info and map on submit.
+const wizardSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').max(50),
   distro: z.string().min(1, 'Distribution is required'),
   distroVersion: z.string().optional(),
@@ -41,41 +44,66 @@ const deviceSchema = z.object({
   cpu: z.string().min(1, 'CPU is required'),
   gpu: z.string().min(1, 'GPU is required'),
   gpuDriver: z.string().optional(),
-  ram: z.string().min(1, 'RAM is required')
+  ram: z.string().min(1, 'RAM is required'),
+  steamSysInfo: z.string().optional()
 })
 
 interface DeviceWizardProps {
-  onAdd: (device: UserDevice) => void
+  onAdd?: (device: Omit<Device, 'id' | 'user_id' | 'created_at' | 'updated_at'>) => void
+  onUpdate?: (id: string, device: Partial<Device>) => void
+  initialData?: Device
   disabled?: boolean
+  trigger?: React.ReactNode
 }
 
-export default function DeviceWizard({ onAdd, disabled }: DeviceWizardProps) {
+export default function DeviceWizard({ onAdd, onUpdate, initialData, disabled, trigger }: DeviceWizardProps) {
   const t = useTranslations('AccountDevices.wizard')
   const tCommon = useTranslations('AppDetail')
   const tMain = useTranslations('AccountDevices')
   const [open, setOpen] = useState(false)
-  const [step, setStep] = useState(1)
-  const [method, setMethod] = useState<'steam' | 'manual' | null>(null)
+  const [step, setStep] = useState(initialData ? 3 : 1) // Start at step 3 if editing
+  const [method, setMethod] = useState<'steam' | 'manual' | null>(initialData ? 'manual' : null)
   const [isParsing, setIsParsing] = useState(false)
 
-  const form = useForm<z.infer<typeof deviceSchema>>({
-    resolver: zodResolver(deviceSchema),
+  const form = useForm<z.infer<typeof wizardSchema>>({
+    resolver: zodResolver(wizardSchema),
     defaultValues: {
-      name: '',
-      distro: '',
-      distroVersion: '',
-      kernel: '',
-      kernelVersion: '',
-      cpu: '',
-      gpu: '',
-      gpuDriver: '',
-      ram: ''
+      name: initialData?.name || '',
+      distro: initialData?.distro || '',
+      distroVersion: initialData?.distro_version || '',
+      kernel: initialData?.kernel || '',
+      kernelVersion: initialData?.kernel_version || '',
+      cpu: initialData?.cpu || '',
+      gpu: initialData?.gpu || '',
+      gpuDriver: initialData?.gpu_driver || '',
+      ram: initialData?.ram || '',
+      steamSysInfo: initialData?.steam_sys_info || ''
     }
   })
 
+  // Sync form with initialData when it changes (important for editing)
+  useEffect(() => {
+    if (initialData && open) {
+      form.reset({
+        name: initialData.name || '',
+        distro: initialData.distro || '',
+        distroVersion: initialData.distro_version || '',
+        kernel: initialData.kernel || '',
+        kernelVersion: initialData.kernel_version || '',
+        cpu: initialData.cpu || '',
+        gpu: initialData.gpu || '',
+        gpuDriver: initialData.gpu_driver || '',
+        ram: initialData.ram || '',
+        steamSysInfo: initialData.steam_sys_info || ''
+      })
+      setStep(3)
+      setMethod('manual')
+    }
+  }, [initialData, open, form])
+
   const nextStep = async () => {
     // Validate current step fields before proceeding
-    let fieldsToValidate: (keyof z.infer<typeof deviceSchema>)[] = []
+    let fieldsToValidate: (keyof z.infer<typeof wizardSchema>)[] = []
 
     if (step === 3) {
       fieldsToValidate = ['distro', 'kernel', 'cpu', 'gpu', 'ram']
@@ -110,7 +138,8 @@ export default function DeviceWizard({ onAdd, disabled }: DeviceWizardProps) {
           cpu: parsed.cpu || '',
           gpu: parsed.gpu || '',
           gpuDriver: parsed.gpuDriver || '',
-          ram: parsed.ram || ''
+          ram: parsed.ram || '',
+          steamSysInfo: text
         })
         setStep(3)
       }
@@ -121,12 +150,27 @@ export default function DeviceWizard({ onAdd, disabled }: DeviceWizardProps) {
     }
   }
 
-  const onSubmit = (values: z.infer<typeof deviceSchema>) => {
-    onAdd({
-      ...values,
-      id: crypto.randomUUID(),
-      isPrimary: false
-    })
+  const onSubmit = (values: z.infer<typeof wizardSchema>) => {
+    const payload = {
+      name: values.name || 'My Device',
+      is_primary: initialData?.is_primary || false,
+      distro: values.distro,
+      distro_version: values.distroVersion || '',
+      kernel: values.kernel,
+      kernel_version: values.kernelVersion || '',
+      cpu: values.cpu,
+      gpu: values.gpu,
+      gpu_driver: values.gpuDriver,
+      ram: values.ram,
+      steam_sys_info: values.steamSysInfo
+    }
+
+    if (initialData?.id && onUpdate) {
+      onUpdate(initialData.id, payload)
+    } else if (onAdd) {
+      onAdd(payload)
+    }
+
     setOpen(false)
     setStep(1)
     setMethod(null)
@@ -148,20 +192,22 @@ export default function DeviceWizard({ onAdd, disabled }: DeviceWizardProps) {
       onOpenChange={(val) => {
         setOpen(val)
         if (!val) {
-          setStep(1)
-          setMethod(null)
+          setStep(initialData ? 3 : 1)
+          setMethod(initialData ? 'manual' : null)
           form.reset()
         }
       }}
     >
       <DialogTrigger asChild>
-        <Button
-          disabled={disabled}
-          className="h-14 rounded-2xl bg-primary px-8 text-lg font-bold shadow-lg shadow-primary/20 transition-all hover:scale-[1.02]"
-        >
-          <Plus className="mr-2 size-5" />
-          {tMain('addDevice')}
-        </Button>
+        {trigger || (
+          <Button
+            disabled={disabled}
+            className="h-14 rounded-2xl bg-primary px-8 text-lg font-bold shadow-lg shadow-primary/20 transition-all hover:scale-[1.02]"
+          >
+            <Plus className="mr-2 size-5" />
+            {tMain('addDevice')}
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="max-w-3xl overflow-hidden rounded-[2.5rem] border-border/40 bg-background/95 p-0 backdrop-blur-2xl">
         <Form {...form}>

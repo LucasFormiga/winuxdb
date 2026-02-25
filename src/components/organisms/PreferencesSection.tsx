@@ -10,38 +10,62 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import type { UserAccount } from '@/lib/types'
+import { updateProfile } from '@/lib/actions/auth'
+import { useRouter, usePathname } from '@/i18n/routing'
 
+// Define schema matching the server action expectation but with local validation messages
 const prefSchema = z.object({
   nickname: z.string().min(2, { message: 'Nickname must be at least 2 characters.' }).max(30),
   preferredLanguage: z.string()
 })
 
 interface PreferencesSectionProps {
-  user: UserAccount
+  user: any // Cast as any for now to avoid strict type mismatch, or use UserData
 }
 
 export default function PreferencesSection({ user }: PreferencesSectionProps) {
   const t = useTranslations('Account.preferences')
   const [isSaving, setIsSaving] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
 
   const form = useForm<z.infer<typeof prefSchema>>({
     resolver: zodResolver(prefSchema),
     defaultValues: {
       nickname: user.nickname,
-      preferredLanguage: user.preferredLanguage
+      preferredLanguage: user.default_language || 'en'
     }
   })
 
   async function onSubmit(values: z.infer<typeof prefSchema>) {
     setIsSaving(true)
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    console.log('Saved preferences:', values)
-    setIsSaving(false)
-    setShowSuccess(true)
-    setTimeout(() => setShowSuccess(false), 3000)
+    
+    try {
+      const result = await updateProfile({
+        nickname: values.nickname,
+        default_language: values.preferredLanguage
+      })
+
+      if (result.error) {
+        console.error('Failed to update profile:', result.error)
+        // You might want to set a form error here
+        return
+      }
+
+      setShowSuccess(true)
+      
+      // If language changed, redirect to new locale
+      if (values.preferredLanguage !== user.default_language) {
+        router.replace(pathname, { locale: values.preferredLanguage })
+      }
+      
+      setTimeout(() => setShowSuccess(false), 3000)
+    } catch (error) {
+      console.error('An unexpected error occurred:', error)
+    } finally {
+      setIsSaving(false)
+    }
   }
 
   return (

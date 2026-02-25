@@ -2,26 +2,39 @@
 
 import { Filter, MessageSquare } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ReviewCard from '@/components/molecules/ReviewCard'
 import ReviewDialog from '@/components/organisms/ReviewDialog'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Button } from '@/components/ui/button'
 import type { UserReview } from '@/lib/types'
+import { createClient } from '@/lib/supabase/client'
+import { getUserData } from '@/lib/actions/auth'
 
 interface ReviewSectionProps {
   appName: string
+  appId: string
   reviews: UserReview[]
 }
 
-export default function ReviewSection({ appName, reviews }: ReviewSectionProps) {
+export default function ReviewSection({ appName, appId, reviews }: ReviewSectionProps) {
   const t = useTranslations('AppDetail')
   const [filter, setFilter] = useState<'ALL' | string>('ALL')
   const [sort] = useState<'recent' | 'rating'>('recent')
+  const [user, setUser] = useState<any>(null)
+
+  useEffect(() => {
+    getUserData().then(setUser)
+  }, [])
+
+  const userHasReviewed = user && reviews.some(r => r.user_id === user.id)
 
   const filteredReviews = reviews
     .filter((r) => filter === 'ALL' || r.rating === filter)
     .sort((a, b) => {
-      if (sort === 'recent') return new Date(b.date).getTime() - new Date(a.date).getTime()
+      const dateA = a.created_at || (a as any).date
+      const dateB = b.created_at || (b as any).date
+      if (sort === 'recent') return new Date(dateB).getTime() - new Date(dateA).getTime()
       // Rating sort could be added here
       return 0
     })
@@ -53,13 +66,25 @@ export default function ReviewSection({ appName, reviews }: ReviewSectionProps) 
             </SelectContent>
           </Select>
 
-          <ReviewDialog appName={appName} />
+          {user && !userHasReviewed ? (
+            <ReviewDialog appName={appName} appId={appId} userDevices={user.devices || []} />
+          ) : !user ? (
+            <Button variant="secondary" onClick={() => window.location.href = '/login'} className="rounded-xl">
+              Log in to review
+            </Button>
+          ) : null}
         </div>
       </div>
 
       <div className="grid gap-6">
         {filteredReviews.length > 0 ? (
-          filteredReviews.map((review) => <ReviewCard key={review.id} review={review} />)
+          filteredReviews.map((review) => (
+            <ReviewCard 
+              key={review.id} 
+              review={review} 
+              currentUserId={user?.id}
+            />
+          ))
         ) : (
           <div className="flex flex-col items-center justify-center rounded-[2.5rem] border border-dashed border-border/60 bg-muted/10 py-20 text-center">
             <div className="flex size-16 items-center justify-center rounded-3xl bg-muted/50 text-muted-foreground/30 mb-4">
@@ -69,7 +94,13 @@ export default function ReviewSection({ appName, reviews }: ReviewSectionProps) 
             <p className="text-muted-foreground max-w-sm mb-8">
               Be the first to share your experience with {appName} on Linux.
             </p>
-            <ReviewDialog appName={appName} />
+            {user ? (
+              <ReviewDialog appName={appName} appId={appId} userDevices={user.devices || []} />
+            ) : (
+              <Button variant="secondary" onClick={() => window.location.href = '/login'} className="rounded-xl px-10 h-12 font-bold uppercase tracking-widest">
+                Log in to review
+              </Button>
+            )}
           </div>
         )}
       </div>

@@ -4,6 +4,7 @@ export const MOCK_REVIEWS: Record<string, UserReview[]> = {
   discord: [
     {
       id: '1',
+      user_id: 'mock-user-1',
       user: { name: 'Lucas Pinheiro', avatar: 'https://github.com/lucaspinheiro.png' },
       rating: 'NATIVE',
       content:
@@ -24,6 +25,7 @@ export const MOCK_REVIEWS: Record<string, UserReview[]> = {
     },
     {
       id: '2',
+      user_id: 'mock-user-2',
       user: { name: 'OpenSourceFan' },
       rating: 'PLATINUM',
       content:
@@ -46,6 +48,7 @@ export const MOCK_REVIEWS: Record<string, UserReview[]> = {
   'photoshop-cc': [
     {
       id: '3',
+      user_id: 'mock-user-3',
       user: { name: 'CreativeLinux' },
       rating: 'SILVER',
       content:

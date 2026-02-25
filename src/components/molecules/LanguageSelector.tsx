@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { usePathname, useRouter } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
+import { updateProfile } from '@/lib/actions/auth'
 
 const locales = [
   { code: 'en', label: 'English' },
@@ -18,8 +19,13 @@ export default function LanguageSelector() {
   const router = useRouter()
   const pathname = usePathname()
 
-  function onSelectChange(nextLocale: string) {
+  async function onSelectChange(nextLocale: string) {
     localStorage.setItem('dismissed-locale-suggestion', 'true')
+    
+    // Fire and forget profile update
+    // If user is not logged in, this will fail silently/safely on server side
+    updateProfile({ default_language: nextLocale }).catch(() => {})
+
     router.replace(pathname, { locale: nextLocale })
   }
 

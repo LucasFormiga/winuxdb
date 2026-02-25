@@ -34,8 +34,8 @@ export default function AppsContent({ apps }: AppsContentProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [columns, setColumns] = useState(1)
 
-  const categories = useMemo(() => Array.from(new Set(apps.map((a) => a.category))).sort(), [apps])
-  const licenses = useMemo(() => Array.from(new Set(apps.map((a) => a.license))).sort(), [apps])
+  const categories = useMemo(() => Array.from(new Set(apps.map((a) => a.category))).filter(Boolean).sort() as string[], [apps])
+  const licenses = useMemo(() => Array.from(new Set(apps.map((a) => a.license))).filter(Boolean).sort() as string[], [apps])
 
   // Update columns based on container width
   useEffect(() => {
@@ -58,26 +58,31 @@ export default function AppsContent({ apps }: AppsContentProps) {
       .filter((app) => {
         const matchesSearch =
           app.name.toLowerCase().includes(search.toLowerCase()) ||
-          app.author.toLowerCase().includes(search.toLowerCase())
-        const matchesRating = rating === 'ALL' || app.rating === rating
+          (app.author?.toLowerCase().includes(search.toLowerCase()) ?? false)
+        const appRating = app.overall_rating || app.rating || 'BORKED'
+        const matchesRating = rating === 'ALL' || appRating === rating
         const matchesCategory = category === 'ALL' || app.category === category
         const matchesLicense = license === 'ALL' || app.license === license
         const matchesAlternatives =
           alternatives === 'ALL' ||
-          (alternatives === 'YES' && app.recommendedAlternatives.length > 0) ||
-          (alternatives === 'NO' && app.recommendedAlternatives.length === 0)
+          (alternatives === 'YES' && (app.recommendedAlternatives?.length || 0) > 0) ||
+          (alternatives === 'NO' && (app.recommendedAlternatives?.length || 0) === 0)
 
         return matchesSearch && matchesRating && matchesCategory && matchesLicense && matchesAlternatives
       })
       .sort((a, b) => {
         if (sort === 'popularity') {
-          return b.popularity - a.popularity
+          return (b.popularity ?? 0) - (a.popularity ?? 0)
         }
         if (sort === 'releaseDate') {
-          return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
+          const dateA = a.release_date || a.releaseDate || '0000-00-00'
+          const dateB = b.release_date || b.releaseDate || '0000-00-00'
+          return new Date(dateB).getTime() - new Date(dateA).getTime()
         }
         if (sort === 'rating') {
-          return RATING_ORDER[b.rating] - RATING_ORDER[a.rating]
+          const ratingA = a.overall_rating || a.rating || 'BORKED'
+          const ratingB = b.overall_rating || b.rating || 'BORKED'
+          return RATING_ORDER[ratingB] - RATING_ORDER[ratingA]
         }
         return 0
       })

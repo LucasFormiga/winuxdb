@@ -1,42 +1,100 @@
 'use client'
 
-import { Monitor, Star, Trash2 } from 'lucide-react'
+import { Edit2, Monitor, Star, Trash2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import type { UserDevice } from '@/lib/types'
+import { type Device } from '@/lib/validations/auth'
+import { addDevice, deleteDevice, updateDevice } from '@/lib/actions/devices'
 import { cn } from '@/lib/utils'
 import DeviceWizard from './DeviceWizard'
 
 interface DevicesSectionProps {
-  initialDevices: UserDevice[]
+  initialDevices: Device[]
 }
 
 export default function DevicesSection({ initialDevices }: DevicesSectionProps) {
   const t = useTranslations('AccountDevices')
-  const [devices, setDevices] = useState<UserDevice[]>(initialDevices)
+  const [devices, setDevices] = useState<Device[]>(initialDevices)
 
-  const handleAddDevice = (device: UserDevice) => {
+  const handleAddDevice = async (deviceData: Omit<Device, 'id' | 'user_id' | 'created_at' | 'updated_at'>) => {
     if (devices.length >= 5) return
-    const newDevices = [...devices, { ...device, isPrimary: devices.length === 0 }]
-    setDevices(newDevices)
-  }
 
-  const handleDeleteDevice = (id: string) => {
-    const newDevices = devices.filter((d) => d.id !== id)
-    // If we deleted the primary, set the first one as primary
-    if (newDevices.length > 0 && !newDevices.some((d) => d.isPrimary)) {
-      newDevices[0].isPrimary = true
+    // Optimistic update
+    const tempId = crypto.randomUUID()
+    const newDevice = { 
+      ...deviceData, 
+      id: tempId, 
+      user_id: 'temp', 
+      created_at: new Date().toISOString(),
+      name: deviceData.name || 'New Device'
+    } as Device
+    setDevices([...devices, newDevice])
+
+    const result = await addDevice(deviceData)
+    if (result.error) {
+      console.error(result.error)
+      setDevices(devices)
+      return
     }
-    setDevices(newDevices)
   }
 
-  const handleSetPrimary = (id: string) => {
+  const handleUpdateDevice = async (id: string, deviceData: Partial<Device>) => {
+    // Optimistic update
+    setDevices(devices.map(d => d.id === id ? { ...d, ...deviceData } : d))
+
+    const result = await updateDevice(id, deviceData)
+    if (result.error) {
+      console.error(result.error)
+      setDevices(devices) // Revert
+    }
+  }
+
+  const handleDeleteDevice = async (id: string) => {
+    // Optimistic update
+    const newDevices = devices.filter((d) => d.id !== id)
+    setDevices(newDevices)
+
+    const result = await deleteDevice(id)
+    if (result.error) {
+      console.error(result.error)
+      setDevices(devices) // Revert
+    }
+  }
+
+  const handleSetPrimary = async (id: string) => {
+    // Optimistic update
     const newDevices = devices.map((d) => ({
       ...d,
-      isPrimary: d.id === id
+      is_primary: d.id === id
     }))
     setDevices(newDevices)
+
+    // We need to unset others and set this one. 
+    // Ideally the backend handles the "unset others" logic via trigger or transaction.
+    // Our migration has a unique index for is_primary=true per user, 
+    // so we must set others to false FIRST or use a transaction.
+    // But Supabase/Postgres doesn't support "update others" easily in one RLS call unless we use a stored procedure.
+    // For now, let's just update the target device to is_primary=true. 
+    // The unique index might fail if we don't unset the old one first.
+    // A better approach: The server action `updateDevice` should handle this logic or we use a database trigger.
+    // I'll assume we might need a specific action `setPrimaryDevice(id)` to handle this atomically.
+    // For now, let's try updating just the target.
+    
+    // Actually, checking the migration:
+    // CREATE UNIQUE INDEX IF NOT EXISTS unique_primary_device_per_user ON public.devices (user_id) WHERE (is_primary = true);
+    // This prevents two true values. So we MUST set the current primary to false first.
+    
+    const currentPrimary = devices.find(d => d.is_primary)
+    if (currentPrimary && currentPrimary.id !== id) {
+       await updateDevice(currentPrimary.id!, { is_primary: false })
+    }
+    
+    const result = await updateDevice(id, { is_primary: true })
+    if (result.error) {
+      console.error(result.error)
+      setDevices(devices) // Revert
+    }
   }
 
   return (
@@ -63,11 +121,11 @@ export default function DevicesSection({ initialDevices }: DevicesSectionProps) 
               key={device.id}
               className={cn(
                 'group relative flex flex-col gap-6 rounded-[2.5rem] border-2 border-border/40 bg-muted/20 p-8 transition-all hover:bg-muted/30 md:flex-row md:items-center',
-                device.isPrimary && 'border-primary/50 bg-primary/[0.03]'
+                device.is_primary && 'border-primary/50 bg-primary/[0.03]'
               )}
             >
               {/* Primary Badge */}
-              {device.isPrimary && (
+              {device.is_primary && (
                 <div className="absolute -left-2 top-8 flex items-center gap-1.5 rounded-r-full bg-primary px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-primary-foreground shadow-lg shadow-primary/20">
                   <Star className="size-3 fill-current" />
                   {t('primary')}
@@ -79,10 +137,10 @@ export default function DevicesSection({ initialDevices }: DevicesSectionProps) 
                   <Monitor className="size-8 text-primary" />
                 </div>
                 <div className="space-y-2">
-                  <h4 className="text-xl font-black uppercase tracking-tight">{device.name}</h4>
+                  <h4 className="text-xl font-black uppercase tracking-tight">{device.name || 'Unnamed Device'}</h4>
                   <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-medium text-muted-foreground">
                     <span>
-                      {device.distro} {device.distroVersion}
+                      {device.distro} {device.distro_version}
                     </span>
                     <span className="opacity-20">•</span>
                     <span>{device.cpu}</span>
@@ -93,20 +151,35 @@ export default function DevicesSection({ initialDevices }: DevicesSectionProps) 
               </div>
 
               <div className="flex items-center gap-3">
-                {!device.isPrimary && (
+                {!device.is_primary && (
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => handleSetPrimary(device.id)}
+                    onClick={() => handleSetPrimary(device.id!)}
                     className="rounded-xl font-bold uppercase tracking-widest text-muted-foreground hover:text-primary"
                   >
                     {t('setPrimary')}
                   </Button>
                 )}
+                
+                <DeviceWizard 
+                  initialData={device} 
+                  onUpdate={handleUpdateDevice}
+                  trigger={
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="size-12 rounded-2xl text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                    >
+                      <Edit2 className="size-5" />
+                    </Button>
+                  }
+                />
+
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={() => handleDeleteDevice(device.id)}
+                  onClick={() => handleDeleteDevice(device.id!)}
                   className="size-12 rounded-2xl text-muted-foreground hover:bg-red-500/10 hover:text-red-500"
                 >
                   <Trash2 className="size-5" />

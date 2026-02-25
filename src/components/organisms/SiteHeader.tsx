@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import LanguageSelector from '@/components/molecules/LanguageSelector'
 import { ThemeSwitcher } from '@/components/molecules/ThemeSwitcher'
+import { UserMenu } from '@/components/molecules/UserMenu'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Link, usePathname } from '@/i18n/routing'
@@ -22,7 +23,14 @@ const externalLinks = [
   { href: 'https://areweanticheatyet.com/?utm_source=winuxdb', labelKey: 'antiCheat' }
 ]
 
-export default function SiteHeader() {
+interface SiteHeaderProps {
+  user?: {
+    nickname: string
+    avatar_url?: string
+  } | null
+}
+
+export default function SiteHeader({ user }: SiteHeaderProps) {
   const t = useTranslations('Nav')
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
@@ -109,15 +117,19 @@ export default function SiteHeader() {
             <LanguageSelector />
           </div>
 
-          <Link href="/login">
-            <Button
-              size="sm"
-              className="h-9 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-[0.7rem] uppercase tracking-wider px-5 shadow-[0_4px_12px_rgba(255,60,60,0.25)] hover:shadow-[0_6px_20px_rgba(255,60,60,0.4)] transition-all duration-300"
-            >
-              <LogIn className="size-3.5 mr-2" />
-              {t('login')}
-            </Button>
-          </Link>
+          {user ? (
+            <UserMenu user={user} />
+          ) : (
+            <Link href="/login">
+              <Button
+                size="sm"
+                className="h-9 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-[0.7rem] uppercase tracking-wider px-5 shadow-[0_4px_12px_rgba(255,60,60,0.25)] hover:shadow-[0_6px_20px_rgba(255,60,60,0.4)] transition-all duration-300"
+              >
+                <LogIn className="size-3.5 mr-2" />
+                {t('login')}
+              </Button>
+            </Link>
+          )}
 
           {/* Mobile Menu Toggle */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -198,6 +210,15 @@ export default function SiteHeader() {
               </nav>
 
               <div className="mt-auto flex flex-col gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                {user && (
+                  <>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-muted-foreground">User</span>
+                      <span className="text-xs font-bold uppercase tracking-wider">{user.nickname}</span>
+                    </div>
+                    <div className="h-px bg-white/10" />
+                  </>
+                )}
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-medium text-muted-foreground">{t('theme')}</span>
                   <ThemeSwitcher />
@@ -206,6 +227,21 @@ export default function SiteHeader() {
                   <span className="text-xs font-medium text-muted-foreground">{t('language')}</span>
                   <LanguageSelector />
                 </div>
+                {user && (
+                  <>
+                    <div className="h-px bg-white/10" />
+                    <Button 
+                      variant="ghost" 
+                      className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10 p-0 h-auto font-bold uppercase tracking-wider text-[10px]"
+                      onClick={() => {
+                        import('@/lib/actions/auth').then(({ signOut }) => signOut())
+                        setIsOpen(false)
+                      }}
+                    >
+                      Log Out
+                    </Button>
+                  </>
+                )}
               </div>
             </SheetContent>
           </Sheet>

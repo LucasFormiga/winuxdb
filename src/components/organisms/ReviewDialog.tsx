@@ -37,11 +37,12 @@ import {
   CACHYOS_PROTON_VERSIONS,
   GE_PROTON_VERSIONS,
   PROTON_VERSIONS,
-  USER_PC_PROFILES,
   WINE_VERSIONS
 } from '@/lib/data/review-options'
 import type { Rating } from '@/lib/types'
 import { cn } from '@/lib/utils'
+import { submitReview } from '@/lib/actions/reviews'
+import type { Device } from '@/lib/validations/auth'
 
 const formSchema = z.object({
   rating: z.enum(['BORKED', 'BRONZE', 'SILVER', 'GOLD', 'PLATINUM', 'NATIVE']),
@@ -53,6 +54,7 @@ const formSchema = z.object({
   engineFlavor: z.string().optional(),
   engineVersion: z.string().min(1, { message: 'Required' }),
   pcProfileId: z.string().min(1, { message: 'Required' }),
+  appVersion: z.string().min(1, { message: 'Required' }),
   content: z.string().max(400, {
     message: 'Comments must be 400 characters or less.'
   })
@@ -62,10 +64,12 @@ type FormValues = z.infer<typeof formSchema>
 
 interface ReviewDialogProps {
   appName: string
+  appId: string
+  userDevices: Device[]
   trigger?: React.ReactNode
 }
 
-export default function ReviewDialog({ appName, trigger }: ReviewDialogProps) {
+export default function ReviewDialog({ appName, appId, userDevices, trigger }: ReviewDialogProps) {
   const t = useTranslations('AppDetail')
   const [open, setOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -82,7 +86,8 @@ export default function ReviewDialog({ appName, trigger }: ReviewDialogProps) {
       engine: 'Wine',
       engineFlavor: 'valve',
       engineVersion: '',
-      pcProfileId: USER_PC_PROFILES[0].id,
+      pcProfileId: userDevices.find(d => d.is_primary)?.id || userDevices[0]?.id || '',
+      appVersion: 'Latest',
       content: ''
     }
   })
@@ -100,8 +105,28 @@ export default function ReviewDialog({ appName, trigger }: ReviewDialogProps) {
 
   const onSubmit: SubmitHandler<FormValues> = async (values) => {
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    console.log('Submitted Review:', values)
+    
+    const engineInfo = values.engine === 'Proton' 
+      ? `${values.engineFlavor} ${values.engineVersion}` 
+      : `Wine ${values.engineVersion}`
+
+    const result = await submitReview({
+      app_id: appId,
+      device_id: values.pcProfileId,
+      rating: values.rating,
+      numerical_score: values.rating === 'NATIVE' ? 5 : (ratings.indexOf(values.rating)), // Map rating to 1-5
+      content: values.content,
+      app_version_tested: values.appVersion,
+      wine_proton_version: engineInfo,
+      is_verified_report: false
+    })
+
+    if (result.error) {
+      console.error('Submit error:', result.error)
+      setIsSubmitting(false)
+      return
+    }
+
     setIsSubmitting(false)
     setOpen(false)
     form.reset()
@@ -425,7 +450,7 @@ export default function ReviewDialog({ appName, trigger }: ReviewDialogProps) {
                       <FormItem className="space-y-4">
                         <FormLabel className="text-base">{t('hardwareDetails')}</FormLabel>
                         <div className="grid gap-4">
-                          {USER_PC_PROFILES.map((profile) => (
+                          {userDevices.map((profile) => (
                             <div
                               key={profile.id}
                               onClick={() => field.onChange(profile.id)}
@@ -442,7 +467,7 @@ export default function ReviewDialog({ appName, trigger }: ReviewDialogProps) {
                                   <div>
                                     <h4 className="font-bold">{profile.name}</h4>
                                     <p className="text-xs text-muted-foreground">
-                                      {profile.distro} • {profile.de}
+                                      {profile.distro} {profile.distro_version} • {profile.de}
                                     </p>
                                   </div>
                                 </div>
@@ -458,6 +483,12 @@ export default function ReviewDialog({ appName, trigger }: ReviewDialogProps) {
                               </div>
                             </div>
                           ))}
+                          {userDevices.length === 0 && (
+                            <div className="text-center py-10 rounded-[2rem] border-2 border-dashed border-border/40 bg-muted/10">
+                               <p className="text-sm text-muted-foreground mb-4">You need to add a device to your account first.</p>
+                               <Button variant="secondary" onClick={() => window.location.href = '/account'}>Add Device</Button>
+                            </div>
+                          )}
                         </div>
                       </FormItem>
                     )}

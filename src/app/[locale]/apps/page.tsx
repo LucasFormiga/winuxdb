@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { getApps } from '@/lib/data/apps-loader'
+import { getApps } from '@/lib/actions/apps'
 import AppsContent from './AppsContent'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function AppsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale)
-  const apps = getApps()
+  const { apps = [] } = await getApps()
 
   return <AppsContent apps={apps} />
 }
