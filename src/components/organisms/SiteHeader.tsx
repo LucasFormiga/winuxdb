@@ -1,21 +1,15 @@
 'use client'
 
+import { ExternalLink, LogIn, Menu } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import { Menu, LogIn, ExternalLink } from 'lucide-react'
 import LanguageSelector from '@/components/molecules/LanguageSelector'
 import { ThemeSwitcher } from '@/components/molecules/ThemeSwitcher'
+import { Button } from '@/components/ui/button'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Link, usePathname } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
 
 const navLinks = [
   { href: '/', labelKey: 'home' },
@@ -44,10 +38,7 @@ export default function SiteHeader() {
 
   return (
     <header
-      className={cn(
-        'sticky top-0 z-50 w-full transition-all duration-300 px-4 lg:px-8', 
-        isScrolled ? 'py-2' : 'py-4'
-      )}
+      className={cn('sticky top-0 z-50 w-full transition-all duration-300 px-4 lg:px-8', isScrolled ? 'py-2' : 'py-4')}
     >
       <div
         className={cn(
@@ -117,10 +108,10 @@ export default function SiteHeader() {
             <ThemeSwitcher />
             <LanguageSelector />
           </div>
-          
+
           <Link href="/login">
-            <Button 
-              size="sm" 
+            <Button
+              size="sm"
               className="h-9 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-[0.7rem] uppercase tracking-wider px-5 shadow-[0_4px_12px_rgba(255,60,60,0.25)] hover:shadow-[0_6px_20px_rgba(255,60,60,0.4)] transition-all duration-300"
             >
               <LogIn className="size-3.5 mr-2" />
@@ -131,7 +122,11 @@ export default function SiteHeader() {
           {/* Mobile Menu Toggle */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9 rounded-full bg-white/5 border border-white/5">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden h-9 w-9 rounded-full bg-white/5 border border-white/5"
+              >
                 <Menu className="size-5" />
                 <span className="sr-only">{t('menu')}</span>
               </Button>
@@ -149,12 +144,16 @@ export default function SiteHeader() {
                     />
                     <div className="absolute inset-0 rounded-xl bg-primary/20 blur-md" />
                   </div>
-                  <SheetTitle className="text-xl font-bold uppercase tracking-[0.2em] text-foreground">WinuxDB</SheetTitle>
+                  <SheetTitle className="text-xl font-bold uppercase tracking-[0.2em] text-foreground">
+                    WinuxDB
+                  </SheetTitle>
                 </div>
               </SheetHeader>
-              
+
               <nav className="flex flex-col gap-4">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50 px-2">{t('navigation')}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50 px-2">
+                  {t('navigation')}
+                </span>
                 {navLinks.map((link) => {
                   const isActive = pathname === link.href
                   return (
@@ -170,7 +169,9 @@ export default function SiteHeader() {
                       )}
                     >
                       {t(link.labelKey)}
-                      {isActive && <div className="size-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(255,60,60,0.8)]" />}
+                      {isActive && (
+                        <div className="size-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(255,60,60,0.8)]" />
+                      )}
                     </Link>
                   )
                 })}
@@ -179,7 +180,9 @@ export default function SiteHeader() {
               <div className="h-px bg-white/10" />
 
               <nav className="flex flex-col gap-4">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50 px-2">{t('external')}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50 px-2">
+                  {t('external')}
+                </span>
                 {externalLinks.map((link) => (
                   <Link
                     key={link.href}

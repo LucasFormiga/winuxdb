@@ -9,6 +9,30 @@ export interface HardwareInfo {
   de: string
 }
 
+export interface UserDevice {
+  id: string
+  name: string
+  distro: string
+  distroVersion?: string
+  kernel: string
+  kernelVersion?: string
+  cpu: string
+  gpu: string
+  gpuDriver?: string
+  ram: string
+  de?: string
+  isPrimary: boolean
+}
+
+export interface UserAccount {
+  id: string
+  nickname: string
+  email: string
+  avatarUrl?: string
+  preferredLanguage: string
+  devices: UserDevice[]
+}
+
 export interface UserReview {
   id: string
   user: {
