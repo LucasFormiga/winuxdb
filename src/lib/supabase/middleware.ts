@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { type NextRequest, NextResponse } from 'next/server'
+import { getBaseUrl } from '../utils'
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -50,22 +51,16 @@ export async function updateSession(request: NextRequest) {
                             request.nextUrl.pathname.includes('/apps')
         
         if (!isPublicPath || request.nextUrl.pathname.includes('/account') || request.nextUrl.pathname.includes('/contribute')) {
-          const url = request.nextUrl.clone()
-          url.pathname = '/banned'
-          return NextResponse.redirect(url)
+          return NextResponse.redirect(`${getBaseUrl()}/banned`)
         }
       }
     } else if (isBannedPage) {
       // If NOT banned but on /banned page, redirect to home
-      const url = request.nextUrl.clone()
-      url.pathname = '/'
-      return NextResponse.redirect(url)
+      return NextResponse.redirect(`${getBaseUrl()}/`)
     }
   } else if (isBannedPage) {
     // If NOT logged in but on /banned page, redirect to home
-    const url = request.nextUrl.clone()
-    url.pathname = '/'
-    return NextResponse.redirect(url)
+    return NextResponse.redirect(`${getBaseUrl()}/`)
   }
 
   return supabaseResponse

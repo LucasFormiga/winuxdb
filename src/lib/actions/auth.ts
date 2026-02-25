@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
+import { getBaseUrl } from '@/lib/utils'
 import { type UpdateProfile, updateProfileSchema } from '@/lib/validations/auth'
 
 /**
@@ -17,7 +18,7 @@ export async function signInWithSocial(provider: Provider, redirectTo?: string) 
 
   // Use the provided redirectTo or fall back to the default site URL + callback
   // We point to /auth/callback WITHOUT locale, and middleware will handle it
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://winuxdb.com'
+  const siteUrl = getBaseUrl()
   const finalRedirectTo = redirectTo || `${siteUrl}/auth/callback`
 
   const { data, error } = await supabase.auth.signInWithOAuth({

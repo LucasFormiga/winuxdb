@@ -2,9 +2,10 @@ import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 // The client you created in Step 1
 import { createClient } from '@/lib/supabase/server'
+import { getBaseUrl } from '@/lib/utils'
 
 export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url)
+  const { searchParams } = new URL(request.url)
   const code = searchParams.get('code')
   // if "next" is in search params, use it as the redirection URL
   let next = searchParams.get('next') ?? '/'
@@ -19,6 +20,7 @@ export async function GET(request: Request) {
 
     if (error) {
       console.error('Auth error during code exchange:', error.message)
+      const origin = getBaseUrl()
       return NextResponse.redirect(`${origin}/auth/auth-code-error`)
     }
 
@@ -67,18 +69,7 @@ export async function GET(request: Request) {
         }
       }
 
-      let redirectUrl = ''
-      const forwardedHost = request.headers.get('x-forwarded-host')
-      const isLocalEnv = process.env.NODE_ENV === 'development'
-
-      // Determine base URL
-      if (isLocalEnv) {
-        redirectUrl = `${origin}`
-      } else if (forwardedHost) {
-        redirectUrl = `https://${forwardedHost}`
-      } else {
-        redirectUrl = `${origin}`
-      }
+      const redirectUrl = getBaseUrl()
 
       // Handle language redirection
       if (profile?.default_language) {
@@ -107,5 +98,5 @@ export async function GET(request: Request) {
   }
 
   // return the user to an error page with instructions
-  return NextResponse.redirect(`${origin}/auth/auth-code-error`)
+  return NextResponse.redirect(`${getBaseUrl()}/auth/auth-code-error`)
 }
