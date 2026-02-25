@@ -17,7 +17,7 @@ export async function signInWithSocial(provider: Provider, redirectTo?: string) 
 
   // Use the provided redirectTo or fall back to the default site URL + callback
   // We point to /auth/callback WITHOUT locale, and middleware will handle it
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://winuxdb.com'
   const finalRedirectTo = redirectTo || `${siteUrl}/auth/callback`
 
   const { data, error } = await supabase.auth.signInWithOAuth({
@@ -127,10 +127,7 @@ export async function getUserData() {
 export async function setBanStatus(userId: string, isBanned: boolean) {
   const supabase = createAdminClient()
 
-  const { error } = await supabase
-    .from('profiles')
-    .update({ is_banned: isBanned })
-    .eq('id', userId)
+  const { error } = await supabase.from('profiles').update({ is_banned: isBanned }).eq('id', userId)
 
   if (error) {
     console.error('Error setting ban status:', error.message)
