@@ -1,6 +1,11 @@
 import { createServerClient } from '@supabase/ssr'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 
+/**
+ * Client for standard requests (Server Components, Actions)
+ * Uses cookies() for authentication.
+ */
 export async function createClient() {
   const cookieStore = await cookies()
 
@@ -20,8 +25,19 @@ export async function createClient() {
           } catch {
             // This can be ignored if you have middleware refreshing user sessions.
           }
-        },
-      },
+        }
+      }
     }
+  )
+}
+
+/**
+ * Client for static generation (SSG, Sitemap)
+ * Does NOT use cookies().
+ */
+export function createPublicClient() {
+  return createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!
   )
 }

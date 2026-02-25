@@ -1,4 +1,4 @@
-import { type NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server'
 import createMiddleware from 'next-intl/middleware'
 import { routing } from './i18n/routing'
 import { updateSession } from './lib/supabase/middleware'
@@ -16,7 +16,7 @@ export default async function middleware(request: NextRequest) {
   // to ensure session updates are preserved
   supabaseResponse.cookies.getAll().forEach((cookie) => {
     response.cookies.set(cookie.name, cookie.value, {
-      ...cookie,
+      ...cookie
       // Ensure we don't accidentally overwrite path if next-intl set it
     })
   })

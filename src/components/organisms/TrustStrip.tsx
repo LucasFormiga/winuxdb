@@ -1,12 +1,18 @@
 import { useTranslations } from 'next-intl'
 
-export default function TrustStrip() {
+interface TrustStripProps {
+  appsCount: number
+  reviewsCount: number
+  distrosCount: number
+}
+
+export default function TrustStrip({ appsCount, reviewsCount, distrosCount }: TrustStripProps) {
   const t = useTranslations('Home.trust')
   const stats = [
-    { label: t('appsLabel'), value: t('appsValue') },
-    { label: t('reportsLabel'), value: t('reportsValue') },
+    { label: t('appsLabel'), value: `${appsCount}+` },
+    { label: t('reportsLabel'), value: `${reviewsCount}+` },
     { label: t('updatesLabel'), value: t('updatesValue') },
-    { label: t('coverageLabel'), value: t('coverageValue') }
+    { label: t('coverageLabel'), value: `${distrosCount}+` }
   ]
 
   return (

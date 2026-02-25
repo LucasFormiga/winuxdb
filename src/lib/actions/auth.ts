@@ -1,10 +1,11 @@
 'use server'
 
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
-import { type Provider } from '@supabase/supabase-js'
-import { updateProfileSchema, type UpdateProfile } from '@/lib/validations/auth'
+import type { Provider } from '@supabase/supabase-js'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
+import { createAdminClient } from '@/lib/supabase/admin'
+import { createClient } from '@/lib/supabase/server'
+import { type UpdateProfile, updateProfileSchema } from '@/lib/validations/auth'
 
 /**
  * Initiates social login with a given provider.
@@ -13,7 +14,7 @@ import { revalidatePath } from 'next/cache'
  */
 export async function signInWithSocial(provider: Provider, redirectTo?: string) {
   const supabase = await createClient()
-  
+
   // Use the provided redirectTo or fall back to the default site URL + callback
   // We point to /auth/callback WITHOUT locale, and middleware will handle it
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
@@ -22,8 +23,8 @@ export async function signInWithSocial(provider: Provider, redirectTo?: string) 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: finalRedirectTo,
-    },
+      redirectTo: finalRedirectTo
+    }
   })
 
   if (error) {
@@ -52,29 +53,28 @@ export async function signOut() {
  */
 export async function updateProfile(data: UpdateProfile) {
   const supabase = await createClient()
-  
+
   // Validate data
   const result = updateProfileSchema.safeParse(data)
   if (!result.success) {
     return { error: result.error.flatten().fieldErrors }
   }
 
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user }
+  } = await supabase.auth.getUser()
   if (!user) {
     return { error: 'Not authenticated' }
   }
 
-  const { error } = await supabase
-    .from('profiles')
-    .update(result.data)
-    .eq('id', user.id)
+  const { error } = await supabase.from('profiles').update(result.data).eq('id', user.id)
 
   if (error) {
     console.error('Profile update error:', error.message)
     return { error: error.message }
   }
 
-  revalidatePath('/[locale]/settings', 'layout')
+  revalidatePath('/[locale]/account', 'layout')
   return { success: true }
 }
 
@@ -83,7 +83,9 @@ export async function updateProfile(data: UpdateProfile) {
  */
 export async function getUserData() {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user }
+  } = await supabase.auth.getUser()
 
   if (!user) return null
 
@@ -109,6 +111,32 @@ export async function getUserData() {
     }
   }
 
+  // Filter out soft-deleted devices
+  if (profile.devices) {
+    profile.devices = profile.devices.filter((d: any) => !d.deleted_at)
+  }
+
   // Include email from the auth user object
   return { ...profile, email: user.email }
+}
+
+/**
+ * Bans or unbans a user.
+ * Restricted to service role or admin check (simulated here).
+ */
+export async function setBanStatus(userId: string, isBanned: boolean) {
+  const supabase = createAdminClient()
+
+  const { error } = await supabase
+    .from('profiles')
+    .update({ is_banned: isBanned })
+    .eq('id', userId)
+
+  if (error) {
+    console.error('Error setting ban status:', error.message)
+    return { error: error.message }
+  }
+
+  revalidatePath('/[locale]/account', 'layout')
+  return { success: true }
 }

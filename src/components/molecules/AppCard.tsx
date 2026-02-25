@@ -17,11 +17,13 @@ export default function AppCard({ app }: AppCardProps) {
   const tLic = useTranslations('Licenses')
 
   const logo = app.logo_url || app.logo
-  const rating = (app.overall_rating || app.rating) as any
-  const releaseYear = app.release_date ? app.release_date.split('-')[0] : (app as any).releaseDate?.split('-')[0] || 'N/A'
+  const rating = app.overall_rating || (app as any).rating || 'BORKED'
+  const releaseYear = app.release_date
+    ? app.release_date.split('-')[0]
+    : (app as any).releaseDate?.split('-')[0] || 'N/A'
 
   return (
-    <Link href={`/apps/${app.slug || app.id}`} className="block h-full">
+    <Link href={`/apps/${app.slug}`} className="block h-full">
       <Card className="group flex h-full flex-col overflow-hidden border-border/60 bg-card/80 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_24px_60px_rgba(0,0,0,0.5)]">
         <CardHeader className="p-0">
           <div className="relative flex aspect-video w-full items-center justify-center">
@@ -42,7 +44,10 @@ export default function AppCard({ app }: AppCardProps) {
             <div className="absolute top-3 right-3 flex flex-col items-end gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <div className="flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-[0.6rem] font-bold text-white backdrop-blur-md border border-white/10">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className={`size-4 ${i < (app.popularity ?? 0) ? 'text-yellow-400' : 'text-white/20'}`} />
+                  <Star
+                    key={i}
+                    className={`size-4 ${i < (app.popularity ?? 0) ? 'text-yellow-400' : 'text-white/20'}`}
+                  />
                 ))}
               </div>
             </div>
@@ -52,9 +57,14 @@ export default function AppCard({ app }: AppCardProps) {
           <div className="flex items-start justify-between gap-2">
             <div className="space-y-1">
               <CardTitle className="line-clamp-1 text-lg font-semibold tracking-tight">{app.name}</CardTitle>
-              <div className="flex items-center gap-1.5 text-[0.7rem] text-muted-foreground">
-                <Users className="size-3" />
-                <span className="line-clamp-1">{app.author}</span>
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-1.5 text-[0.7rem] text-muted-foreground">
+                  <Users className="size-3" />
+                  <span className="line-clamp-1">{app.author}</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-[0.65rem] text-muted-foreground/50 font-mono">
+                  <span>/{app.slug}</span>
+                </div>
               </div>
             </div>
             <RatingMedal rating={rating} />

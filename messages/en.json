@@ -1,6 +1,5 @@
 {
   "Home": {
-    "subtitle": "Wine compatibility",
     "quizKicker": "Switch smarter",
     "quizTitle": "Find the right Linux distro",
     "quizSubtitle": "Answer a few questions and we will match you with a distro and flavor that fits your workflow.",
@@ -25,6 +24,10 @@
       "step3": {
         "title": "Switch with confidence",
         "description": "Plan your migration with clear data and community reports."
+      },
+      "step4": {
+        "title": "Contribute reports",
+        "description": "Submit your own reports to help other users migrate with confidence."
       }
     },
     "trust": {
@@ -59,7 +62,6 @@
       "suggestedFlavor": "Suggested flavor",
       "visitSite": "Visit official site",
       "tryInBrowser": "Try in browser",
-      "downloadFlavor": "{flavor} downloads",
       "questions": {
         "activity": {
           "label": "What will you do most?",
@@ -158,8 +160,6 @@
   },
   "Apps": {
     "title": "Explore app compatibility",
-    "subtitle": "Wine compatibility",
-    "subtitleLong": "Search the WinuxDB index to see how Windows apps behave on Linux, including ratings, licenses, and release activity.",
     "kicker": "App database",
     "kickerSecondary": "Compatibility ratings",
     "emptyState": "No apps found matching your criteria.",
@@ -234,6 +234,7 @@
   },
   "Sort": {
     "label": "Sort by",
+    "name": "Name",
     "popularity": "Popularity",
     "releaseDate": "Release Date",
     "rating": "Compatibility"
@@ -247,6 +248,7 @@
     "Education": "Education",
     "Engineering": "Engineering",
     "Finance": "Finance",
+    "Game": "Game",
     "Game Development": "Game Development",
     "Graphics": "Graphics",
     "Multimedia": "Multimedia",
@@ -289,8 +291,11 @@
       "antiCheat": "Anti-Cheat Games",
       "resources": "Resources",
       "github": "GitHub",
+      "x": "X (Twitter)",
       "contribute": "Contribute",
+      "guidelines": "Community Guidelines",
       "submitReview": "Submit App Review",
+      "reportBug": "Report a Bug",
       "about": "About WinuxDB",
       "legal": "Legal",
       "privacy": "Privacy Policy",
@@ -300,39 +305,51 @@
   },
   "Privacy": {
     "title": "Privacy Policy",
-    "lastUpdated": "Last updated: February 22, 2026",
+    "lastUpdated": "Last updated: February 25, 2026",
     "intro": "WinuxDB is a community-driven project dedicated to mapping Windows application compatibility on Linux. We value transparency and your privacy.",
     "sections": {
       "data": {
         "title": "1. Data Collection",
-        "content": "WinuxDB does not require registration and does not collect personal identifiers such as names, email addresses, or IP addresses. We are a search and reference tool, not a data-harvesting platform."
+        "content": "WinuxDB collects minimal information to provide its services. When you create an account, we store your nickname, avatar (via social providers), and preferred language. For compatibility reports, we store the hardware profile you choose to share. We do not sell or share your personal data with third parties."
+      },
+      "accounts": {
+        "title": "2. User Accounts",
+        "content": "We use social authentication (Google, GitHub, Discord) to simplify account creation. We only receive basic profile information required to identify your account and display your contributions."
+      },
+      "storage": {
+        "title": "3. Data Storage & Management",
+        "content": "Your hardware profiles and reviews are stored in our secure database. You can manage, update, or soft-delete your hardware profiles at any time. When a device is soft-deleted, it remains in our database to preserve historical review data but is no longer linked to your active profile."
       },
       "cookies": {
-        "title": "2. Local Storage & Preferences",
-        "content": "We use your browser's local storage or minimal cookies solely to remember your language preference and UI settings. This data never leaves your device."
+        "title": "4. Local Storage & Preferences",
+        "content": "We use your browser's local storage or minimal cookies solely to maintain your session and remember your language preference. This data is essential for the site to function correctly."
       },
       "links": {
-        "title": "3. External Links",
-        "content": "Our database contains links to external websites (e.g., WineHQ, GitHub, official software sites). We are not responsible for the privacy practices or content of these third-party services."
+        "title": "5. External Links",
+        "content": "Our database contains links to external websites (e.g. ProtonDB, Are We Anti-Cheat Yet?, GitHub). We are not responsible for the privacy practices or content of these third-party services."
       }
     }
   },
   "Terms": {
-    "title": "Terms of Use",
-    "lastUpdated": "Last updated: February 22, 2026",
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: February 25, 2026",
     "intro": "By using WinuxDB, you agree to the following terms. This project is created by the community, for the community, and is intended for informational purposes only.",
     "sections": {
+      "moderation": {
+        "title": "1. Community Moderation",
+        "content": "All users are required to follow our Community Guidelines. WinuxDB maintainers reserve the right to moderate content, hide reviews, and suspend or ban accounts that violate these guidelines, including those engaging in harassment, discrimination, or intentional misinformation."
+      },
       "noWarranty": {
-        "title": "1. No Warranty",
-        "content": "Information on WinuxDB is provided on an 'as-is' and 'as-available' basis. Compatibility ratings are based on community reports and may not reflect your specific hardware or software configuration. We do not guarantee that any application will run perfectly or at all."
+        "title": "2. No Warranty",
+        "content": "Information on WinuxDB is provided on an 'as-is' basis. Compatibility ratings are based on community reports and may not reflect your specific configuration. We do not guarantee that any application will run perfectly or at all."
       },
       "liability": {
-        "title": "2. Limitation of Liability",
-        "content": "WinuxDB, its contributors, and maintainers are not liable for any system instability, data loss, hardware damage, or financial loss resulting from the use of information found on this site. You use Wine, Proton, and other compatibility layers at your own risk."
+        "title": "3. Limitation of Liability",
+        "content": "WinuxDB, its contributors, and maintainers are not liable for any system instability, data loss, hardware damage, or financial loss resulting from the use of information found on this site. You use compatibility layers at your own risk."
       },
       "affiliation": {
-        "title": "3. No Affiliation",
-        "content": "WinuxDB is an independent community project. We are not affiliated with, endorsed by, or sponsored by Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (Proton), ProtonDB, AWACY (Are We Anti-Cheat Yet?), or any software author listed in our database."
+        "title": "4. No Affiliation",
+        "content": "WinuxDB is an independent community project. We are not affiliated with, endorsed by, or sponsored by Microsoft Corporation, WineHQ, CodeWeavers, Valve Corporation (Proton), ProtonDB, Are We Anti-Cheat Yet?, or any software author listed here."
       }
     }
   },
@@ -351,21 +368,53 @@
   "Contribute": {
     "title": "Contribute to WinuxDB",
     "subtitle": "Help us build the ultimate compatibility index",
-    "intro": "WinuxDB is an open-source project. Every rating, bug report, and line of code is a gift to the Linux community.",
+    "intro": "WinuxDB is a community-driven project. Every rating, report, and line of code helps the Linux community grow.",
     "sections": {
       "reporting": {
-        "title": "1. Report Compatibility",
-        "content": "The most valuable way to contribute is by reporting how apps run on your system. You can submit reports directly via our GitHub repository by editing the src/lib/data/apps.jsonl file.",
-        "cta": "Submit App Review",
+        "title": "1. Live Compatibility Reports",
+        "content": "The fastest way to contribute is by reporting how apps run on your system. Sign in, create your hardware profile, and submit reviews directly on any app page. Your reports help us build a real-time database of what works.",
+        "cta": "Search Apps to Review",
         "githubRepo": "GitHub Repository"
       },
-      "code": {
-        "title": "2. Code & Design",
-        "content": "Our codebase is built with Next.js and TypeScript. We welcome PRs for UI improvements, performance optimizations, and new features. Check our GitHub issues for 'good first issues'."
+      "issues": {
+        "title": "2. Report Issues & Bugs",
+        "content": "Found a bug in the site or incorrect data? You can report it directly through our feedback form. We value your help in keeping WinuxDB clean and accurate.",
+        "cta": "Report a Bug"
       },
-      "governance": {
-        "title": "3. Governance",
-        "content": "WinuxDB follows a benevolent community model. Major architectural changes are discussed in GitHub Discussions, and all data updates require a peer-review process via Pull Requests to ensure accuracy."
+      "code": {
+        "title": "3. Code & Design",
+        "content": "Our codebase is open-source and built with Next.js. We welcome Pull Requests for UI improvements, performance optimizations, and new features. Check our GitHub for 'good first issues'."
+      },
+      "data": {
+        "title": "4. Data Integrity",
+        "content": "While live reports are the primary source, our foundation remains the community-curated apps database. Technical contributions to our data structure are always welcome via GitHub."
+      }
+    }
+  },
+  "Guidelines": {
+    "title": "Community Guidelines",
+    "subtitle": "Maintaining a safe and accurate compatibility database",
+    "intro": "WinuxDB is a space for collaboration and helpful technical information. To ensure the quality of our data and the safety of our users, we require all contributors to follow these guidelines.",
+    "sections": {
+      "respect": {
+        "title": "1. Respect Everyone",
+        "content": "We have zero tolerance for discrimination, harassment, or hate speech. This includes but is not limited to comments based on gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, age, religion, or nationality. We are here to talk about software, but we treat people with dignity."
+      },
+      "trolls": {
+        "title": "2. No Trolls or Harassment",
+        "content": "Intentional misinformation, inflammatory comments, or personal attacks on other users or developers are strictly prohibited. Harassment includes offensive comments, deliberate intimidation, stalking, following, or unwelcome sexual attention."
+      },
+      "integrity": {
+        "title": "3. Accuracy and Integrity",
+        "content": "Report your experiences honestly. Do not submit fake ratings or copy reports from other sources without verification. High-quality technical details (Distro, Kernel, Wine version) are what make WinuxDB valuable."
+      },
+      "legal": {
+        "title": "4. Legal Protection & Disclaimer",
+        "content": "WinuxDB is a community-driven information resource. The project creator and contributors are not responsible for any system damage, data loss, or legal issues resulting from the use of the information or software linked here. Use compatibility layers and community tweaks at your own risk."
+      },
+      "enforcement": {
+        "title": "5. Enforcement",
+        "content": "Violations of these guidelines may result in the immediate removal of your content and/or a permanent ban from the platform. Moderation is at the sole discretion of the project maintainers."
       }
     }
   },
@@ -376,7 +425,9 @@
     "screenshots": "Screenshots",
     "alternatives": "Alternatives",
     "nativeAlternatives": "Native Linux Alternatives",
+    "nativeAlternativesEmpty": "No native alternatives listed yet.",
     "otherAlternatives": "Other Alternatives",
+    "otherAlternativesEmpty": "No recommended alternatives listed yet.",
     "details": "App Details",
     "author": "Author",
     "license": "License",
@@ -393,17 +444,36 @@
     "reviews": "{count, plural, =0 {No reviews yet} one {# Review} other {# Reviews}}",
     "noReviews": "No reviews yet",
     "beTheFirst": "Be the first to share your experience with {appName} on Linux.",
+    "loginToReview": "Log in to review",
+    "deleteReviewTitle": "Delete Review",
+    "deleteReviewConfirm": "Are you sure you want to delete this review? This action cannot be undone.",
+    "delete": "Delete",
+    "banUser": "Ban User",
+    "banReason": "Reason for suspension",
+    "banReasonPlaceholder": "e.g. Hate speech, Spam, False reporting...",
+    "banConfirm": "Confirm Suspension",
+    "admin": "Admin",
+    "verified": "Verified",
+    "anonymous": "Anonymous",
+    "latest": "Latest",
+    "required": "Required",
+    "commentLimit": "Comments must be 400 characters or less.",
+    "commentMin": "Comments must be at least 10 characters.",
+    "wineDesc": "Standard compatibility",
+    "protonDesc": "Optimized for Gaming/GPU",
+    "noDevicesFound": "You need to add a device to your account first.",
     "submitReview": "Write a Review",
     "reportIssue": "Report Issue",
     "verified": "Verified",
     "popularity": "Popularity",
+    "stability": "Stability",
+    "performance": "Performance",
+    "installation": "Installation",
     "distroDe": "Distro / DE",
     "cpuRam": "Processor / RAM",
     "gpu": "Graphics Card",
     "kernel": "Kernel",
     "version": "Version",
-    "reviewStep1": "1",
-    "reviewStep2": "2",
     "reviewDialogDesc": "Share your experience with {appName} on Linux.",
     "compatibilityRating": "Compatibility Rating",
     "experience": "Your Experience",
@@ -480,9 +550,7 @@
     "submit": "Submit Review",
     "nativeBanner": {
       "title": "Native Application",
-      "description": "This application has a native Linux version provided directly by the developer. Because it runs without compatibility layers like Wine or Proton, community compatibility reports are not required. Enjoy the best possible performance and stability!",
-      "featurePerformance": "Optimized Performance",
-      "featureHardware": "Full Hardware Support"
+      "description": "This application has a native Linux version provided directly by the developer. Because it runs without compatibility layers like Wine or Proton, community compatibility reports are not required. Enjoy the best possible performance and stability!"
     }
   },
   "UserMenu": {
@@ -496,12 +564,19 @@
     "message": "It seems this page has a 'Borked' rating. We couldn't find the resource you were looking for.",
     "cta": "Return to Base"
   },
+  "Banned": {
+    "title": "Account Banned",
+    "message": "Your account has been suspended for violating our community guidelines or terms of service.",
+    "submessage": "If you believe this is a mistake, please contact support via our GitHub repository.",
+    "cta": "Return to Home"
+  },
   "Account": {
     "title": "Account Settings",
     "subtitle": "Manage your preferences and hardware profiles",
     "tabs": {
       "preferences": "Preferences",
-      "devices": "Devices"
+      "devices": "Devices",
+      "reportBug": "Report a Bug"
     },
     "preferences": {
       "title": "Preferences",

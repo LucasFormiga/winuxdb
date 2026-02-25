@@ -5,11 +5,13 @@ import HighlightsGrid from '@/components/organisms/HighlightsGrid'
 import HomeHero from '@/components/organisms/HomeHero'
 import HowItWorks from '@/components/organisms/HowItWorks'
 import TrustStrip from '@/components/organisms/TrustStrip'
+import { getStats } from '@/lib/actions/apps'
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations('Home')
+  const { appsCount, reviewsCount, distrosCount } = await getStats()
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -20,7 +22,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <main className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 pb-20 pt-12 lg:px-8">
           <HomeHero />
           <HowItWorks />
-          <TrustStrip />
+          <TrustStrip appsCount={appsCount} reviewsCount={reviewsCount} distrosCount={distrosCount} />
           <HighlightsGrid />
           <section id="quiz" className="space-y-6">
             <div>

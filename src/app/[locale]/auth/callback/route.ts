@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 // The client you created in Step 1
 import { createClient } from '@/lib/supabase/server'
-import { createAdminClient } from '@/lib/supabase/admin'
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
@@ -12,8 +12,11 @@ export async function GET(request: Request) {
   if (code) {
     const supabase = await createClient()
     const admin = createAdminClient()
-    const { data: { session }, error } = await supabase.auth.exchangeCodeForSession(code)
-    
+    const {
+      data: { session },
+      error
+    } = await supabase.auth.exchangeCodeForSession(code)
+
     if (error) {
       console.error('Auth error during code exchange:', error.message)
       return NextResponse.redirect(`${origin}/auth/auth-code-error`)
@@ -21,7 +24,7 @@ export async function GET(request: Request) {
 
     if (session?.user) {
       console.log('User authenticated via social login:', session.user.email)
-      
+
       // Fetch user profile to get default language
       let { data: profile, error: profileError } = await supabase
         .from('profiles')
@@ -36,24 +39,27 @@ export async function GET(request: Request) {
       // Fallback: If profile doesn't exist (trigger failed), create it manually using ADMIN client
       if (!profile) {
         console.log('Profile not found, creating manually for:', session.user.id)
-        const nickname = session.user.user_metadata?.nickname || 
-                         session.user.user_metadata?.full_name || 
-                         session.user.email?.split('@')[0] || 
-                         'User'
-        const avatarUrl = session.user.user_metadata?.avatar_url || 
-                          session.user.user_metadata?.picture
-        
+        const nickname =
+          session.user.user_metadata?.nickname ||
+          session.user.user_metadata?.full_name ||
+          session.user.email?.split('@')[0] ||
+          'User'
+        const avatarUrl = session.user.user_metadata?.avatar_url || session.user.user_metadata?.picture
+
         const { data: newProfile, error: createError } = await admin
           .from('profiles')
-          .upsert({
-            id: session.user.id,
-            nickname: nickname,
-            default_language: 'en',
-            avatar_url: avatarUrl
-          }, { onConflict: 'id' })
+          .upsert(
+            {
+              id: session.user.id,
+              nickname: nickname,
+              default_language: 'en',
+              avatar_url: avatarUrl
+            },
+            { onConflict: 'id' }
+          )
           .select('default_language')
           .maybeSingle()
-        
+
         if (createError) {
           console.error('Failed to create profile manually via admin:', createError.message)
         } else {
@@ -64,7 +70,7 @@ export async function GET(request: Request) {
       let redirectUrl = ''
       const forwardedHost = request.headers.get('x-forwarded-host')
       const isLocalEnv = process.env.NODE_ENV === 'development'
-      
+
       // Determine base URL
       if (isLocalEnv) {
         redirectUrl = `${origin}`
@@ -80,22 +86,22 @@ export async function GET(request: Request) {
         // Regex to check if path starts with /en, /pt, /es etc.
         const localeRegex = /^\/(en|pt|es)(\/|$)/
         if (localeRegex.test(next)) {
-           next = next.replace(localeRegex, `/${profile.default_language}$2`)
+          next = next.replace(localeRegex, `/${profile.default_language}$2`)
         } else if (next === '/') {
-           next = `/${profile.default_language}`
+          next = `/${profile.default_language}`
         } else {
-           // If no locale in path, prepend it
-           next = `/${profile.default_language}${next}`
+          // If no locale in path, prepend it
+          next = `/${profile.default_language}${next}`
         }
       }
 
       const response = NextResponse.redirect(`${redirectUrl}${next}`)
-      
+
       // Set the cookie for next-intl
       if (profile?.default_language) {
         response.cookies.set('NEXT_LOCALE', profile.default_language, { path: '/' })
       }
-      
+
       return response
     }
   }

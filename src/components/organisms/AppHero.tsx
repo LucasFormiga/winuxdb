@@ -14,8 +14,8 @@ export default function AppHero({ app }: AppHeroProps) {
   const t = useTranslations('AppDetail')
 
   const logo = app.logo_url || app.logo
-  const rating = (app.overall_rating || app.rating || 'BORKED') as any
-  const releaseDate = app.release_date || app.releaseDate || 'N/A'
+  const rating = app.overall_rating || (app as any).rating || 'BORKED'
+  const releaseDate = app.release_date || (app as any).releaseDate || 'N/A'
   const isVerified = app.is_verified || app.isVerified
 
   return (
@@ -96,7 +96,7 @@ export default function AppHero({ app }: AppHeroProps) {
                   />
                 ))}
               </div>
-              <span className="text-sm font-bold">{(app.popularity ?? 0)}/5</span>
+              <span className="text-sm font-bold">{app.popularity ?? 0}/5</span>
             </div>
           </div>
         </div>

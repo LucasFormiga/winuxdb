@@ -16,7 +16,7 @@ import {
   Zap
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { Button } from '@/components/ui/button'
@@ -33,52 +33,68 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import {
-  CACHYOS_PROTON_VERSIONS,
-  GE_PROTON_VERSIONS,
-  PROTON_VERSIONS,
-  WINE_VERSIONS
-} from '@/lib/data/review-options'
+import { useRouter } from '@/i18n/routing'
+import { submitReview } from '@/lib/actions/reviews'
+import { CACHYOS_PROTON_VERSIONS, GE_PROTON_VERSIONS, PROTON_VERSIONS, WINE_VERSIONS } from '@/lib/data/review-options'
 import type { Rating } from '@/lib/types'
 import { cn } from '@/lib/utils'
-import { submitReview } from '@/lib/actions/reviews'
 import type { Device } from '@/lib/validations/auth'
-
-const formSchema = z.object({
-  rating: z.enum(['BORKED', 'BRONZE', 'SILVER', 'GOLD', 'PLATINUM', 'NATIVE']),
-  stability: z.enum(['perfect', 'minor', 'crashes_occ', 'crashes_const']),
-  performance: z.enum(['native', 'good', 'slow', 'unusable']),
-  installation: z.enum(['easy', 'tweaks', 'difficult', 'failed']),
-  tinkerSteps: z.array(z.string()).default([]),
-  engine: z.enum(['Wine', 'Proton']),
-  engineFlavor: z.string().optional(),
-  engineVersion: z.string().min(1, { message: 'Required' }),
-  pcProfileId: z.string().min(1, { message: 'Required' }),
-  appVersion: z.string().min(1, { message: 'Required' }),
-  content: z.string().max(400, {
-    message: 'Comments must be 400 characters or less.'
-  })
-})
-
-type FormValues = z.infer<typeof formSchema>
 
 interface ReviewDialogProps {
   appName: string
   appId: string
   userDevices: Device[]
   trigger?: React.ReactNode
+  defaultRating?: Rating
 }
 
-export default function ReviewDialog({ appName, appId, userDevices, trigger }: ReviewDialogProps) {
+export default function ReviewDialog({
+  appName,
+  appId,
+  userDevices,
+  trigger,
+  defaultRating = 'GOLD'
+}: ReviewDialogProps) {
   const t = useTranslations('AppDetail')
+  const t_account = useTranslations('AccountDevices')
+  const router = useRouter()
   const [open, setOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [step, setStep] = useState(1)
 
+  const formSchema = useMemo(
+    () =>
+      z.object({
+        rating: z.enum(['BORKED', 'BRONZE', 'SILVER', 'GOLD', 'PLATINUM', 'NATIVE']),
+        stability: z.enum(['perfect', 'minor', 'crashes_occ', 'crashes_const']),
+        performance: z.enum(['native', 'good', 'slow', 'unusable']),
+        installation: z.enum(['easy', 'tweaks', 'difficult', 'failed']),
+        tinkerSteps: z.array(z.string()).min(1, { message: t('required') }),
+        engine: z.enum(['Wine', 'Proton']),
+        engineFlavor: z.string().optional(),
+        engineVersion: z.string().min(1, { message: t('required') }),
+        pcProfileId: z.string().min(1, { message: t('required') }),
+        appVersion: z.string().min(1, { message: t('required') }),
+        content: z
+          .string()
+          .min(10, { message: t('commentMin') })
+          .max(400, {
+            message: t('commentLimit')
+          })
+      }),
+    [t]
+  )
+
+  type FormValues = z.infer<typeof formSchema>
+
+  const ratingsArr: Rating[] = ['BORKED', 'BRONZE', 'SILVER', 'GOLD', 'PLATINUM']
+
+  const effectiveDefaultRating = defaultRating === 'NATIVE' ? 'GOLD' : defaultRating
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema) as any,
     defaultValues: {
-      rating: 'GOLD',
+      rating: effectiveDefaultRating,
       stability: 'perfect',
       performance: 'native',
       installation: 'easy',
@@ -86,11 +102,31 @@ export default function ReviewDialog({ appName, appId, userDevices, trigger }: R
       engine: 'Wine',
       engineFlavor: 'valve',
       engineVersion: '',
-      pcProfileId: userDevices.find(d => d.is_primary)?.id || userDevices[0]?.id || '',
-      appVersion: 'Latest',
+      pcProfileId: userDevices.find((d) => d.is_primary)?.id || userDevices[0]?.id || '',
+      appVersion: t('latest'),
       content: ''
     }
   })
+
+  // Reset form when dialog opens
+  useEffect(() => {
+    if (open) {
+      form.reset({
+        rating: effectiveDefaultRating,
+        stability: 'perfect',
+        performance: 'native',
+        installation: 'easy',
+        tinkerSteps: [],
+        engine: 'Wine',
+        engineFlavor: 'valve',
+        engineVersion: '',
+        pcProfileId: userDevices.find((d) => d.is_primary)?.id || userDevices[0]?.id || '',
+        appVersion: t('latest'),
+        content: ''
+      })
+      setStep(1)
+    }
+  }, [open, form, effectiveDefaultRating, userDevices, t])
 
   const watchEngine = form.watch('engine')
   const watchFlavor = form.watch('engineFlavor')
@@ -104,17 +140,24 @@ export default function ReviewDialog({ appName, appId, userDevices, trigger }: R
   }, [watchEngine, watchFlavor])
 
   const onSubmit: SubmitHandler<FormValues> = async (values) => {
+    // Final validation check
+    const isValid = await form.trigger()
+    if (!isValid) return
+
     setIsSubmitting(true)
-    
-    const engineInfo = values.engine === 'Proton' 
-      ? `${values.engineFlavor} ${values.engineVersion}` 
-      : `Wine ${values.engineVersion}`
+
+    const engineInfo =
+      values.engine === 'Proton' ? `${values.engineFlavor} ${values.engineVersion}` : `Wine ${values.engineVersion}`
 
     const result = await submitReview({
       app_id: appId,
       device_id: values.pcProfileId,
       rating: values.rating,
-      numerical_score: values.rating === 'NATIVE' ? 5 : (ratings.indexOf(values.rating)), // Map rating to 1-5
+      numerical_score: ratingsArr.indexOf(values.rating) + 1, // Map rating to 1-5 (BORKED=1, ..., PLATINUM=5)
+      stability: values.stability,
+      performance: values.performance,
+      installation: values.installation,
+      tinker_steps: values.tinkerSteps,
       content: values.content,
       app_version_tested: values.appVersion,
       wine_proton_version: engineInfo,
@@ -131,12 +174,24 @@ export default function ReviewDialog({ appName, appId, userDevices, trigger }: R
     setOpen(false)
     form.reset()
     setStep(1)
+    router.refresh()
   }
 
-  const nextStep = () => setStep((s) => s + 1)
+  const nextStep = async () => {
+    // Validate current step fields
+    let fieldsToValidate: any[] = []
+    if (step === 1) fieldsToValidate = ['rating', 'stability', 'performance']
+    if (step === 2) fieldsToValidate = ['engine', 'engineVersion']
+    if (step === 3) fieldsToValidate = ['tinkerSteps']
+    if (step === 4) fieldsToValidate = ['pcProfileId']
+    if (step === 5) fieldsToValidate = ['content']
+
+    const isValid = await form.trigger(fieldsToValidate)
+    if (isValid) setStep((s) => s + 1)
+  }
   const prevStep = () => setStep((s) => s - 1)
 
-  const ratings: Rating[] = ['BORKED', 'BRONZE', 'SILVER', 'GOLD', 'PLATINUM', 'NATIVE']
+  const ratings: Rating[] = ['BORKED', 'BRONZE', 'SILVER', 'GOLD', 'PLATINUM']
 
   const steps = [
     { id: 1, title: t('reviewStep1') },
@@ -316,7 +371,7 @@ export default function ReviewDialog({ appName, appId, userDevices, trigger }: R
                               >
                                 <Wine className="mb-2 size-8 text-primary" />
                                 <span className="text-lg font-bold">Wine</span>
-                                <span className="text-xs text-muted-foreground">Standard compatibility</span>
+                                <span className="text-xs text-muted-foreground">{t('wineDesc')}</span>
                               </FormLabel>
                             </FormItem>
                             <FormItem>
@@ -331,7 +386,7 @@ export default function ReviewDialog({ appName, appId, userDevices, trigger }: R
                               >
                                 <Zap className="mb-2 size-8 text-blue-500" />
                                 <span className="text-lg font-bold">Proton</span>
-                                <span className="text-xs text-muted-foreground">Optimized for Gaming/GPU</span>
+                                <span className="text-xs text-muted-foreground">{t('protonDesc')}</span>
                               </FormLabel>
                             </FormItem>
                           </RadioGroup>
@@ -413,29 +468,57 @@ export default function ReviewDialog({ appName, appId, userDevices, trigger }: R
                         { id: 'launch', label: t('presets.tinkering.launch') },
                         { id: 'dll', label: t('presets.tinkering.dll') },
                         { id: 'env', label: t('presets.tinkering.env') }
-                      ].map((item) => (
-                        <FormField
-                          key={item.id}
-                          control={form.control as any}
-                          name="tinkerSteps"
-                          render={({ field }) => (
-                            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-2xl border border-border/40 bg-muted/30 p-4 transition-all hover:bg-muted/50">
-                              <FormControl>
-                                <Checkbox
-                                  checked={field.value?.includes(item.id)}
-                                  onCheckedChange={(checked) => {
-                                    return checked
-                                      ? field.onChange([...field.value, item.id])
-                                      : field.onChange(field.value?.filter((value: string) => value !== item.id))
-                                  }}
-                                />
-                              </FormControl>
-                              <FormLabel className="font-medium cursor-pointer flex-1">{item.label}</FormLabel>
-                            </FormItem>
-                          )}
-                        />
-                      ))}
+                      ].map((item) => {
+                        const currentValues = form.watch('tinkerSteps') || []
+                        const isNoneSelected = currentValues.includes('none')
+                        const hasTweaksSelected = currentValues.some(v => v !== 'none')
+                        
+                        // Disable none if tweaks are selected
+                        // Disable tweaks if none is selected
+                        const isDisabled = item.id === 'none' ? hasTweaksSelected : isNoneSelected
+
+                        return (
+                          <FormField
+                            key={item.id}
+                            control={form.control as any}
+                            name="tinkerSteps"
+                            render={({ field }) => (
+                              <FormItem
+                                className={cn(
+                                  'flex flex-row items-center space-x-3 space-y-0 rounded-2xl border border-border/40 bg-muted/30 p-4 transition-all hover:bg-muted/50',
+                                  isDisabled && 'opacity-50 cursor-not-allowed'
+                                )}
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    disabled={isDisabled}
+                                    checked={field.value?.includes(item.id)}
+                                    onCheckedChange={(checked) => {
+                                      let newValue = [...(field.value || [])]
+                                      if (checked) {
+                                        if (item.id === 'none') {
+                                          newValue = ['none']
+                                        } else {
+                                          newValue = newValue.filter((v) => v !== 'none')
+                                          newValue.push(item.id)
+                                        }
+                                      } else {
+                                        newValue = newValue.filter((v) => v !== item.id)
+                                      }
+                                      field.onChange(newValue)
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className={cn('font-medium flex-1', !isDisabled && 'cursor-pointer')}>
+                                  {item.label}
+                                </FormLabel>
+                              </FormItem>
+                            )}
+                          />
+                        )
+                      })}
                     </div>
+                    <FormMessage />
                   </div>
                 </div>
               )}
@@ -485,11 +568,16 @@ export default function ReviewDialog({ appName, appId, userDevices, trigger }: R
                           ))}
                           {userDevices.length === 0 && (
                             <div className="text-center py-10 rounded-[2rem] border-2 border-dashed border-border/40 bg-muted/10">
-                               <p className="text-sm text-muted-foreground mb-4">You need to add a device to your account first.</p>
-                               <Button variant="secondary" onClick={() => window.location.href = '/account'}>Add Device</Button>
+                              <p className="text-sm text-muted-foreground mb-4">
+                                {t('noDevicesFound')}
+                              </p>
+                              <Button variant="secondary" onClick={() => (window.location.href = '/account')}>
+                                {t_account('addDevice')}
+                              </Button>
                             </div>
                           )}
                         </div>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />

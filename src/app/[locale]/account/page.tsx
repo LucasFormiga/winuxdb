@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
-import { getUserData } from '@/lib/actions/auth'
 import AccountContent from '@/components/templates/AccountContent'
+import { getUserData } from '@/lib/actions/auth'
 
 export default async function AccountPage() {
   const user = await getUserData()

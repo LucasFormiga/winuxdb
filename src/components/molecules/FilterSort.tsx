@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import type { Rating } from '@/lib/types'
 
-export type SortOption = 'popularity' | 'releaseDate' | 'rating'
+export type SortOption = 'popularity' | 'releaseDate' | 'rating' | 'name'
 
 interface FilterSortProps {
   onRatingChange: (filter: Rating | 'ALL') => void
@@ -38,7 +38,7 @@ export default function FilterSort({
   const t = useTranslations()
 
   const ratings: (Rating | 'ALL')[] = ['ALL', 'BORKED', 'BRONZE', 'SILVER', 'GOLD', 'PLATINUM', 'NATIVE']
-  const sortOptions: SortOption[] = ['popularity', 'releaseDate', 'rating']
+  const sortOptions: SortOption[] = ['name', 'rating', 'popularity', 'releaseDate']
 
   return (
     <div className="flex flex-wrap gap-x-6 gap-y-4">

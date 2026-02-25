@@ -77,7 +77,11 @@ async function seed() {
         score: appData.rating || 0,
         overall_rating: appData.compatibility,
         popularity: appData.popularity || 0,
-        is_verified: appData.isVerified || false
+        is_verified: appData.isVerified || false,
+        native_alternatives: appData.nativeAlternatives || [],
+        recommended_alternatives: appData.recommendedAlternatives || [],
+        gpu_compatibility: appData.gpuCompatibility || {},
+        instructions: appData.instructions || {}
       }
 
       const { error } = await supabase

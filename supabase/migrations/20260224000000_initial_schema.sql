@@ -80,15 +80,10 @@ BEGIN
 
   INSERT INTO public.profiles (id, nickname, default_language)
   VALUES (NEW.id, initial_nickname, COALESCE(NEW.raw_user_meta_data->>'language', 'en'));
-  
+
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
-
--- Trigger to create profile on user signup
-CREATE TRIGGER on_auth_user_created
-AFTER INSERT ON auth.users
-FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
 -- Function to update updated_at timestamp
 CREATE OR REPLACE FUNCTION handle_updated_at()

@@ -27,10 +27,11 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { deviceSchema as apiDeviceSchema, type Device } from '@/lib/validations/auth'
 import { cn } from '@/lib/utils'
 import { parseSteamSystemInfo } from '@/lib/utils/steam-parser'
+import { DESKTOP_ENVIRONMENTS, type Device } from '@/lib/validations/auth'
 
 // Extend the API schema for the wizard form if needed, or use it directly.
 // The API schema expects snake_case for some fields (distro_version, etc) but the form uses camelCase.
@@ -39,6 +40,7 @@ const wizardSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').max(50),
   distro: z.string().min(1, 'Distribution is required'),
   distroVersion: z.string().optional(),
+  de: z.string().min(1, 'Desktop Environment is required'),
   kernel: z.string().min(1, 'Kernel is required'),
   kernelVersion: z.string().optional(),
   cpu: z.string().min(1, 'CPU is required'),
@@ -71,6 +73,7 @@ export default function DeviceWizard({ onAdd, onUpdate, initialData, disabled, t
       name: initialData?.name || '',
       distro: initialData?.distro || '',
       distroVersion: initialData?.distro_version || '',
+      de: initialData?.de || '',
       kernel: initialData?.kernel || '',
       kernelVersion: initialData?.kernel_version || '',
       cpu: initialData?.cpu || '',
@@ -88,6 +91,7 @@ export default function DeviceWizard({ onAdd, onUpdate, initialData, disabled, t
         name: initialData.name || '',
         distro: initialData.distro || '',
         distroVersion: initialData.distro_version || '',
+        de: initialData.de || '',
         kernel: initialData.kernel || '',
         kernelVersion: initialData.kernel_version || '',
         cpu: initialData.cpu || '',
@@ -106,7 +110,7 @@ export default function DeviceWizard({ onAdd, onUpdate, initialData, disabled, t
     let fieldsToValidate: (keyof z.infer<typeof wizardSchema>)[] = []
 
     if (step === 3) {
-      fieldsToValidate = ['distro', 'kernel', 'cpu', 'gpu', 'ram']
+      fieldsToValidate = ['distro', 'de', 'kernel', 'cpu', 'gpu', 'ram']
     }
 
     if (fieldsToValidate.length > 0) {
@@ -133,6 +137,7 @@ export default function DeviceWizard({ onAdd, onUpdate, initialData, disabled, t
           name: form.getValues('name') || '',
           distro: parsed.distro || '',
           distroVersion: parsed.distroVersion || '',
+          de: parsed.de || '',
           kernel: parsed.kernel || '',
           kernelVersion: parsed.kernelVersion || '',
           cpu: parsed.cpu || '',
@@ -156,6 +161,7 @@ export default function DeviceWizard({ onAdd, onUpdate, initialData, disabled, t
       is_primary: initialData?.is_primary || false,
       distro: values.distro,
       distro_version: values.distroVersion || '',
+      de: values.de,
       kernel: values.kernel,
       kernel_version: values.kernelVersion || '',
       cpu: values.cpu,
@@ -166,9 +172,9 @@ export default function DeviceWizard({ onAdd, onUpdate, initialData, disabled, t
     }
 
     if (initialData?.id && onUpdate) {
-      onUpdate(initialData.id, payload)
+      onUpdate(initialData.id, payload as any)
     } else if (onAdd) {
-      onAdd(payload)
+      onAdd(payload as any)
     }
 
     setOpen(false)
@@ -398,6 +404,32 @@ export default function DeviceWizard({ onAdd, onUpdate, initialData, disabled, t
                         />
                         <FormField
                           control={form.control}
+                          name="de"
+                          render={({ field }) => (
+                            <FormItem className="group rounded-[1.5rem] border border-border/40 bg-muted/20 p-5 transition-all focus-within:border-primary/40 focus-within:bg-muted/40">
+                              <FormLabel className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest opacity-60">
+                                <Layout className="size-3" /> {tCommon('de')}
+                              </FormLabel>
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                  <SelectTrigger className="h-auto border-none bg-transparent p-0 text-lg font-bold shadow-none focus:ring-0">
+                                    <SelectValue placeholder="Select DE" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent className="rounded-2xl border-border/40 bg-background/95 backdrop-blur-xl">
+                                  {DESKTOP_ENVIRONMENTS.map((de) => (
+                                    <SelectItem key={de} value={de} className="rounded-xl">
+                                      {de}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage className="text-[10px]" />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
                           name="kernel"
                           render={({ field }) => (
                             <FormItem className="group rounded-[1.5rem] border border-border/40 bg-muted/20 p-5 transition-all focus-within:border-primary/40 focus-within:bg-muted/40">
@@ -580,6 +612,15 @@ export default function DeviceWizard({ onAdd, onUpdate, initialData, disabled, t
                               <p className="text-sm font-bold">
                                 {watchValues.distro} {watchValues.distroVersion}
                               </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <div className="size-2 rounded-full bg-primary/80" />
+                            <div>
+                              <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">
+                                {tCommon('de')}
+                              </p>
+                              <p className="text-sm font-bold">{watchValues.de}</p>
                             </div>
                           </div>
                           <div className="flex items-center gap-3">

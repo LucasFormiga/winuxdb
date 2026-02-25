@@ -58,7 +58,7 @@ export default function SiteHeader({ user }: SiteHeaderProps) {
       >
         <div className="flex items-center gap-6">
           <Link href="/" className="group flex items-center gap-3">
-            <div className="relative flex size-9 items-center justify-center rounded-xl border border-border/70 bg-card/80 transition-transform duration-300 group-hover:scale-105">
+            <div className="flex w-fit h-fit items-center justify-center">
               <Image
                 src="/images/winuxdb-logo.png"
                 alt="WinuxDB"
@@ -67,11 +67,13 @@ export default function SiteHeader({ user }: SiteHeaderProps) {
                 className="size-6 z-10"
                 priority
               />
-              <div className="absolute inset-0 rounded-xl bg-primary/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground transition-colors group-hover:text-primary">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground transition-colors group-hover:text-primary leading-none">
                 WinuxDB
+              </span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/40 ml-[2px] mt-0.5">
+                Beta
               </span>
             </div>
           </Link>
@@ -156,9 +158,14 @@ export default function SiteHeader({ user }: SiteHeaderProps) {
                     />
                     <div className="absolute inset-0 rounded-xl bg-primary/20 blur-md" />
                   </div>
-                  <SheetTitle className="text-xl font-bold uppercase tracking-[0.2em] text-foreground">
-                    WinuxDB
-                  </SheetTitle>
+                  <div className="flex flex-col">
+                    <SheetTitle className="text-xl font-bold uppercase tracking-[0.2em] text-foreground leading-none">
+                      WinuxDB
+                    </SheetTitle>
+                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/40 ml-[2px] mt-1.5">
+                      Beta
+                    </span>
+                  </div>
                 </div>
               </SheetHeader>
 
@@ -230,8 +237,8 @@ export default function SiteHeader({ user }: SiteHeaderProps) {
                 {user && (
                   <>
                     <div className="h-px bg-white/10" />
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10 p-0 h-auto font-bold uppercase tracking-wider text-[10px]"
                       onClick={() => {
                         import('@/lib/actions/auth').then(({ signOut }) => signOut())

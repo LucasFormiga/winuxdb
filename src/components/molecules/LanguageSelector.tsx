@@ -5,8 +5,8 @@ import { useLocale } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { usePathname, useRouter } from '@/i18n/routing'
-import { cn } from '@/lib/utils'
 import { updateProfile } from '@/lib/actions/auth'
+import { cn } from '@/lib/utils'
 
 const locales = [
   { code: 'en', label: 'English' },
@@ -21,7 +21,7 @@ export default function LanguageSelector() {
 
   async function onSelectChange(nextLocale: string) {
     localStorage.setItem('dismissed-locale-suggestion', 'true')
-    
+
     // Fire and forget profile update
     // If user is not logged in, this will fail silently/safely on server side
     updateProfile({ default_language: nextLocale }).catch(() => {})
@@ -36,6 +36,7 @@ export default function LanguageSelector() {
           variant="ghost"
           size="sm"
           className="h-10 px-3 flex items-center gap-2 hover:bg-white/5 transition-colors border border-transparent hover:border-white/10"
+          data-testid="language-selector-trigger"
         >
           <Globe className="size-4 text-muted-foreground" />
           <span className="text-[0.7rem] font-bold uppercase tracking-wider hidden sm:inline-block">{locale}</span>
@@ -47,6 +48,7 @@ export default function LanguageSelector() {
           <DropdownMenuItem
             key={l.code}
             onClick={() => onSelectChange(l.code)}
+            data-testid={`language-item-${l.code}`}
             className={cn(
               'flex items-center justify-between px-3 py-2 text-xs font-medium cursor-pointer transition-colors rounded-sm',
               locale === l.code

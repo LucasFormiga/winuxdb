@@ -13,7 +13,6 @@ The biggest hurdle for most users switching to Linux isn't the interface—it's 
 - **Crowdsourced Intelligence**: Data directly from users, for users.
 - **Distro Guidance**: A smart quiz to match your workflow with the right Linux distribution.
 - **Multilingual**: Native support for English, Português, and Español.
-- **Modern Stack**: Built for speed and accessibility with Next.js 15, TypeScript, and Tailwind CSS.
 
 ---
 
@@ -23,7 +22,6 @@ The biggest hurdle for most users switching to Linux isn't the interface—it's 
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
 - **Internationalization**: [next-intl](https://next-intl-docs.vercel.app/)
-- **Virtualization**: [TanStack Virtual v3](https://tanstack.com/virtual)
 - **Linting/Formatting**: [Biome](https://biomejs.dev/)
 - **Testing**: [Vitest](https://vitest.dev/) & [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 

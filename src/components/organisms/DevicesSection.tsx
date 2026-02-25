@@ -4,9 +4,9 @@ import { Edit2, Monitor, Star, Trash2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { type Device } from '@/lib/validations/auth'
 import { addDevice, deleteDevice, updateDevice } from '@/lib/actions/devices'
 import { cn } from '@/lib/utils'
+import type { Device } from '@/lib/validations/auth'
 import DeviceWizard from './DeviceWizard'
 
 interface DevicesSectionProps {
@@ -22,10 +22,10 @@ export default function DevicesSection({ initialDevices }: DevicesSectionProps) 
 
     // Optimistic update
     const tempId = crypto.randomUUID()
-    const newDevice = { 
-      ...deviceData, 
-      id: tempId, 
-      user_id: 'temp', 
+    const newDevice = {
+      ...deviceData,
+      id: tempId,
+      user_id: 'temp',
       created_at: new Date().toISOString(),
       name: deviceData.name || 'New Device'
     } as Device
@@ -41,7 +41,7 @@ export default function DevicesSection({ initialDevices }: DevicesSectionProps) 
 
   const handleUpdateDevice = async (id: string, deviceData: Partial<Device>) => {
     // Optimistic update
-    setDevices(devices.map(d => d.id === id ? { ...d, ...deviceData } : d))
+    setDevices(devices.map((d) => (d.id === id ? { ...d, ...deviceData } : d)))
 
     const result = await updateDevice(id, deviceData)
     if (result.error) {
@@ -51,8 +51,17 @@ export default function DevicesSection({ initialDevices }: DevicesSectionProps) 
   }
 
   const handleDeleteDevice = async (id: string) => {
+    const targetDevice = devices.find(d => d.id === id)
+    if (!targetDevice) return
+
     // Optimistic update
-    const newDevices = devices.filter((d) => d.id !== id)
+    let newDevices = devices.filter((d) => d.id !== id)
+    
+    // If we deleted the primary device, make another one primary if available
+    if (targetDevice.is_primary && newDevices.length > 0) {
+      newDevices = newDevices.map((d, i) => i === 0 ? { ...d, is_primary: true } : d)
+    }
+    
     setDevices(newDevices)
 
     const result = await deleteDevice(id)
@@ -70,26 +79,26 @@ export default function DevicesSection({ initialDevices }: DevicesSectionProps) 
     }))
     setDevices(newDevices)
 
-    // We need to unset others and set this one. 
+    // We need to unset others and set this one.
     // Ideally the backend handles the "unset others" logic via trigger or transaction.
-    // Our migration has a unique index for is_primary=true per user, 
+    // Our migration has a unique index for is_primary=true per user,
     // so we must set others to false FIRST or use a transaction.
     // But Supabase/Postgres doesn't support "update others" easily in one RLS call unless we use a stored procedure.
-    // For now, let's just update the target device to is_primary=true. 
+    // For now, let's just update the target device to is_primary=true.
     // The unique index might fail if we don't unset the old one first.
     // A better approach: The server action `updateDevice` should handle this logic or we use a database trigger.
     // I'll assume we might need a specific action `setPrimaryDevice(id)` to handle this atomically.
     // For now, let's try updating just the target.
-    
+
     // Actually, checking the migration:
     // CREATE UNIQUE INDEX IF NOT EXISTS unique_primary_device_per_user ON public.devices (user_id) WHERE (is_primary = true);
     // This prevents two true values. So we MUST set the current primary to false first.
-    
-    const currentPrimary = devices.find(d => d.is_primary)
+
+    const currentPrimary = devices.find((d) => d.is_primary)
     if (currentPrimary && currentPrimary.id !== id) {
-       await updateDevice(currentPrimary.id!, { is_primary: false })
+      await updateDevice(currentPrimary.id!, { is_primary: false })
     }
-    
+
     const result = await updateDevice(id, { is_primary: true })
     if (result.error) {
       console.error(result.error)
@@ -161,9 +170,9 @@ export default function DevicesSection({ initialDevices }: DevicesSectionProps) 
                     {t('setPrimary')}
                   </Button>
                 )}
-                
-                <DeviceWizard 
-                  initialData={device} 
+
+                <DeviceWizard
+                  initialData={device}
                   onUpdate={handleUpdateDevice}
                   trigger={
                     <Button

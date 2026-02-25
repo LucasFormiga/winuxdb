@@ -5,10 +5,31 @@ export const profileSchema = z.object({
   nickname: z.string().min(3).max(50),
   default_language: z.string().min(2).max(5),
   created_at: z.string().optional(),
-  updated_at: z.string().optional(),
+  updated_at: z.string().optional()
 })
 
 export type Profile = z.infer<typeof profileSchema>
+
+export const DESKTOP_ENVIRONMENTS = [
+  'GNOME',
+  'KDE',
+  'COSMIC',
+  'i3',
+  'SWAY',
+  'Hyprland',
+  'XFCE',
+  'LXDE',
+  'LXQT',
+  'Cinnamon',
+  'Niri',
+  'Mate',
+  'Qtile',
+  'Openbox',
+  'UKUI',
+  'Budgie',
+  'bspwm',
+  'Wayfire'
+] as const
 
 export const deviceSchema = z.object({
   id: z.string().uuid().optional(),
@@ -23,17 +44,19 @@ export const deviceSchema = z.object({
   gpu: z.string().nullable().optional(),
   gpu_driver: z.string().nullable().optional(),
   ram: z.string().nullable().optional(),
-  de: z.string().nullable().optional(),
+  de: z.enum(DESKTOP_ENVIRONMENTS),
   steam_sys_info: z.string().nullable().optional(),
   created_at: z.string().optional(),
-  updated_at: z.string().optional(),
+  updated_at: z.string().optional()
 })
 
 export type Device = z.infer<typeof deviceSchema>
 
-export const updateProfileSchema = profileSchema.pick({
-  nickname: true,
-  default_language: true,
-}).partial()
+export const updateProfileSchema = profileSchema
+  .pick({
+    nickname: true,
+    default_language: true
+  })
+  .partial()
 
 export type UpdateProfile = z.infer<typeof updateProfileSchema>

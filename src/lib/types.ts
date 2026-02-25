@@ -31,6 +31,9 @@ export interface UserAccount {
   avatarUrl?: string
   preferredLanguage: string
   devices: UserDevice[]
+  is_banned?: boolean
+  is_admin?: boolean
+  is_verified?: boolean
 }
 
 export interface UserReview {
@@ -39,6 +42,8 @@ export interface UserReview {
   user: {
     name: string
     avatar?: string
+    is_admin?: boolean
+    is_verified?: boolean
   }
   rating: Rating
   content: string
@@ -74,7 +79,9 @@ export interface App {
   release_date?: string | null // Match DB
   popularity?: number
   recommendedAlternatives?: string[] | null
+  recommended_alternatives?: string[] | null // Match DB
   nativeAlternatives?: string[] | null
+  native_alternatives?: string[] | null // Match DB
   isVerified?: boolean | null
   is_verified?: boolean | null // Match DB
   gpuCompatibility?: {
@@ -82,6 +89,11 @@ export interface App {
     opengl?: string
     vulkan?: string
   }
+  gpu_compatibility?: {
+    directx?: string
+    opengl?: string
+    vulkan?: string
+  } | null // Match DB
   instructions?: {
     wine?: {
       bottles?: string
@@ -93,5 +105,5 @@ export interface App {
       ge?: string
       cachyos?: string
     }
-  }
+  } | null
 }

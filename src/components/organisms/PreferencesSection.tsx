@@ -10,8 +10,8 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { usePathname, useRouter } from '@/i18n/routing'
 import { updateProfile } from '@/lib/actions/auth'
-import { useRouter, usePathname } from '@/i18n/routing'
 
 // Define schema matching the server action expectation but with local validation messages
 const prefSchema = z.object({
@@ -40,7 +40,7 @@ export default function PreferencesSection({ user }: PreferencesSectionProps) {
 
   async function onSubmit(values: z.infer<typeof prefSchema>) {
     setIsSaving(true)
-    
+
     try {
       const result = await updateProfile({
         nickname: values.nickname,
@@ -54,12 +54,12 @@ export default function PreferencesSection({ user }: PreferencesSectionProps) {
       }
 
       setShowSuccess(true)
-      
+
       // If language changed, redirect to new locale
       if (values.preferredLanguage !== user.default_language) {
         router.replace(pathname, { locale: values.preferredLanguage })
       }
-      
+
       setTimeout(() => setShowSuccess(false), 3000)
     } catch (error) {
       console.error('An unexpected error occurred:', error)

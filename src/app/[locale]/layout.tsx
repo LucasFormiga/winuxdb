@@ -1,5 +1,4 @@
 import { IBM_Plex_Mono, Saira, Saira_Condensed } from 'next/font/google'
-import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import SmoothScroll from '@/components/atoms/SmoothScroll'
@@ -105,10 +104,6 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-
-  if (!routing.locales.includes(locale as any)) {
-    notFound()
-  }
 
   setRequestLocale(locale)
 

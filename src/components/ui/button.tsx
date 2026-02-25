@@ -10,7 +10,7 @@ function Button({
   asChild = false,
   ...props
 }: React.ComponentProps<'button'> & {
-  variant?: 'default' | 'secondary' | 'ghost'
+  variant?: 'default' | 'secondary' | 'ghost' | 'destructive'
   size?: 'default' | 'sm' | 'lg' | 'icon'
   asChild?: boolean
 }) {
@@ -27,6 +27,8 @@ function Button({
         'data-[size=icon]:size-9',
         variant === 'default' &&
           'bg-primary text-primary-foreground shadow-[0_0_18px_rgba(255,60,60,0.28)] hover:shadow-[0_0_22px_rgba(255,60,60,0.35)]',
+        variant === 'destructive' &&
+          'bg-destructive text-destructive-foreground shadow-[0_0_18px_rgba(255,60,60,0.22)] hover:bg-destructive/90',
         variant === 'secondary' &&
           'bg-secondary text-secondary-foreground border border-border/70 hover:border-primary/50',
         variant === 'ghost' && 'text-foreground hover:bg-accent',

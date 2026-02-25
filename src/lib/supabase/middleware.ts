@@ -30,7 +30,43 @@ export async function updateSession(request: NextRequest) {
   )
 
   // IMPORTANT: Use getUser() for secure session validation
-  await supabase.auth.getUser()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  const isBannedPage = request.nextUrl.pathname.includes('/banned')
+
+  if (user) {
+    // Check if user is banned
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('is_banned')
+      .eq('id', user.id)
+      .maybeSingle()
+
+    if (profile?.is_banned) {
+      // If banned user is NOT on /banned page and is on a restricted path, redirect to /banned
+      if (!isBannedPage) {
+        const isPublicPath = request.nextUrl.pathname.includes('/login') || 
+                            request.nextUrl.pathname === '/' ||
+                            request.nextUrl.pathname.includes('/apps')
+        
+        if (!isPublicPath || request.nextUrl.pathname.includes('/account') || request.nextUrl.pathname.includes('/contribute')) {
+          const url = request.nextUrl.clone()
+          url.pathname = '/banned'
+          return NextResponse.redirect(url)
+        }
+      }
+    } else if (isBannedPage) {
+      // If NOT banned but on /banned page, redirect to home
+      const url = request.nextUrl.clone()
+      url.pathname = '/'
+      return NextResponse.redirect(url)
+    }
+  } else if (isBannedPage) {
+    // If NOT logged in but on /banned page, redirect to home
+    const url = request.nextUrl.clone()
+    url.pathname = '/'
+    return NextResponse.redirect(url)
+  }
 
   return supabaseResponse
 }
