@@ -8,7 +8,7 @@ export function parseSteamSystemInfo(text: string): Partial<UserDevice> {
   if (osLineMatch) {
     const rawLine = osLineMatch[1].split(' (')[0].replace(/"/g, '').trim()
     const parts = rawLine.split(' ')
-    const versionIndex = parts.findIndex(p => /^[0-9]/.test(p))
+    const versionIndex = parts.findIndex((p) => /^[0-9]/.test(p))
     if (versionIndex !== -1) {
       info.distro = parts.slice(0, versionIndex).join(' ')
       info.distroVersion = parts[versionIndex]

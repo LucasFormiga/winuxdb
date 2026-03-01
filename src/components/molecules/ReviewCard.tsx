@@ -1,4 +1,18 @@
-import { Ban, Calendar, Cpu, Layers, Loader2, Monitor, Plus, Shield, ShieldCheck, Terminal, Trash2, Wrench, Zap } from 'lucide-react'
+import {
+  Ban,
+  Calendar,
+  Cpu,
+  Layers,
+  Loader2,
+  Monitor,
+  Plus,
+  Shield,
+  ShieldCheck,
+  Terminal,
+  Trash2,
+  Wrench,
+  Zap
+} from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import RatingMedal from '@/components/atoms/RatingMedal'
@@ -46,9 +60,9 @@ export default function ReviewCard({ review, currentUserId }: ReviewCardProps) {
   const userAvatar = reviewerProfile?.avatar_url || (review as any).user?.avatar
   const isVerified = reviewerProfile?.is_verified || (review as any).user?.is_verified
   const isAdmin = reviewerProfile?.is_admin || (review as any).user?.is_admin
-  
+
   const dateStr = review.created_at || (review as any).date
-  
+
   // Supabase join data can come as an object or an array depending on relationship detection
   const devicesData = (review as any).devices || (review as any).device
   const hardware = (Array.isArray(devicesData) ? devicesData[0] : devicesData) || (review as any).hardware
@@ -104,11 +118,12 @@ export default function ReviewCard({ review, currentUserId }: ReviewCardProps) {
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
                 <span className="font-semibold text-foreground/90">{userName}</span>
-                {isVerified && (
-                  <ShieldCheck className="size-3.5 text-blue-500" fill="currentColor" fillOpacity={0.1} />
-                )}
+                {isVerified && <ShieldCheck className="size-3.5 text-blue-500" fill="currentColor" fillOpacity={0.1} />}
                 {isAdmin && (
-                  <Badge variant="secondary" className="h-4 rounded-sm px-1 text-[10px] font-black uppercase leading-none bg-primary/10 text-primary border-none">
+                  <Badge
+                    variant="secondary"
+                    className="h-4 rounded-sm px-1 text-[10px] font-black uppercase leading-none bg-primary/10 text-primary border-none"
+                  >
                     {t('admin')}
                   </Badge>
                 )}
@@ -122,7 +137,7 @@ export default function ReviewCard({ review, currentUserId }: ReviewCardProps) {
 
           <div className="flex items-center gap-3 self-start md:self-auto">
             <RatingMedal rating={review.rating as any} className="px-4 py-1.5 shadow-lg shadow-black/5" />
-            
+
             <div className="flex items-center gap-1">
               {isCurrentUserAdmin && !isOwner && (
                 <Dialog open={showBanDialog} onOpenChange={setShowBanDialog}>
@@ -141,16 +156,14 @@ export default function ReviewCard({ review, currentUserId }: ReviewCardProps) {
                         <Ban className="size-6" />
                       </div>
                       <DialogTitle className="text-xl">{t('banUser')}</DialogTitle>
-                      <DialogDescription className="mt-2">
-                        {t('banConfirm')}
-                      </DialogDescription>
+                      <DialogDescription className="mt-2">{t('banConfirm')}</DialogDescription>
                     </DialogHeader>
-                    
+
                     <div className="my-6 space-y-3 px-1">
                       <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60 px-1">
                         {t('banReason')}
                       </label>
-                      <Input 
+                      <Input
                         placeholder={t('banReasonPlaceholder')}
                         value={banReason}
                         onChange={(e) => setBanReason(e.target.value)}
@@ -234,19 +247,21 @@ export default function ReviewCard({ review, currentUserId }: ReviewCardProps) {
         </div>
 
         {/* Tinker Steps Badges */}
-        {(review as any).tinker_steps && (review as any).tinker_steps.length > 0 && !(review as any).tinker_steps.includes('none') && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {(review as any).tinker_steps.map((step: string) => (
-              <div
-                key={step}
-                className="flex items-center gap-1.5 rounded-lg border border-primary/20 bg-primary/5 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-primary"
-              >
-                <Wrench className="size-3" />
-                {t(`presets.tinkering.${step}`)}
-              </div>
-            ))}
-          </div>
-        )}
+        {(review as any).tinker_steps &&
+          (review as any).tinker_steps.length > 0 &&
+          !(review as any).tinker_steps.includes('none') && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {(review as any).tinker_steps.map((step: string) => (
+                <div
+                  key={step}
+                  className="flex items-center gap-1.5 rounded-lg border border-primary/20 bg-primary/5 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-primary"
+                >
+                  <Wrench className="size-3" />
+                  {t(`presets.tinkering.${step}`)}
+                </div>
+              ))}
+            </div>
+          )}
 
         {/* Hardware & Compatibility Specs */}
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -257,9 +272,7 @@ export default function ReviewCard({ review, currentUserId }: ReviewCardProps) {
                 <span className="text-[0.6rem] uppercase tracking-wider text-muted-foreground font-bold">
                   {t('stability')}
                 </span>
-                <span className="font-medium break-words">
-                  {t(`presets.stability.${(review as any).stability}`)}
-                </span>
+                <span className="font-medium break-words">{t(`presets.stability.${(review as any).stability}`)}</span>
               </div>
             </div>
           )}

@@ -16,7 +16,7 @@ import {
   Zap
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useMemo, useState, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { Button } from '@/components/ui/button'
@@ -471,8 +471,8 @@ export default function ReviewDialog({
                       ].map((item) => {
                         const currentValues = form.watch('tinkerSteps') || []
                         const isNoneSelected = currentValues.includes('none')
-                        const hasTweaksSelected = currentValues.some(v => v !== 'none')
-                        
+                        const hasTweaksSelected = currentValues.some((v) => v !== 'none')
+
                         // Disable none if tweaks are selected
                         // Disable tweaks if none is selected
                         const isDisabled = item.id === 'none' ? hasTweaksSelected : isNoneSelected
@@ -568,9 +568,7 @@ export default function ReviewDialog({
                           ))}
                           {userDevices.length === 0 && (
                             <div className="text-center py-10 rounded-[2rem] border-2 border-dashed border-border/40 bg-muted/10">
-                              <p className="text-sm text-muted-foreground mb-4">
-                                {t('noDevicesFound')}
-                              </p>
+                              <p className="text-sm text-muted-foreground mb-4">{t('noDevicesFound')}</p>
                               <Button variant="secondary" onClick={() => (window.location.href = '/account')}>
                                 {t_account('addDevice')}
                               </Button>

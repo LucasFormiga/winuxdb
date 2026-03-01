@@ -1,23 +1,23 @@
 import { Bug, ShieldCheck } from 'lucide-react'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import JSONLD from '@/components/atoms/seo/JSONLD'
 import AppAbout from '@/components/organisms/AppAbout'
 import AppHero from '@/components/organisms/AppHero'
 import AppStats from '@/components/organisms/AppStats'
 import ReviewSection from '@/components/organisms/ReviewSection'
-import JSONLD from '@/components/atoms/seo/JSONLD'
 import { Link, redirect } from '@/i18n/routing'
 import { getAppBySlug, getApps } from '@/lib/actions/apps'
-import type { Metadata } from 'next'
 
 export async function generateMetadata({ params }: AppPageProps): Promise<Metadata> {
   const { slug } = await params
   const app = await getAppBySlug(slug, true)
-  
+
   if (!app) return {}
 
   const rating = app.overall_rating || 'BORKED'
-  
+
   return {
     title: `${app.name} Linux Compatibility Rating: ${rating}`,
     description: `Check if ${app.name} runs on Linux. View community ratings, Wine/Proton versions, and setup instructions. Current rating: ${rating}.`,
@@ -32,11 +32,11 @@ export async function generateMetadata({ params }: AppPageProps): Promise<Metada
 export async function generateStaticParams() {
   // Pre-render apps to improve performance and SEO
   // We use a larger limit to cover most apps
-  const { apps = [] } = await getApps({ 
+  const { apps = [] } = await getApps({
     limit: 1000,
-    sortBy: 'popularity' 
+    sortBy: 'popularity'
   })
-  
+
   return apps.map((app) => ({
     slug: app.slug
   }))
@@ -87,11 +87,14 @@ export default async function AppPage({ params }: AppPageProps) {
       '@type': 'Organization',
       name: app.author || 'Unknown'
     },
-    aggregateRating: reviews.length > 0 ? {
-      '@type': 'AggregateRating',
-      ratingValue: (app as any).score || 5,
-      reviewCount: reviews.length
-    } : undefined
+    aggregateRating:
+      reviews.length > 0
+        ? {
+            '@type': 'AggregateRating',
+            ratingValue: (app as any).score || 5,
+            reviewCount: reviews.length
+          }
+        : undefined
   }
 
   return (

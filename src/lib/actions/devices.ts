@@ -129,9 +129,9 @@ export async function deleteDevice(id: string) {
   // 2. Perform soft delete
   const { error: deleteError } = await supabase
     .from('devices')
-    .update({ 
+    .update({
       deleted_at: new Date().toISOString(),
-      is_primary: false 
+      is_primary: false
     })
     .eq('id', id)
     .eq('user_id', user.id)

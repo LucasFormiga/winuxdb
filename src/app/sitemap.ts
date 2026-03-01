@@ -26,9 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 2. Dynamic App Pages (All apps)
   try {
     const supabase = createAdminClient()
-    const { data: apps } = await supabase
-      .from('apps')
-      .select('slug, updated_at')
+    const { data: apps } = await supabase.from('apps').select('slug, updated_at')
 
     if (apps) {
       for (const locale of locales) {
@@ -37,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
           const isDefaultLocale = locale === routing.defaultLocale
           const urlPath = isDefaultLocale ? `/apps/${app.slug}` : `/${locale}/apps/${app.slug}`
-          
+
           routes.push({
             url: `${baseUrl}${urlPath}`,
             lastModified: app.updated_at ? new Date(app.updated_at) : new Date(),

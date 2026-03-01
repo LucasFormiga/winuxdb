@@ -97,9 +97,7 @@ export default function ReviewSection({ appName, appId, reviews, overallRating }
               <MessageSquare className="size-8" />
             </div>
             <h3 className="text-xl font-semibold mb-2">{t('noReviews')}</h3>
-            <p className="text-muted-foreground max-w-sm mb-8">
-              {t('beTheFirst', { appName })}
-            </p>
+            <p className="text-muted-foreground max-w-sm mb-8">{t('beTheFirst', { appName })}</p>
             {isLoadingUser ? (
               <div className="h-12 w-40 animate-pulse rounded-xl bg-muted/30" />
             ) : user ? (

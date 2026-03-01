@@ -19,7 +19,9 @@ export default function BannedPage() {
             </div>
 
             <div className="space-y-4">
-              <h1 className="text-4xl font-black uppercase tracking-tight text-destructive sm:text-6xl">{t('title')}</h1>
+              <h1 className="text-4xl font-black uppercase tracking-tight text-destructive sm:text-6xl">
+                {t('title')}
+              </h1>
               <p className="mx-auto max-w-md text-lg font-medium text-foreground/80">{t('message')}</p>
               <p className="mx-auto max-w-sm text-sm text-muted-foreground">{t('submessage')}</p>
             </div>

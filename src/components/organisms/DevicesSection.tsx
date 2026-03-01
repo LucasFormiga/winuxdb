@@ -51,17 +51,17 @@ export default function DevicesSection({ initialDevices }: DevicesSectionProps) 
   }
 
   const handleDeleteDevice = async (id: string) => {
-    const targetDevice = devices.find(d => d.id === id)
+    const targetDevice = devices.find((d) => d.id === id)
     if (!targetDevice) return
 
     // Optimistic update
     let newDevices = devices.filter((d) => d.id !== id)
-    
+
     // If we deleted the primary device, make another one primary if available
     if (targetDevice.is_primary && newDevices.length > 0) {
-      newDevices = newDevices.map((d, i) => i === 0 ? { ...d, is_primary: true } : d)
+      newDevices = newDevices.map((d, i) => (i === 0 ? { ...d, is_primary: true } : d))
     }
-    
+
     setDevices(newDevices)
 
     const result = await deleteDevice(id)

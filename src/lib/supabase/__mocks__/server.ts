@@ -14,9 +14,9 @@ const createMockBuilder = () => {
     single: vi.fn().mockResolvedValue({ data: null, error: null }),
     insert: vi.fn().mockResolvedValue({ data: null, error: null }),
     upsert: vi.fn().mockResolvedValue({ data: null, error: null }),
-    delete: vi.fn().mockResolvedValue({ data: null, error: null }),
+    delete: vi.fn().mockResolvedValue({ data: null, error: null })
   }
-  
+
   const chainable = () => b
   b.select.mockImplementation(chainable)
   b.eq.mockImplementation(chainable)
@@ -26,12 +26,12 @@ const createMockBuilder = () => {
   b.limit.mockImplementation(chainable)
   b.range.mockImplementation(chainable)
   b.update.mockImplementation(chainable)
-  
+
   // biome-ignore lint/suspicious/noThenProperty: Needed for await support in mocks
-  b.then = vi.fn().mockImplementation((onFulfilled: any) => 
-    Promise.resolve({ data: [], error: null, count: 0 }).then(onFulfilled)
-  )
-  
+  b.then = vi
+    .fn()
+    .mockImplementation((onFulfilled: any) => Promise.resolve({ data: [], error: null, count: 0 }).then(onFulfilled))
+
   return b
 }
 

@@ -43,7 +43,10 @@ export default function AccountHeader({ user }: AccountHeaderProps) {
                 <ShieldCheck className="size-5 text-blue-500 md:size-6" fill="currentColor" fillOpacity={0.1} />
               )}
               {user.is_admin && (
-                <Badge variant="secondary" className="rounded-sm px-1.5 py-0.5 text-xs font-black uppercase bg-primary/10 text-primary border-none">
+                <Badge
+                  variant="secondary"
+                  className="rounded-sm px-1.5 py-0.5 text-xs font-black uppercase bg-primary/10 text-primary border-none"
+                >
                   {t('admin')}
                 </Badge>
               )}

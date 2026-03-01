@@ -170,7 +170,7 @@ export async function getAppBySlug(identifier: string, forceFresh = false) {
 
   // Fallback to ID if not found by slug and identifier looks like a UUID
   const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(identifier)
-  
+
   if (isUuid) {
     const { data: idData } = await supabase
       .from('apps')
@@ -187,7 +187,7 @@ export async function getAppBySlug(identifier: string, forceFresh = false) {
   }
 
   if (slugError) console.error('Error fetching app by slug:', slugError.message)
-  
+
   return null
 }
 
