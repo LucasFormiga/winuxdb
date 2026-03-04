@@ -108,15 +108,15 @@
         "philosophy": {
           "label": "Libertad de Software",
           "options": {
-            "functionality": "Funcionalidade primeiro (Proprietário está ok)",
-            "foss": "Estritamente Código Aberto (Purista FOSS)"
+            "functionality": "Funcionalidad primero (Propietario está bien)",
+            "foss": "Estrictamente Código Abierto (Purista FOSS)"
           }
         },
         "customization": {
-          "label": "Profundidade de Personalização",
+          "label": "Profundidad de Personalización",
           "options": {
-            "ready": "Polido e pronto para uso",
-            "canvas": "Tela em branco (Eu quero construir)"
+            "ready": "Pulido y listo para usar",
+            "canvas": "Lienzo en blanco (Quiero construirlo)"
           }
         },
         "battery": {
@@ -155,7 +155,7 @@
       "getFlavor": "Descargar {flavor}",
       "Fixed": "Lanzamiento Fijo",
       "Rolling": "Rolling Release",
-      "Atomic": "Atômico / Imutável"
+      "Atomic": "Atómico / Inmutable"
     }
   },
   "Apps": {

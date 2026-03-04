@@ -111,6 +111,34 @@
             "curated": "Loja Curada / Flatpaks",
             "aur_wild": "O \"Velho Oeste\" (AUR, compilar do zero)"
           }
+        },
+        "philosophy": {
+          "label": "Liberdade de Software",
+          "options": {
+            "functionality": "Funcionalidade primeiro (Proprietário está ok)",
+            "foss": "Estritamente Código Aberto (Purista FOSS)"
+          }
+        },
+        "customization": {
+          "label": "Profundidade de Personalização",
+          "options": {
+            "ready": "Polido e pronto para usar",
+            "canvas": "Tela em branco (Eu quero construir)"
+          }
+        },
+        "battery": {
+          "label": "Gerenciamento de Energia",
+          "options": {
+            "important": "Sim, máxima duração de bateria",
+            "dont_care": "Não, desempenho é mais importante"
+          }
+        },
+        "rollback": {
+          "label": "Necessidade de Snapshot / Rollback",
+          "options": {
+            "essential": "Essencial (Desfazer instantaneamente uma atualização ruim)",
+            "dont_care": "Bom de ter, mas não é imprescindível"
+          }
         }
       },
       "stepLabel": "Pergunta {current} de {total}",
