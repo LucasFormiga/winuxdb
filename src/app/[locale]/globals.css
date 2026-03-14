@@ -121,6 +121,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -174,13 +175,11 @@
   }
 
   .surface-noise {
-    /* Static PNG replaces inline SVG feTurbulence — avoids per-frame CPU painting in Gecko */
     background-image: url('/noise.png');
     background-size: 160px 160px;
     mix-blend-mode: soft-light;
   }
 
-  /* H1 fix: opaque fallback first, backdrop-filter only where GPU-composited (not Firefox Android) */
   .glass-panel {
     background: oklch(0.96 0.005 285);
     border: 1px solid oklch(0.148 0.012 285 / 0.1);
