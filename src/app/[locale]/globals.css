@@ -49,7 +49,6 @@
 }
 
 :root {
-  scroll-behavior: smooth;
   --radius: 0.625rem;
   --background: oklch(0.985 0.005 285);
   --foreground: oklch(0.148 0.012 285);
@@ -175,37 +174,65 @@
   }
 
   .surface-noise {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+    /* Static PNG replaces inline SVG feTurbulence — avoids per-frame CPU painting in Gecko */
+    background-image: url('/noise.png');
     background-size: 160px 160px;
     mix-blend-mode: soft-light;
   }
 
+  /* H1 fix: opaque fallback first, backdrop-filter only where GPU-composited (not Firefox Android) */
   .glass-panel {
-    background: linear-gradient(180deg, oklch(1 0 0 / 0.7) 0%, oklch(0.97 0.01 285 / 0.8) 100%);
-    backdrop-filter: blur(16px) saturate(180%);
+    background: oklch(0.96 0.005 285);
     border: 1px solid oklch(0.148 0.012 285 / 0.1);
     box-shadow:
       0 0 0 1px oklch(0.64 0.235 27.5 / 0.03),
       0 20px 60px oklch(0.148 0.012 285 / 0.05);
   }
 
+  @supports (backdrop-filter: blur(1px)) {
+    .glass-panel {
+      background: linear-gradient(180deg, oklch(1 0 0 / 0.7) 0%, oklch(0.97 0.01 285 / 0.8) 100%);
+      backdrop-filter: blur(16px) saturate(180%);
+    }
+  }
+
   .dark .glass-panel {
-    background: linear-gradient(180deg, oklch(0.22 0.02 285 / 0.65) 0%, oklch(0.19 0.02 285 / 0.85) 100%);
+    background: oklch(0.20 0.016 285);
     border: 1px solid oklch(0.35 0.03 285 / 0.4);
     box-shadow:
       0 0 0 1px oklch(0.64 0.235 27.5 / 0.05),
       0 20px 60px oklch(0.04 0 0 / 0.45);
   }
 
+  @supports (backdrop-filter: blur(1px)) {
+    .dark .glass-panel {
+      background: linear-gradient(180deg, oklch(0.22 0.02 285 / 0.65) 0%, oklch(0.19 0.02 285 / 0.85) 100%);
+      backdrop-filter: blur(16px) saturate(180%);
+    }
+  }
+
   .glass-header {
-    background: oklch(0.985 0.005 285 / 0.8);
-    backdrop-filter: blur(20px) saturate(160%);
+    background: oklch(0.985 0.005 285);
     border-bottom: 1px solid oklch(0.148 0.012 285 / 0.1);
   }
 
+  @supports (backdrop-filter: blur(1px)) {
+    .glass-header {
+      background: oklch(0.985 0.005 285 / 0.8);
+      backdrop-filter: blur(20px) saturate(160%);
+    }
+  }
+
   .dark .glass-header {
-    background: oklch(0.148 0.012 285 / 0.7);
+    background: oklch(0.148 0.012 285);
     border-bottom: 1px solid oklch(0.28 0.02 285 / 0.5);
+  }
+
+  @supports (backdrop-filter: blur(1px)) {
+    .dark .glass-header {
+      background: oklch(0.148 0.012 285 / 0.7);
+      backdrop-filter: blur(20px) saturate(160%);
+    }
   }
 
   .neon-ring {

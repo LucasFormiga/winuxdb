@@ -18,19 +18,22 @@ export function generateStaticParams() {
 const saira = Saira({
   variable: '--font-body',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700']
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
 })
 
 const sairaCondensed = Saira_Condensed({
   variable: '--font-display',
   subsets: ['latin'],
-  weight: ['500', '600', '700']
+  weight: ['500', '600', '700'],
+  display: 'swap',
 })
 
 const ibmPlexMono = IBM_Plex_Mono({
   variable: '--font-mono',
   subsets: ['latin'],
-  weight: ['400', '500']
+  weight: ['400', '500'],
+  display: 'swap',
 })
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
