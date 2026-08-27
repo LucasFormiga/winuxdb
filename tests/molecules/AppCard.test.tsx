@@ -8,6 +8,7 @@ import { App } from '@/lib/types'
 const mockApp: App = {
   id: '1',
   name: 'Test App',
+  slug: 'test-app',
   version: 'Latest',
   recommendedVersion: 'Native',
   rating: 'GOLD',
