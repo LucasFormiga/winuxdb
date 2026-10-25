@@ -5,6 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export function isRemoteImage(src: string) {
+  return /^https?:\/\//i.test(src)
+}
+
 /**
  * Returns the base URL of the application.
  * Prioritizes NEXT_PUBLIC_SITE_URL, then Vercel's URL, then localhost.

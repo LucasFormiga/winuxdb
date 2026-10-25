@@ -2,6 +2,7 @@ import { Camera } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import type { App } from '@/lib/types'
+import { isRemoteImage } from '@/lib/utils'
 
 interface AppGalleryProps {
   app: App
@@ -30,6 +31,7 @@ export default function AppGallery({ app }: AppGalleryProps) {
           >
             <Image
               src={src}
+              unoptimized={isRemoteImage(src)}
               alt={`${app.name} screenshot ${index + 1}`}
               className="object-cover transition-all duration-700 group-hover:scale-110"
               fill
