@@ -1,4 +1,4 @@
-import { IBM_Plex_Mono, Saira, Saira_Condensed } from 'next/font/google'
+import localFont from 'next/font/local'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import SmoothScroll from '@/components/atoms/SmoothScroll'
@@ -15,25 +15,49 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }
 
-const saira = Saira({
+const saira = localFont({
+  src: [
+    { path: '../../../node_modules/@fontsource/saira/files/saira-latin-400-normal.woff2', weight: '400' },
+    { path: '../../../node_modules/@fontsource/saira/files/saira-latin-500-normal.woff2', weight: '500' },
+    { path: '../../../node_modules/@fontsource/saira/files/saira-latin-600-normal.woff2', weight: '600' },
+    { path: '../../../node_modules/@fontsource/saira/files/saira-latin-700-normal.woff2', weight: '700' }
+  ],
   variable: '--font-body',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
+  display: 'swap'
 })
 
-const sairaCondensed = Saira_Condensed({
+const sairaCondensed = localFont({
+  src: [
+    {
+      path: '../../../node_modules/@fontsource/saira-condensed/files/saira-condensed-latin-500-normal.woff2',
+      weight: '500'
+    },
+    {
+      path: '../../../node_modules/@fontsource/saira-condensed/files/saira-condensed-latin-600-normal.woff2',
+      weight: '600'
+    },
+    {
+      path: '../../../node_modules/@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2',
+      weight: '700'
+    }
+  ],
   variable: '--font-display',
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  display: 'swap',
+  display: 'swap'
 })
 
-const ibmPlexMono = IBM_Plex_Mono({
+const ibmPlexMono = localFont({
+  src: [
+    {
+      path: '../../../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2',
+      weight: '400'
+    },
+    {
+      path: '../../../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2',
+      weight: '500'
+    }
+  ],
   variable: '--font-mono',
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  display: 'swap',
+  display: 'swap'
 })
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {

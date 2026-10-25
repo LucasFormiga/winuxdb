@@ -16,13 +16,14 @@ WinuxDB helps users migrate to Linux with confidence by mapping the landscape of
 - **Distro Guidance**: A smart, technical quiz to match your workflow with the right Linux distribution.
 - **Community Safety**: Comprehensive guidelines and active moderation to maintain a safe, accurate, and helpful environment.
 - **Multilingual**: Native support for English, Português, and Español.
-- **Modern Stack**: Built for speed and accessibility with Next.js 15, TypeScript, and Tailwind CSS.
+- **Modern Stack**: Built for speed and accessibility with Next.js 16, TypeScript, and Tailwind CSS.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Runtime**: [Node.js 24 LTS](https://nodejs.org/) (exact version in `.nvmrc`) and npm 11.19.1 or newer
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
 - **Database/Auth**: [Supabase](https://supabase.com/) (PostgreSQL + RLS + GoTrue)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
@@ -46,9 +47,12 @@ The fastest way to contribute is by reporting how apps run on your system.
 ### 2. Code & Design
 - **Setup**:
   ```bash
-  npm install
+  nvm install
+  nvm use
+  npm ci
   npm run dev
   ```
+- **Security**: Run `npm run audit` for both production and development dependencies. See [the dependency security upgrade plan](docs/dependency-security.md) for the upgrade baseline and maintenance policy.
 - **Guidelines**: We use **Biome** for linting and formatting. Run `npm run lint` before submitting a PR.
 - **Translations**: All strings must be added to `messages/*.json`. We support English, Spanish, and Portuguese.
 

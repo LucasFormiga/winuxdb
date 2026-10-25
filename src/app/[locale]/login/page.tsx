@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowLeft, Chrome, Github, MessageSquare } from 'lucide-react'
+import { ArrowLeft, CodeXml, Globe, MessageSquare } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
@@ -58,7 +58,7 @@ export default function LoginPage() {
               className="relative h-12 bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group/btn"
               onClick={() => handleSocialLogin('google')}
             >
-              <Chrome className="mr-3 size-5 text-[#4285F4]" />
+              <Globe className="mr-3 size-5 text-[#4285F4]" />
               <span className="flex-1 text-center font-semibold">{t('google')}</span>
               <div className="absolute inset-0 rounded-md opacity-0 group-hover/btn:opacity-100 transition-opacity neon-ring pointer-events-none" />
             </Button>
@@ -68,7 +68,7 @@ export default function LoginPage() {
               className="relative h-12 bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group/btn"
               onClick={() => handleSocialLogin('github')}
             >
-              <Github className="mr-3 size-5 text-foreground" />
+              <CodeXml className="mr-3 size-5 text-foreground" />
               <span className="flex-1 text-center font-semibold">{t('github')}</span>
               <div className="absolute inset-0 rounded-md opacity-0 group-hover/btn:opacity-100 transition-opacity neon-ring pointer-events-none" />
             </Button>

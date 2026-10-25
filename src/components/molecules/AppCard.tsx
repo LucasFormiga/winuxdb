@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Link } from '@/i18n/routing'
 import type { App } from '@/lib/types'
+import { isRemoteImage } from '@/lib/utils'
 
 interface AppCardProps {
   app: App
@@ -31,6 +32,7 @@ export default function AppCard({ app }: AppCardProps) {
               {logo ? (
                 <Image
                   src={logo}
+                  unoptimized={isRemoteImage(logo)}
                   alt={app.name}
                   className="size-20 max-h-full max-w-full object-contain"
                   loading="lazy"

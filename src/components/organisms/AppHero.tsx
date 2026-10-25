@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import RatingMedal from '@/components/atoms/RatingMedal'
 import { Badge } from '@/components/ui/badge'
 import type { App } from '@/lib/types'
+import { isRemoteImage } from '@/lib/utils'
 
 interface AppHeroProps {
   app: App
@@ -31,6 +32,7 @@ export default function AppHero({ app }: AppHeroProps) {
             {logo ? (
               <Image
                 src={logo}
+                unoptimized={isRemoteImage(logo)}
                 alt={app.name}
                 className="size-full object-contain transition-transform duration-500 group-hover:scale-110"
                 width={192}
